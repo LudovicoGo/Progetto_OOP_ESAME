@@ -6,10 +6,6 @@ public class CityModel extends GeolocationModel {
     private long id;
     private String country;
 
-    public CityModel(double latitude, double longitude) {
-        super(latitude, longitude);
-    }
-
     public String getName() {
         return name;
     }
