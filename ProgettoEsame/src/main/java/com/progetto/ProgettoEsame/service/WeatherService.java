@@ -91,44 +91,6 @@ public class WeatherService {
     }
 
 
-
-
-
-
-    /*
-    public WeatherModel JSONToWeatherModel(JSONObject object) throws IOException, ParseException { //salva il contenuto del json object in un oggetto weather
-        WeatherModel saveWeather = new WeatherModel();
-        JSONObject jsWeather = object;
-
-        JSONArray weather  = (JSONArray)object.get("main");
-
-
-
-
-        saveWeather.setVisibility((Long) jsWeather.get("visibility"));
-        long trashBin =(Long)jsWeather.get("timezone");
-
-            MAIN
-            saveWeather.setTemp((Double) jsonLineItem.get("temp"));
-            saveWeather.setTempMin((Double) jsonLineItem.get("temp_min"));
-            saveWeather.setHumidity((Integer) jsonLineItem.get("humidity"));
-            saveWeather.setPressure((Integer) jsonLineItem.get("pressure"));
-            saveWeather.setFeelsLike((Double) jsonLineItem.get("feels_like"));
-            saveWeather.setTempMax((Double) jsonLineItem.get("temp_max"));
-
-
-
-        saveWeather.setCountry((String)jsWeather.get("country"));
-
-         saveWeather.setLongitude((Double) jsWeather.get("lon"));
-         saveWeather.setLatitude((Double) jsWeather.get("lat"));
-        saveWeather.setMainWeather(jsWeather.getJSONObject("main"));
-         saveWeather.setDescription((String)jsWeather.get("description"));
-
-
- }*/
-
-/*
     public JSONObject WeatherModelToJSON(WeatherModel model){
         JSONObject JSONWeather = new JSONObject();
 
@@ -153,9 +115,6 @@ public class WeatherService {
         return JSONWeather;
     }
 
-
-
-*/
 
 
 }

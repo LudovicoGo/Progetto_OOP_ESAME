@@ -39,6 +39,12 @@ public class WeatherController {
         return service.JSONToWeatherModel(service.getJSONWeather(cityName));
     }
 
+    @GetMapping("/meteo3")
+    public JSONObject getJSONWeather(@RequestParam String cityName){
+
+        return service.WeatherModelToJSON(service.JSONToWeatherModel(service.getJSONWeather(cityName)));
+    }
+
 
 
 
