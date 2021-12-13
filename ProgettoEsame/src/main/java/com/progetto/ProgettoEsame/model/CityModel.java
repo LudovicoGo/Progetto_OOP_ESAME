@@ -2,22 +2,26 @@ package com.progetto.ProgettoEsame.model;
 
 public class CityModel extends GeolocationModel {
 
-    private String name;
-    private long id;
+    private String cityName;
+    private long cityId;
     private String country;
 
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
+    public CityModel() {
+        super();
     }
 
-    public long getId() {
-        return id;
+    public String getCityName() {
+        return cityName;
     }
-    public void setId(long id) {
-        this.id = id;
+    public void setCityName(String name) {
+        this.cityName = name;
+    }
+
+    public long getCityId() {
+        return cityId;
+    }
+    public void setCityId(long id) {
+        this.cityId = id;
     }
 
     public String getCountry() {
@@ -27,10 +31,10 @@ public class CityModel extends GeolocationModel {
         this.country = country;
     }
 
-    public CityModel(String name, long id, String country, double latitude, double longitude) {
+    public CityModel(String name, long cityId, String country, double latitude, double longitude) {
         super(latitude, longitude);
-        this.name = name;
-        this.id = id;
+        this.cityName = name;
+        this.cityId = cityId;
         this.country = country;
     }
 }

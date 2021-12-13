@@ -1,16 +1,20 @@
 package com.progetto.ProgettoEsame.service;
 
+import com.progetto.ProgettoEsame.model.WeatherModel;
+import org.json.simple.JSONArray;
+import org.json.JSONException;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
-import org.springframework.web.client.RestTemplate;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+//import org.json.JSONArray;
+//import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
-import java.text.ParseException;
+import java.util.Iterator;
 
 
 public class WeatherService {
@@ -19,7 +23,7 @@ public class WeatherService {
     private final String apiCallUrl = "https://api.openweathermap.org/data/2.5/weather?q=";
 
 
-    public JSONObject getJSONWeather(String cityName){
+    public JSONObject getJSONWeather(String cityName){ //ritorna al controller un jsonobject che corrisponde a quello che si tottiene dalla chiamata delle api su postman
         JSONObject jsonWeather = new JSONObject();
 
         try {
@@ -39,4 +43,119 @@ public class WeatherService {
         return jsonWeather;
 
     }
+    public WeatherModel JSONToWeatherModel(JSONObject ob) {
+
+        WeatherModel saveWeather = new WeatherModel();
+
+        try {
+            JSONObject jsonObject = (JSONObject) ob;
+            //ELEMENTI CHE STANNO NEL NESTED JSONOBJECT "COORD"
+            JSONObject coord = (JSONObject) jsonObject.get("coord");
+            saveWeather.setLongitude((Double)coord.get("lon"));
+            saveWeather.setLatitude((Double) coord.get("lat"));
+
+            //ELEMENTI CHE STANNO NEL NESTED JSONOBJECT "MAIN"
+            JSONObject main = (JSONObject) jsonObject.get("main");
+            saveWeather.setTemp((Double) main.get("temp"));
+            saveWeather.setTempMin((Double) main.get("temp_min"));
+            saveWeather.setHumidity((Long) main.get("humidity"));
+            saveWeather.setPressure((Long) main.get("pressure"));
+            saveWeather.setFeelsLike((Double) main.get("feels_like"));
+            saveWeather.setTempMax((Double) main.get("temp_max"));
+
+            //ELEMENTI CHE STANNO NEL JSONARRAY "SYS"
+            JSONObject sys = (JSONObject) jsonObject.get("sys");
+            saveWeather.setCountry((String) sys.get("country"));
+
+            //ELEMENTI CHE STANNO NEL JSONARRAY "WEATHER"
+            JSONArray weather = (JSONArray)ob.get("weather");
+            Iterator i = weather.iterator();
+            while(i.hasNext()){
+                JSONObject line = (JSONObject) i.next();
+                saveWeather.setDescription((String) line.get("description"));
+                saveWeather.setMainWeather((String) line.get("main"));
+            }
+
+            //ELEMENTI CHE STANNO NON SONO CONTENUTI IN ALCUN NESTED JSONOBJECT / JSONARRAY
+            saveWeather.setVisibility((Long) ob.get("visibility"));
+            saveWeather.setCityName((String) ob.get("name"));
+            saveWeather.setCityId((Long) ob.get("id"));
+            saveWeather.setDate((Long) ob.get("dt"));
+
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return saveWeather;
+
+    }
+
+
+
+
+
+
+    /*
+    public WeatherModel JSONToWeatherModel(JSONObject object) throws IOException, ParseException { //salva il contenuto del json object in un oggetto weather
+        WeatherModel saveWeather = new WeatherModel();
+        JSONObject jsWeather = object;
+
+        JSONArray weather  = (JSONArray)object.get("main");
+
+
+
+
+        saveWeather.setVisibility((Long) jsWeather.get("visibility"));
+        long trashBin =(Long)jsWeather.get("timezone");
+
+            MAIN
+            saveWeather.setTemp((Double) jsonLineItem.get("temp"));
+            saveWeather.setTempMin((Double) jsonLineItem.get("temp_min"));
+            saveWeather.setHumidity((Integer) jsonLineItem.get("humidity"));
+            saveWeather.setPressure((Integer) jsonLineItem.get("pressure"));
+            saveWeather.setFeelsLike((Double) jsonLineItem.get("feels_like"));
+            saveWeather.setTempMax((Double) jsonLineItem.get("temp_max"));
+
+
+
+        saveWeather.setCountry((String)jsWeather.get("country"));
+
+         saveWeather.setLongitude((Double) jsWeather.get("lon"));
+         saveWeather.setLatitude((Double) jsWeather.get("lat"));
+        saveWeather.setMainWeather(jsWeather.getJSONObject("main"));
+         saveWeather.setDescription((String)jsWeather.get("description"));
+
+
+ }*/
+
+/*
+    public JSONObject WeatherModelToJSON(WeatherModel model){
+        JSONObject JSONWeather = new JSONObject();
+
+        JSONWeather.put("name", model.getCityName());
+        JSONWeather.put("country", model.getCountry());
+        JSONWeather.put("id", model.getCityId());
+        JSONWeather.put("dt", model.getDate());
+
+        JSONWeather.put("lon", model.getLongitude());
+        JSONWeather.put("lat", model.getLatitude());
+
+        JSONWeather.put("main", model.getMainWeather());
+        JSONWeather.put("description", model.getDescription());
+        JSONWeather.put("temp", model.getTemp());
+        JSONWeather.put("feels_like", model.getFeelsLike());
+        JSONWeather.put("temp_min", model.getTempMin());
+        JSONWeather.put("temp_max", model.getTempMax());
+        JSONWeather.put("pressure", model.getPressure());
+        JSONWeather.put("humidity", model.getHumidity());
+        JSONWeather.put("visibility", model.getVisibility());
+
+        return JSONWeather;
+    }
+
+
+
+*/
+
+
 }
