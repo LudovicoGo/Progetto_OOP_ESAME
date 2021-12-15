@@ -47,7 +47,7 @@ public class WeatherController {
         return service.WeatherModelToJSON(service.JSONToWeatherModel(service.getJSONWeather(cityName)));
     }
 
-    @GetMapping("/meteo4")
+   /* @GetMapping("/meteo4")
     public JSONObject testCombinazioneJSON(){
         return service.testCombinedFile();
     }
@@ -57,9 +57,6 @@ public class WeatherController {
     {
         //service.getScheduledWeather(cityName, freq, initialParam, finalHour);
         service.getScheduledWeather("Milan", "hours", 15, 19);
-    }
-
-
-
+    }*/
 
 }

@@ -1,5 +1,7 @@
 package com.progetto.ProgettoEsame.model;
 
+import java.util.Vector;
+
 public class GeolocationModel {
 
     private double latitude;

@@ -10,14 +10,11 @@ import org.json.simple.parser.ParseException;
 //import org.json.JSONArray;
 //import org.json.JSONObject;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URL;
-import java.nio.file.StandardOpenOption;
-import java.sql.Date;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.concurrent.Executors;
+import java.util.Iterator;
 
 
 public class WeatherService {
@@ -26,7 +23,7 @@ public class WeatherService {
     private final String apiCallUrl = "https://api.openweathermap.org/data/2.5/weather?q=";
 
 
-    public JSONObject getJSONWeather(String cityName){ //ritorna al controller un jsonobject che corrisponde a quello che si tottiene dalla chiamata delle api su postman
+    public JSONObject getJSONWeather(String cityName){ //ritorna al controller un jsonobject che corrisponde a quello che si ottiene dalla chiamata delle api su postman
         JSONObject jsonWeather = new JSONObject();
 
         try {
@@ -40,7 +37,6 @@ public class WeatherService {
 
             jsonWeather = (JSONObject) JSONValue.parse(savedLines);
             input.close();
-
         } catch(IOException e) {
             e.printStackTrace();
         }
@@ -94,142 +90,42 @@ public class WeatherService {
 
     }
 
-    public JSONObject MergeJSONObject(JSONObject toMerge1, JSONObject toMerge2, int index1, int index2){
-
-        JSONObject tm1 = toMerge1;
-        JSONObject tm2 = toMerge2;
-        JSONObject combined = new JSONObject();
-        combined.put("forecast" + index1, tm1);
-        combined.put("forecast" + index2, tm2);
-
-        return combined;
-
-    }
-
-    public JSONObject testCombinedFile(){
-
-        JSONObject a = new JSONObject();
-        JSONObject b = getJSONWeather("Bergamo");
-        JSONObject c = getJSONWeather("Ancona");
-
-        JSONObject comb = MergeJSONObject(a, b, 1, 2);
-        comb = MergeJSONObject(comb, c, 3, 4);
-        return comb;
-
-    }
-
-
-    public void JSONToFile (JSONObject obj, String cityName, boolean append){
-
-
-        try{ //TODO modificare percorso salvataggio files
-            File f = new File("saved/" + cityName + "WeatherArray.json");
-            FileWriter file = new FileWriter(cityName + "WeatherArray.json", false);
-            file.write(obj.toJSONString());
-            file.flush();
-            file.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    public void JSONArrayToFile (JSONArray array, String cityName, boolean append){
-
-        try{         //TODO modificare percorso salvataggio files
-            File f = new File("saved/" + cityName + "WeatherArray.json");
-            FileWriter file = new FileWriter(cityName + "WeatherArray.json", false);
-            file.write(array.toJSONString());
-            file.flush();
-            file.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-    }
-
-   /* public void FileToJSON (String fileName){
-        JSONParser parser = new JSONParser();
-
-        try {
-            BufferedReader input = new BufferedReader(new InputStreamReader();
-
-            Reader reader = new FileReader("saved/" + fileName);
-            JSONObject obj = (JSONObject) parser.parse(reader);
-            String inputLine, savedLines = "";
-            JSONObject jsonWeather = new JSONObject();
-            while ((inputLine = reader.readLine()) != null)
-                savedLines = savedLines + inputLine;
-
-            jsonWeather = (JSONObject) JSONValue.parse(savedLines);
-            input.close();
-
-
-
-
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-    }
-*/
-
-
-
-    public void getScheduledWeather (String cityName, String freq, int initialParam, int finalHour){
-
-        Timer timer = new Timer();
-        JSONArray completeWeather = new JSONArray();
-        TimerTask task = new TimerTask() {
-            int  counter = 0;
-            @Override
-            public void run() {
-                int times = finalHour - initialParam;
-                JSONObject weather = getJSONWeather(cityName);
-                completeWeather.add(counter, weather);
-                counter++;
-
-                if (counter >= times) {
-                    JSONArrayToFile(completeWeather, cityName, false);
-                    timer.cancel();
-                }
-            }
-        };
-        timer.schedule(task, 0, 1000); //3600000 1 ora
-
-
-    }
-
-
-
     public JSONObject WeatherModelToJSON(WeatherModel model){
         JSONObject JSONWeather = new JSONObject();
+        JSONObject JSONCoord = new JSONObject();
+        JSONObject JSONMain = new JSONObject();
+        JSONArray JSONArrayWeather = new JSONArray();
+        JSONObject objWeather = new JSONObject();
+        JSONObject JSONSys = new JSONObject();
+
 
         JSONWeather.put("name", model.getCityName());
-        JSONWeather.put("country", model.getCountry());
+        JSONWeather.put("sys", JSONSys);
         JSONWeather.put("id", model.getCityId());
         JSONWeather.put("dt", model.getDate());
 
-        JSONWeather.put("lon", model.getLongitude());
-        JSONWeather.put("lat", model.getLatitude());
+        JSONCoord.put("lon", model.getLongitude());
+        JSONCoord.put("lat", model.getLatitude());
 
-        JSONWeather.put("main", model.getMainWeather());
-        JSONWeather.put("description", model.getDescription());
-        JSONWeather.put("temp", model.getTemp());
-        JSONWeather.put("feels_like", model.getFeelsLike());
-        JSONWeather.put("temp_min", model.getTempMin());
-        JSONWeather.put("temp_max", model.getTempMax());
-        JSONWeather.put("pressure", model.getPressure());
-        JSONWeather.put("humidity", model.getHumidity());
+        JSONWeather.put("coord", JSONCoord);
+
+        objWeather.put("main",model.getMainWeather());
+        objWeather.put("description", model.getDescription());
+        JSONArrayWeather.add(objWeather);
+        JSONWeather.put("weather", JSONArrayWeather);
+
+        JSONWeather.put("main", JSONMain);
+        JSONMain.put("temp", model.getTemp());
+        JSONMain.put("feels_like", model.getFeelsLike());
+        JSONMain.put("temp_min", model.getTempMin());
+        JSONMain.put("temp_max", model.getTempMax());
+        JSONMain.put("pressure", model.getPressure());
+        JSONMain.put("humidity", model.getHumidity());
+
         JSONWeather.put("visibility", model.getVisibility());
+
+        JSONSys.put("country", model.getCountry());
 
         return JSONWeather;
     }
-
-
 }
