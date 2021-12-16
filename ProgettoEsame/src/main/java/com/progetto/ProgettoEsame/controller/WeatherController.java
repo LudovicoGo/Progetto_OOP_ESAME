@@ -2,8 +2,8 @@ package com.progetto.ProgettoEsame.controller;
 
 import com.progetto.ProgettoEsame.model.WeatherModel;
 import com.progetto.ProgettoEsame.service.WeatherService;
-import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,7 +29,7 @@ public class WeatherController {
 
     private WeatherService service = new WeatherService();
 
-        //restituisce il JSON completo delle previsioni della chiamata api per la città cityName
+    //restituisce il JSON completo delle previsioni della chiamata api per la città cityName
     @GetMapping("/meteo")
     public JSONObject getWeather(@RequestParam String cityName) throws IOException {
         return service.getJSONWeather(cityName);
@@ -42,21 +42,28 @@ public class WeatherController {
     }
 
     @GetMapping("/meteo3")
-    public JSONObject getJSONWeather(@RequestParam String cityName){
+    public JSONObject getJSONWeather(@RequestParam String cityName) {
 
         return service.WeatherModelToJSON(service.JSONToWeatherModel(service.getJSONWeather(cityName)));
     }
 
-   /* @GetMapping("/meteo4")
-    public JSONObject testCombinazioneJSON(){
+    @GetMapping("/meteo4")
+    public JSONObject testCombinazioneJSON() {
         return service.testCombinedFile();
     }
 
-    @GetMapping ("/meteoOre")
-    public void getHourlyWeather ()//(@RequestParam String cityName, String freq, int initialParam, int finalHour)
+    @GetMapping("/meteoOre")
+    public void getHourlyWeather()//(@RequestParam String cityName, String freq, int initialParam, int finalHour)
     {
         //service.getScheduledWeather(cityName, freq, initialParam, finalHour);
-        service.getScheduledWeather("Milan", "hours", 15, 19);
-    }*/
+        service.getScheduledWeather("Milan", "TimeSlot", 15, 19);
+    }
 
+    @GetMapping("/provasalvafile")
+    public void prova() {
+        JSONArray ar = new JSONArray();
+        ar.add(service.getJSONWeather("Milan"));
+        service.JSONArrayToFile(ar, "Milan", false);
+    }
 }
+
