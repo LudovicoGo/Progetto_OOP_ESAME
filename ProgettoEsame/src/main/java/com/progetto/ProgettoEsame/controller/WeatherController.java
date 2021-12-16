@@ -1,11 +1,11 @@
 package com.progetto.ProgettoEsame.controller;
+import com.progetto.ProgettoEsame.filterAndStats.VisibilityFilterImpl;
 
 import com.progetto.ProgettoEsame.model.WeatherModel;
 import com.progetto.ProgettoEsame.service.WeatherService;
 import org.json.JSONException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
+import java.util.Vector;
 
 @RestController
 public class WeatherController {
@@ -28,9 +29,10 @@ public class WeatherController {
 */
 
     private WeatherService service = new WeatherService();
-
+    private VisibilityFilterImpl visFilter = new VisibilityFilterImpl();
     //restituisce il JSON completo delle previsioni della chiamata api per la città cityName
-    @GetMapping("/meteo")
+
+    //@GetMapping("/meteo")
     public JSONObject getWeather(@RequestParam String cityName) throws IOException {
         return service.getJSONWeather(cityName);
     }
@@ -65,5 +67,14 @@ public class WeatherController {
         ar.add(service.getJSONWeather("Milan"));
         service.JSONArrayToFile(ar, "Milan", false);
     }
+
+    @GetMapping("/lettura")
+    public Vector<Long>  lettura () throws IOException {
+
+        return visFilter.getVIsibilityData("Milan");
+
+
+    }
+
 }
 
