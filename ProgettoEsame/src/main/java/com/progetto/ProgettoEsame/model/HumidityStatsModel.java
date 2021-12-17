@@ -6,5 +6,4 @@ public class HumidityStatsModel extends CityForStatsModel{
         super(cityName);
     }
 
-
 }

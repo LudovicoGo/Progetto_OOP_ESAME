@@ -13,8 +13,8 @@ import java.util.Vector;
 
 public class HumidityFilterImpl {
 
-    public Vector<Integer> getHumidityData(String cityName){
-        Vector<Integer> dataHumidity = new Vector<Integer>();
+    public Vector<Long> getHumidityData(String cityName){
+        Vector<Long> dataHumidity = new Vector<Long>();
         JSONParser parser = new JSONParser();
         try{
             JSONArray humArray = (JSONArray) parser.parse(new FileReader(cityName + "WeatherArray.json"));
@@ -22,7 +22,7 @@ public class HumidityFilterImpl {
                 JSONObject weather = (JSONObject) o;
                 JSONObject main = (JSONObject) weather.get("main");
 
-                int hum = (Integer) main.get("humidity");
+                long hum = (Long) main.get("humidity");
                 dataHumidity.add(hum);
             }
 

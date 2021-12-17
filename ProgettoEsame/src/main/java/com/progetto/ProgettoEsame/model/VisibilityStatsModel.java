@@ -2,7 +2,6 @@ package com.progetto.ProgettoEsame.model;
 
 public class VisibilityStatsModel extends CityForStatsModel{
 
-
     double averageVisibility;
     double visibilityVariance;
 
@@ -31,4 +30,5 @@ public class VisibilityStatsModel extends CityForStatsModel{
     public void setVisibilityVariance(double visibilityVariance) {
         this.visibilityVariance = visibilityVariance;
     }
+
 }

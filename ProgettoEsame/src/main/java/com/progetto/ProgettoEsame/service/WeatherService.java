@@ -316,9 +316,9 @@ public class WeatherService {
         JSONObject objWeather = new JSONObject();
         JSONObject JSONSys = new JSONObject();
 
+        JSONWeather.put("sys", JSONSys);
 
         JSONWeather.put("name", model.getCityName());
-        JSONWeather.put("sys", JSONSys);
         JSONWeather.put("id", model.getCityId());
         JSONWeather.put("dt", model.getDate());
 
@@ -346,6 +346,5 @@ public class WeatherService {
 
         return JSONWeather;
     }
-
 
 }
