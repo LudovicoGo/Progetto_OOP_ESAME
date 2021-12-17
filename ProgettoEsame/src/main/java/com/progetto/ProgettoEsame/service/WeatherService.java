@@ -310,24 +310,39 @@ public class WeatherService {
     */
     public JSONObject WeatherModelToJSON(WeatherModel model){
         JSONObject JSONWeather = new JSONObject();
+        JSONObject JSONCoord = new JSONObject();
+        JSONObject JSONMain = new JSONObject();
+        JSONArray JSONArrayWeather = new JSONArray();
+        JSONObject objWeather = new JSONObject();
+        JSONObject JSONSys = new JSONObject();
+
 
         JSONWeather.put("name", model.getCityName());
-        JSONWeather.put("country", model.getCountry());
+        JSONWeather.put("sys", JSONSys);
         JSONWeather.put("id", model.getCityId());
         JSONWeather.put("dt", model.getDate());
 
-        JSONWeather.put("lon", model.getLongitude());
-        JSONWeather.put("lat", model.getLatitude());
+        JSONCoord.put("lon", model.getLongitude());
+        JSONCoord.put("lat", model.getLatitude());
 
-        JSONWeather.put("main", model.getMainWeather());
-        JSONWeather.put("description", model.getDescription());
-        JSONWeather.put("temp", model.getTemp());
-        JSONWeather.put("feels_like", model.getFeelsLike());
-        JSONWeather.put("temp_min", model.getTempMin());
-        JSONWeather.put("temp_max", model.getTempMax());
-        JSONWeather.put("pressure", model.getPressure());
-        JSONWeather.put("humidity", model.getHumidity());
+        JSONWeather.put("coord", JSONCoord);
+
+        objWeather.put("main",model.getMainWeather());
+        objWeather.put("description", model.getDescription());
+        JSONArrayWeather.add(objWeather);
+        JSONWeather.put("weather", JSONArrayWeather);
+
+        JSONWeather.put("main", JSONMain);
+        JSONMain.put("temp", model.getTemp());
+        JSONMain.put("feels_like", model.getFeelsLike());
+        JSONMain.put("temp_min", model.getTempMin());
+        JSONMain.put("temp_max", model.getTempMax());
+        JSONMain.put("pressure", model.getPressure());
+        JSONMain.put("humidity", model.getHumidity());
+
         JSONWeather.put("visibility", model.getVisibility());
+
+        JSONSys.put("country", model.getCountry());
 
         return JSONWeather;
     }
