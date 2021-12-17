@@ -71,7 +71,7 @@ public class WeatherController {
     @GetMapping("/lettura")
     public Vector<Long>  lettura () throws IOException {
 
-        return visFilter.getVIsibilityData("Milan");
+        return visFilter.getVisibilityData("Milan");
 
 
     }

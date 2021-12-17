@@ -3,8 +3,8 @@ package com.progetto.ProgettoEsame.filterAndStats;
 import java.io.IOException;
 import java.util.Vector;
 
-public interface VisibilityFilter {
+public interface HumidityFilter {
 
-    public abstract Vector<Long> getVisibilityData(String cityName);
+    public abstract Vector<Integer> getHumidityData (String cityName);
 
 }

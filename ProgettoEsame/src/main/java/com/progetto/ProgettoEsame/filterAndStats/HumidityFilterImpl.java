@@ -1,5 +1,6 @@
 package com.progetto.ProgettoEsame.filterAndStats;
 
+import ch.qos.logback.core.subst.Parser;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -10,17 +11,19 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Vector;
 
-public class VisibilityFilterImpl implements VisibilityFilter {
+public class HumidityFilterImpl {
 
-    public Vector<Long> getVisibilityData(String cityName){
-        Vector<Long> dataVisibility = new Vector<Long>();
+    public Vector<Integer> getHumidityData(String cityName){
+        Vector<Integer> dataHumidity = new Vector<Integer>();
         JSONParser parser = new JSONParser();
         try{
-            JSONArray array = (JSONArray) parser.parse(new FileReader(cityName + "WeatherArray.json"));
-            for(Object o : array){
+            JSONArray humArray = (JSONArray) parser.parse(new FileReader(cityName + "WeatherArray.json"));
+            for(Object o : humArray){
                 JSONObject weather = (JSONObject) o;
-                long vis =(Long) weather.get("visibility");
-                dataVisibility.add(vis);
+                JSONObject main = (JSONObject) weather.get("main");
+
+                int hum = (Integer) main.get("humidity");
+                dataHumidity.add(hum);
             }
 
         } catch (ParseException | FileNotFoundException e) {
@@ -29,7 +32,7 @@ public class VisibilityFilterImpl implements VisibilityFilter {
             e.printStackTrace();
         }
 
-        return dataVisibility;
+        return dataHumidity;
 
     }
 
