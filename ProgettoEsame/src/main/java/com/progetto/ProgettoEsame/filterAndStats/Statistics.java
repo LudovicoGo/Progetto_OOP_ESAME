@@ -73,8 +73,8 @@ public class Statistics {
                 currentData = termInDataSet;
         }
 
-        this.maxValue = currentData;
-        return maxValue;
+        this.minValue = currentData;
+        return minValue;
     }
 
 }

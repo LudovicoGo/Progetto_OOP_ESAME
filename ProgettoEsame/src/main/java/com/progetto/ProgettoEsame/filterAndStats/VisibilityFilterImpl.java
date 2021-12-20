@@ -1,5 +1,9 @@
 package com.progetto.ProgettoEsame.filterAndStats;
 
+import com.progetto.ProgettoEsame.model.WeatherModel;
+import com.progetto.ProgettoEsame.service.WeatherService;
+
+import com.progetto.ProgettoEsame.model.CityForStatsModel;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -30,7 +34,25 @@ public class VisibilityFilterImpl implements VisibilityFilter {
         }
 
         return dataVisibility;
-
     }
+
+    public JSONObject fourHourStats(WeatherModel model){
+
+        JSONObject JSONVisibilityStats = new JSONObject();
+        Statistics visStats = new Statistics();
+
+        double averageVisibility = visStats.average(getVisibilityData(model.getCityName()));
+        double visibilityVariance = visStats.variance(getVisibilityData(model.getCityName()));
+        double maxValueVis = visStats.maxValue(getVisibilityData(model.getCityName()));
+        double minValueVis = visStats.minValue(getVisibilityData(model.getCityName()));
+
+        JSONVisibilityStats.put("Average Visibility", averageVisibility);
+        JSONVisibilityStats.put("Visibility Variance", visibilityVariance);
+        JSONVisibilityStats.put("Max Value Visibility", maxValueVis);
+        JSONVisibilityStats.put("Min Value Visibility", minValueVis);
+
+        return JSONVisibilityStats;
+    }
+
 
 }
