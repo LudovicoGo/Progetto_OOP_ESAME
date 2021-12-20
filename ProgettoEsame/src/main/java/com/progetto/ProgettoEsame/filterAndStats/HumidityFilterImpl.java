@@ -11,7 +11,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Vector;
 
-public class HumidityFilterImpl {
+public class HumidityFilterImpl implements HumidityFilter {
 
     public Vector<Long> getHumidityData(String cityName){
         Vector<Long> dataHumidity = new Vector<Long>();
