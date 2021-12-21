@@ -1,26 +1,38 @@
 package com.progetto.ProgettoEsame.filterAndStats;
 
+import com.progetto.ProgettoEsame.filterAndStats.HumidityFilterImpl;
+import com.progetto.ProgettoEsame.filterAndStats.VisibilityFilterImpl;
+import com.progetto.ProgettoEsame.model.VisibilityStatsModel;
+import com.progetto.ProgettoEsame.model.HumidityStatsModel;
+
+
 import java.util.Vector;
 
-// import com.progetto.ProgettoEsame.model.VisibilityStatsModel;
 
 public class Statistics {
 
-    private double variance; // variance = sum/(numberOfSamples - 1);
-    private double average; // media dei campioni
-    private int numberOfSamples; // numero di campioni
-    private double sum; // sum = sommatoria di (termInDataSet - meanVis)^2
-    private long maxValue; // valore massimo registrato
-    private long minValue; // valore minimo registrato
+    /*
+        //  private double variance; // variance = sum/(numberOfSamples - 1);
+        //  private double average; // media dei campioni
+        //  private int numberOfSamples; // numero di campioni
+        //  private double sum; // sum = sommatoria di (termInDataSet - meanVis)^2
+        //  private long maxValue; // valore massimo registrato
+        //  private long minValue; // valore minimo registrato
 
-    public double getVariance() {
-        return variance;
-    }
 
-    public double getAverage() {
-        return average;
-    }
-    
+        public double getVariance() {
+            return variance;
+        }
+
+        public double getAverage() {
+            return average;
+        }
+    */
+
+
+    VisibilityFilterImpl vis = new VisibilityFilterImpl();
+    HumidityFilterImpl hum = new HumidityFilterImpl();
+
     public double average (Vector<Long> getData){
 
         int numberOfSamples = 0;
@@ -33,21 +45,24 @@ public class Statistics {
 
         double average = (double) sumAverage / (double) numberOfSamples;
 
-        this.average = average;
+        //this.average = average;
         return average;
     }
-    
+
     public double variance(Vector<Long> getData){
 
+        double sum = 0;
+        int numberOfSamples = 0;
         for (long termInDataSet : getData) {
             sum = termInDataSet - average(getData);
             numberOfSamples++;
         }
 
         sum = Math.pow(sum, 2);
-        variance = sum / (numberOfSamples - 1);
+        double variance = sum / (numberOfSamples - 1);
 
-        this.variance = variance;
+
+        //this.variance = variance;
         return variance;
     }
 
@@ -60,7 +75,8 @@ public class Statistics {
                 currentData = termInDataSet;
         }
 
-        this.maxValue = currentData;
+       // this.maxValue = currentData;
+        long maxValue = currentData;
         return maxValue;
     }
 
@@ -73,7 +89,8 @@ public class Statistics {
                 currentData = termInDataSet;
         }
 
-        this.minValue = currentData;
+        //this.minValue = currentData;
+        long minValue = currentData;
         return minValue;
     }
 

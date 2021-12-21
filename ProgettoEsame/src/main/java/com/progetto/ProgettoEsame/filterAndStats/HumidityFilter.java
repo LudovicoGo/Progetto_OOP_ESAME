@@ -4,6 +4,6 @@ import java.util.Vector;
 
 public interface HumidityFilter {
 
-    public abstract Vector<Long> getHumidityData (String cityName);
+    public abstract Vector<Long> getHumidityData (String cityName, String period);
 
 }

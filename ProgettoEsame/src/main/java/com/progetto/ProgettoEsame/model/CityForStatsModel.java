@@ -15,4 +15,5 @@ public class CityForStatsModel {
     public void setCityName(String cityName) {
         this.cityName = cityName;
     }
+
 }

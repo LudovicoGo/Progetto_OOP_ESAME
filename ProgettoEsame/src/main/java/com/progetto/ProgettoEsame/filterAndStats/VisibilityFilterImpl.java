@@ -1,6 +1,8 @@
 package com.progetto.ProgettoEsame.filterAndStats;
 
+import com.progetto.ProgettoEsame.model.VisibilityStatsModel;
 import com.progetto.ProgettoEsame.model.WeatherModel;
+import com.progetto.ProgettoEsame.filterAndStats.Statistics;
 import com.progetto.ProgettoEsame.service.WeatherService;
 
 import com.progetto.ProgettoEsame.model.CityForStatsModel;
@@ -16,11 +18,14 @@ import java.util.Vector;
 
 public class VisibilityFilterImpl implements VisibilityFilter {
 
-    public Vector<Long> getVisibilityData(String cityName){
+    private Statistics stats = new Statistics();
+
+
+    public Vector<Long> getVisibilityData(String cityName, String period){
         Vector<Long> dataVisibility = new Vector<Long>();
         JSONParser parser = new JSONParser();
         try{
-            JSONArray array = (JSONArray) parser.parse(new FileReader(cityName + "WeatherArray.json"));
+            JSONArray array = (JSONArray) parser.parse(new FileReader(cityName + period + "WeatherArray.json"));
             for(Object o : array){
                 JSONObject weather = (JSONObject) o;
                 long vis =(Long) weather.get("visibility");
@@ -36,22 +41,30 @@ public class VisibilityFilterImpl implements VisibilityFilter {
         return dataVisibility;
     }
 
-    public JSONObject fourHourStats(WeatherModel model){
+    public VisibilityStatsModel calculator (String cityName, String period){
+        VisibilityStatsModel model = new VisibilityStatsModel(cityName);
+        model.setAverageVisibility(stats.average(getVisibilityData(cityName, period)));
+        model.setVisibilityVariance(stats.variance(getVisibilityData(cityName, period)));
+        model.setMaxValue(stats.maxValue(getVisibilityData(cityName, period)));
+        model.setMinValue(stats.minValue(getVisibilityData(cityName, period)));
 
-        JSONObject JSONVisibilityStats = new JSONObject();
-        Statistics visStats = new Statistics();
+        return model;
+    }
 
-        double averageVisibility = visStats.average(getVisibilityData(model.getCityName()));
-        double visibilityVariance = visStats.variance(getVisibilityData(model.getCityName()));
-        double maxValueVis = visStats.maxValue(getVisibilityData(model.getCityName()));
-        double minValueVis = visStats.minValue(getVisibilityData(model.getCityName()));
 
-        JSONVisibilityStats.put("Average Visibility", averageVisibility);
-        JSONVisibilityStats.put("Visibility Variance", visibilityVariance);
-        JSONVisibilityStats.put("Max Value Visibility", maxValueVis);
-        JSONVisibilityStats.put("Min Value Visibility", minValueVis);
+    public JSONObject modelToJSONObject (VisibilityStatsModel model){
+        JSONObject jsonObject = new JSONObject();
+        JSONObject name = new JSONObject();
 
-        return JSONVisibilityStats;
+        name.put("average visibility", model.getAverageVisibility());
+        name.put("visibility variance",model.getVisibilityVariance());
+        name.put("max visibility", model.getMaxValue());
+        name.put("min visibility", model.getMinValue());
+
+        jsonObject.put("stats", name);
+        jsonObject.put("city name", model.getCityName());
+
+        return jsonObject;
     }
 
 

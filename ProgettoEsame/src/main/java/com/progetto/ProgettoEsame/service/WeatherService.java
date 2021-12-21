@@ -1,5 +1,7 @@
 package com.progetto.ProgettoEsame.service;
 
+import com.progetto.ProgettoEsame.Exception.CityException;
+import com.progetto.ProgettoEsame.Exception.TimeSlotException;
 import com.progetto.ProgettoEsame.model.WeatherModel;
 import org.json.simple.JSONArray;
 
@@ -11,13 +13,42 @@ import java.net.URL;
 import java.time.*;
 import java.util.*;
 
+/**
+ * Questa classe implementa l'interfaccia WeatherService e contiene i metodi usati dal controller
+ * per ottenere e salvare le previsioni del tempo a partire dalle api di OpenWeather.
+ *
+ * @author Ludovico Gorgoglione
+ * @author Christian Curzi
+ *
+ */
 
 
 public class WeatherService {
 
+    /**
+     * api key utilizzata per ottenere accesso alle informazioni che
+     * si richiedono tramite la chiamata ai servizi di OpenWeather.
+     *
+     */
+
     private final String APIKey = "7a89f821172959c6731c4bafaa3f1b20";
+
+
+
+    /**
+     * url al quale ci si riferisce per fare le chiamate alle api di OpenWeather.
+     *
+     */
     private final String apiCallUrl = "https://api.openweathermap.org/data/2.5/weather?q=";
 
+
+
+    /**
+     * metodo che fa una chiamata alle api di OpenWeather, estrapola le previsioni meteo per la città richiesta.
+     *
+     * @param cityName nome della città di cui si vogliono richiedere le previsioni meteo.
+     * @return restituisce un JSONObject con all'interno le previsioni meteo complete per la città richiesta.
+     */
 
     public JSONObject getJSONWeather(String cityName){ //ritorna al controller un jsonobject che corrisponde a quello che si tottiene dalla chiamata delle api su postman
         JSONObject jsonWeather = new JSONObject();
@@ -37,9 +68,20 @@ public class WeatherService {
         } catch(IOException e) {
             e.printStackTrace();
         }
+
         return jsonWeather;
 
     }
+
+
+
+    /**
+     * metodo che trasforma un JSONObject contenente previsioni meteo in un oggetto WeatherModel.
+     *
+     * @param ob JSONObject contenente le previsioni meteo.
+     * @return restituisce le previsioni meteo in forma WeatherModel.
+     */
+
     public WeatherModel JSONToWeatherModel(JSONObject ob) {
 
         WeatherModel saveWeather = new WeatherModel();
@@ -87,35 +129,19 @@ public class WeatherService {
 
     }
 
-    public JSONObject MergeJSONObject(JSONObject toMerge1, JSONObject toMerge2, int index1, int index2){
-
-        JSONObject tm1 = toMerge1;
-        JSONObject tm2 = toMerge2;
-        JSONObject combined = new JSONObject();
-        combined.put("forecast" + index1, tm1);
-        combined.put("forecast" + index2, tm2);
-
-        return combined; //TODO può essere rimosso
-
-    }
-
-    public JSONObject testCombinedFile(){ //TODO da rimuovere
-
-        JSONObject a = new JSONObject();
-        JSONObject b = getJSONWeather("Bergamo");
-        JSONObject c = getJSONWeather("Ancona");
-
-        JSONObject comb = MergeJSONObject(a, b, 1, 2);
-        comb = MergeJSONObject(comb, c, 3, 4);
-        return comb;
-
-    }
+/*
+    /**
+     * metodo che stampa un JSONObject su un file.
+     *
+     * @param obj JSONObject da stampare sul file.
+     * @param cityName nome della città a cui si riferiscono le previsioni contenute nel JSONObject passato prima.
+     * @param append se si vuole scrivere in append sul file o sovrascriverlo direttamente.
+     */
+/*
+   public void JSONToFile (JSONObject obj, String cityName, boolean append){
 
 
-    public void JSONToFile (JSONObject obj, String cityName, boolean append){
-
-
-        try{ //TODO modificare percorso salvataggio files
+        try{        //TODO modificare percorso salvataggio files
             File f = new File("saved/" + cityName + "WeatherArray.json");
             FileWriter file = new FileWriter(cityName + "WeatherArray.json", false);
             file.write(obj.toJSONString());
@@ -125,7 +151,15 @@ public class WeatherService {
             e.printStackTrace();
         }
     }
+*/
 
+    /**
+     * metodo che stampa un JSONArray su un file.
+     *
+     * @param array JSONArray da stampare sul file.
+     * @param cityName nome della città a cui si riferiscono le previsioni contenute nel JSONObject passato prima.
+     * @param append se si vuole scrivere in append sul file o sovrascriverlo direttamente.
+     */
 
     public void JSONArrayToFile (JSONArray array, String cityName, boolean append){
 
@@ -138,43 +172,21 @@ public class WeatherService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 
-   /* public void FileToJSON (String fileName){
-        JSONParser parser = new JSONParser();
 
-        try {
-            BufferedReader input = new BufferedReader(new InputStreamReader();
-
-            Reader reader = new FileReader("saved/" + fileName);
-            JSONObject obj = (JSONObject) parser.parse(reader);
-            String inputLine, savedLines = "";
-            JSONObject jsonWeather = new JSONObject();
-            while ((inputLine = reader.readLine()) != null)
-                savedLines = savedLines + inputLine;
-
-            jsonWeather = (JSONObject) JSONValue.parse(savedLines);
-            input.close();
+    /**
+     * metodo che salva su file, ogni ora, le previsioni meteo in relazione al periodo scelto
+     * (Giorno stesso, un giorno a scelta, intera settimana, una certa fascia oraria).
+     *
+     * @param cityName nome della città di cui si vogliono salvare
+     * @param period periodo relativo al quale si vogliono salvare le previsioni (Daily, ChosenDay, Week, TimeSlot)
+     * @param initialParam ora/data d'inizio del periodo scelto
+     * @param finalParam ora/data finale del periodo scelto
+     */
 
 
-
-
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-    }
-*/ //TODO da rifare in modo corretto
-
-
-
-    public void getScheduledWeather (String cityName, String freq, long initialParam, long finalHour){
+    public void getScheduledWeather (String cityName, String period, long initialParam, long finalParam) {
 
         Timer timer = new Timer();
         JSONArray completeWeather = new JSONArray();
@@ -186,12 +198,13 @@ public class WeatherService {
 
             @Override
             public void run() {
+                JSONObject weather = getJSONWeather(cityName);
 
-                switch (freq){
+                switch (period){
                     case "TimeSlot": {
 
-                        long times = (finalHour - initialParam)/3600000; // /3600000
-                        JSONObject weather = getJSONWeather(cityName);
+                        long times = (finalParam - initialParam)/3600000; // /3600000
+                        // JSONObject weather = getJSONWeather(cityName);
                         completeWeather.add(counter, weather);
                         counter++;
                         JSONArrayToFile(completeWeather, cityName, false);
@@ -211,7 +224,7 @@ public class WeatherService {
                         long dateDifference = (endOfTheWeek.atZone(zoneId).toEpochSecond()*1000) - (now.atZone(zoneId).toEpochSecond()*1000);   //questa è la differenza in millisecondi tra la mezzanotte del secondo giorno e l'ora attuale
                         long times = dateDifference / 3600000;                    //numero di ore per cui devo eseguire il ciclo (604800000 è il numero di ore presenti in una settimana), alla fine ho il giorno corrente +
 
-                        JSONObject weather = getJSONWeather(cityName);                          //TODO qui andrebbe il metodo da implementare nel TODO successivo
+                        // JSONObject weather = getJSONWeather(cityName);                          //TODO forse si può ridurre questo ammasso di roba con un metodo a parte
                         completeWeather.add(counter, weather);
                         counter++;
 
@@ -224,7 +237,7 @@ public class WeatherService {
 
                     case "ChosenDay": {
                         long times = 24;
-                        JSONObject weather = getJSONWeather(cityName);                          //TODO qui andrebbe il metodo da implementare nel TODO successivo
+                        // JSONObject weather = getJSONWeather(cityName);                          //TODO forse si può ridurre questo ammasso di roba con un metodo a parte
                         completeWeather.add(counter, weather);
                         counter++;
 
@@ -243,7 +256,7 @@ public class WeatherService {
                         long tomorrowToEpoch = tomorrow.atZone(zoneId).toEpochSecond()*1000;
                         long times = (tomorrowToEpoch - nowToEpoch)/3600000;
 
-                        JSONObject weather = getJSONWeather(cityName);                          //TODO qui andrebbe un metodo per ridurre questo codice che in questo medoto è ripetuto 4 volte
+                        // JSONObject weather = getJSONWeather(cityName);                          //TODO qui andrebbe un metodo per ridurre questo codice che in questo medoto è ripetuto 4 volte
                         completeWeather.add(counter, weather);
                         counter++;
 
@@ -257,16 +270,23 @@ public class WeatherService {
                 }
             }
         };                      //getDelay(freq, initialParam, finalHour)
-        timer.schedule(task, getDelay(freq, initialParam, finalHour), 1000);          //TODO rimpiazzare 1000 con 3600000                //   1000 = 1 secondo, 60000 = 1 minuto, 3600000 = 1 ora
+        timer.schedule(task, getDelay(period, initialParam), 1000);          //TODO rimpiazzare 1000 con 3600000, 1000 = 1 secondo, 60000 = 1 minuto, 3600000 = 1 ora
     }
 
 
+    /**
+     * metodo che calcola il delay di partenza per il timer del metodo getScheduledWeather
+     *
+     * @param period periodo relativo al quale si vogliono salvare le previsioni (Daily, ChosenDay, Week, TimeSlot)
+     * @param initialParam ora/data d'inizio del periodo scelto
+     * @return il delay di partenza per il timer del metodo getScheduledWeather
+     */
 
-    public long getDelay(String freq, long initialParam, long finalHour){           //per ottenere il delay di partenza del timer
+    public long getDelay(String period, long initialParam){           //per ottenere il delay di partenza del timer
 
         long delay = 0;
 
-        switch (freq){
+        switch (period){
             case "TimeSlot":{
                 ZoneId zoneId = ZoneId.systemDefault();
                 LocalDateTime now = LocalDateTime.now();                            //qui il delay è l'ora a cui inizia la fascia oraria - l'ora attuale
@@ -299,15 +319,13 @@ public class WeatherService {
         return delay;
     }
 
-    /* //TODO implementare questo metodo per rimpiazzare il codice ripetuto nel metodo getScheduledWeather
-    public JSONArray WeatherObjectIntoArray (JSONArray arr, String cityName, int counter){
-        JSONArray array = arr;
-        JSONObject weather = getJSONWeather(cityName);
-        array.add(counter, weather);
-        return array;
-    }
 
-    */
+    /**
+     * metodo che converte un WeatherModel in un JSONObject
+     *
+     * @param model WeatherModel da convertire
+     * @return un JSONObject contente le informazioni del WeatherModel
+     */
     public JSONObject WeatherModelToJSON(WeatherModel model){
         JSONObject JSONWeather = new JSONObject();
         JSONObject JSONCoord = new JSONObject();
