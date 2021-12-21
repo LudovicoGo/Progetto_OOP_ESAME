@@ -12,6 +12,7 @@ import org.json.simple.JSONValue;
 import java.io.*;
 import java.net.URL;
 import java.time.*;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 /**
@@ -314,41 +315,22 @@ public class WeatherService {
         return delay;
     }
 
-
-    public long dataConverter(String stringDate, String time){
+    /**
+     * metodo che converte una data in formato ddMMyyyHHmmss nel suo equivalente in epoch seconds
+     *
+     * @param stringDateTime data da convertire
+     * @return ritorna un long contenente il tempo trascorso dalla data inserita all'epoch time
+     */
+    public long dataConverter(String stringDateTime){
 
         //per la data usare il formato ddmmyy
         //per l'ora usare il HHMMSS
-        String s = stringDate;
-        
-        int day;
-        int month;
-        int year;
-
-        day = Integer.parseInt(s.substring(0, 2));
-        month = Integer.parseInt(s.substring(2, 4));
-        year = Integer.parseInt(s.substring(4, s.length()));
-
-        String t = time;
-
-        int hour;
-        int min;
-        int secs;
-
-        hour = Integer.parseInt(t.substring(0, 2));
-        min = Integer.parseInt(t.substring(2, 4));
-        secs = Integer.parseInt(t.substring(4, t.length()));
+        String s = stringDateTime;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyyHHmmss");
+        LocalDateTime dateTime = LocalDateTime.parse(s, formatter);
         ZoneId zoneId = ZoneId.systemDefault();
 
-        LocalDate localDate = LocalDate.of(year, month, day);
-
-        LocalTime localTime = LocalTime.of(hour, min, secs);
-
-        LocalDateTime date = LocalDateTime.of(localDate, localTime);
-
-
-        long dateToEpoch = date.atZone(zoneId).toEpochSecond();
-        return dateToEpoch;
+        return dateTime.atZone(zoneId).toEpochSecond();
     }
 
     /**
