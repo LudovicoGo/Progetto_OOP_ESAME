@@ -58,18 +58,21 @@ public class WeatherController {
      * può scegliere il periodo di tempo di raccolta dei dati.
      *  @param cityName nome della città di cui si vogliono salvare le previsioni
      * @param period periodo di tempo nel quale si vogliono salvare le previsioni (Daily, ChosenDay, Week, TimeSlot).
-     * @param initialParam ora/data d'inizio del periodo durante il quale si vogliono salvare le previsioni.
-     * @param finalParam ora/data della fine del periodo durente il quale si vogliono salvare le previsioni.
+     * @param initialDate ora/data d'inizio del periodo durante il quale si vogliono salvare le previsioni.
+     * @param finalDate ora/data della fine del periodo durante il quale si vogliono salvare le previsioni.
      *
      */
     @GetMapping("/scheduledWeather")//(@RequestParam String cityName, String freq, int initialParam, int finalHour)
     public ResponseEntity<Object> saveScheduledWeather(@RequestParam (name = "cityName", defaultValue = "empty") String cityName, @RequestParam (name = "period", defaultValue = "Daily") String period,
-                                                       @RequestParam (name = "initialParam", defaultValue = "-1") long initialParam, @RequestParam (name = "finalParam", defaultValue = "-1") long finalParam){
+                                                       @RequestParam (name = "initialParam", defaultValue = "-1") String initialDate, @RequestParam (name = "finalParam", defaultValue = "-1") String finalDate){
 
         try {
 
             if (cityName.equals("empty"))
                 throw new CityException("ERRORE! Non hai inserito il nome della città, riprova!");
+
+            long initialParam = service.dataConverter(initialDate);
+            long finalParam = service.dataConverter(finalDate);
 
             switch (period) {
                 case "Daily": {
