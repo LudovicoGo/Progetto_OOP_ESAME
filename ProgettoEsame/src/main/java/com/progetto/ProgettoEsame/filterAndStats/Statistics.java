@@ -30,10 +30,8 @@ public class Statistics {
     */
 
 
-    VisibilityFilterImpl vis = new VisibilityFilterImpl();
-    HumidityFilterImpl hum = new HumidityFilterImpl();
 
-    public double average (Vector<Long> getData){
+        public double average (Vector<Long> getData){
 
         int numberOfSamples = 0;
         long sumAverage = 0;

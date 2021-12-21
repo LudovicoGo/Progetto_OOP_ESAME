@@ -314,7 +314,7 @@ public class WeatherService {
         return delay;
     }
 
-
+/*
     public long dataConverter(String stringDate, String time){
 
         //per la data usare il formato dd/mm/yy
@@ -349,7 +349,7 @@ public class WeatherService {
         long dateToEpoch = date.atZone(zoneId).toEpochSecond();
         return dateToEpoch;
     }
-
+*/
     /**
      * metodo che converte un WeatherModel in un JSONObject
      *

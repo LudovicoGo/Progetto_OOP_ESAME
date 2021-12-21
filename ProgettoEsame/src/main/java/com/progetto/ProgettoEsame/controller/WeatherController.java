@@ -6,6 +6,7 @@ import com.progetto.ProgettoEsame.filterAndStats.Statistics;
 
 import com.progetto.ProgettoEsame.filterAndStats.VisibilityFilterImpl;
 import com.progetto.ProgettoEsame.service.WeatherService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class WeatherController {
 
-    // @Autowired
+  // @Autowired
 
     private WeatherService service = new WeatherService();
     private Statistics statistics = new Statistics();
@@ -110,9 +111,9 @@ public class WeatherController {
 
     //TODO ROTTA DI TEST ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     @GetMapping("/test")
-    public String test(@RequestParam String s1, @RequestParam String s2){
-
-        return s1+s2;
+    public long test(@RequestParam String s1, @RequestParam String s2){
+       // return service.dataConverter(s1, s2);
+        return (long)10;
     }
     //TODO ROTTA DI TEST ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
