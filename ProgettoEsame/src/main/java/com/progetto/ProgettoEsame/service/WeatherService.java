@@ -314,19 +314,20 @@ public class WeatherService {
         return delay;
     }
 
-/*
+
     public long dataConverter(String stringDate, String time){
 
-        //per la data usare il formato dd/mm/yy
-        //per l'ora usare il HH:MM:SS
+        //per la data usare il formato ddmmyy
+        //per l'ora usare il HHMMSS
         String s = stringDate;
+        
         int day;
         int month;
         int year;
 
         day = Integer.parseInt(s.substring(0, 2));
-        month = Integer.parseInt(s.substring(3, 5));
-        year = Integer.parseInt(s.substring(6));
+        month = Integer.parseInt(s.substring(2, 4));
+        year = Integer.parseInt(s.substring(4, s.length()));
 
         String t = time;
 
@@ -335,8 +336,8 @@ public class WeatherService {
         int secs;
 
         hour = Integer.parseInt(t.substring(0, 2));
-        min = Integer.parseInt(t.substring(3, 5));
-        secs = Integer.parseInt(t.substring(6));
+        min = Integer.parseInt(t.substring(2, 4));
+        secs = Integer.parseInt(t.substring(4, t.length()));
         ZoneId zoneId = ZoneId.systemDefault();
 
         LocalDate localDate = LocalDate.of(year, month, day);
@@ -349,7 +350,7 @@ public class WeatherService {
         long dateToEpoch = date.atZone(zoneId).toEpochSecond();
         return dateToEpoch;
     }
-*/
+
     /**
      * metodo che converte un WeatherModel in un JSONObject
      *
