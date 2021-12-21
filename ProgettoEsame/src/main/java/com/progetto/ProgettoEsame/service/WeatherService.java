@@ -1,5 +1,6 @@
 package com.progetto.ProgettoEsame.service;
 
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.progetto.ProgettoEsame.Exception.CityException;
 import com.progetto.ProgettoEsame.Exception.TimeSlotException;
 import com.progetto.ProgettoEsame.model.WeatherModel;
@@ -30,7 +31,6 @@ public class WeatherService {
      * si richiedono tramite la chiamata ai servizi di OpenWeather.
      *
      */
-
     private final String APIKey = "7a89f821172959c6731c4bafaa3f1b20";
 
 
@@ -49,7 +49,6 @@ public class WeatherService {
      * @param cityName nome della città di cui si vogliono richiedere le previsioni meteo.
      * @return restituisce un JSONObject con all'interno le previsioni meteo complete per la città richiesta.
      */
-
     public JSONObject getJSONWeather(String cityName){ //ritorna al controller un jsonobject che corrisponde a quello che si tottiene dalla chiamata delle api su postman
         JSONObject jsonWeather = new JSONObject();
 
@@ -81,7 +80,6 @@ public class WeatherService {
      * @param ob JSONObject contenente le previsioni meteo.
      * @return restituisce le previsioni meteo in forma WeatherModel.
      */
-
     public WeatherModel JSONToWeatherModel(JSONObject ob) {
 
         WeatherModel saveWeather = new WeatherModel();
@@ -160,7 +158,6 @@ public class WeatherService {
      * @param cityName nome della città a cui si riferiscono le previsioni contenute nel JSONObject passato prima.
      * @param append se si vuole scrivere in append sul file o sovrascriverlo direttamente.
      */
-
     public void JSONArrayToFile (JSONArray array, String cityName, boolean append){
 
         try{         //TODO modificare percorso salvataggio files
@@ -184,8 +181,6 @@ public class WeatherService {
      * @param initialParam ora/data d'inizio del periodo scelto
      * @param finalParam ora/data finale del periodo scelto
      */
-
-
     public void getScheduledWeather (String cityName, String period, long initialParam, long finalParam) {
 
         Timer timer = new Timer();
@@ -274,6 +269,7 @@ public class WeatherService {
     }
 
 
+
     /**
      * metodo che calcola il delay di partenza per il timer del metodo getScheduledWeather
      *
@@ -281,7 +277,6 @@ public class WeatherService {
      * @param initialParam ora/data d'inizio del periodo scelto
      * @return il delay di partenza per il timer del metodo getScheduledWeather
      */
-
     public long getDelay(String period, long initialParam){           //per ottenere il delay di partenza del timer
 
         long delay = 0;
@@ -319,6 +314,41 @@ public class WeatherService {
         return delay;
     }
 
+
+    public long dataConverter(String stringDate, String time){
+
+        //per la data usare il formato dd/mm/yy
+        //per l'ora usare il HH:MM:SS
+        String s = stringDate;
+        int day;
+        int month;
+        int year;
+
+        day = Integer.parseInt(s.substring(0, 2));
+        month = Integer.parseInt(s.substring(3, 5));
+        year = Integer.parseInt(s.substring(6));
+
+        String t = time;
+
+        int hour;
+        int min;
+        int secs;
+
+        hour = Integer.parseInt(t.substring(0, 2));
+        min = Integer.parseInt(t.substring(3, 5));
+        secs = Integer.parseInt(t.substring(6));
+        ZoneId zoneId = ZoneId.systemDefault();
+
+        LocalDate localDate = LocalDate.of(year, month, day);
+
+        LocalTime localTime = LocalTime.of(hour, min, secs);
+
+        LocalDateTime date = LocalDateTime.of(localDate, localTime);
+
+
+        long dateToEpoch = date.atZone(zoneId).toEpochSecond();
+        return dateToEpoch;
+    }
 
     /**
      * metodo che converte un WeatherModel in un JSONObject
