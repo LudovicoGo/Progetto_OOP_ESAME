@@ -5,9 +5,7 @@ import com.progetto.ProgettoEsame.filterAndStats.VisibilityFilterImpl;
 import com.progetto.ProgettoEsame.model.VisibilityStatsModel;
 import com.progetto.ProgettoEsame.model.HumidityStatsModel;
 
-
 import java.util.Vector;
-
 
 public class Statistics {
 
@@ -28,8 +26,6 @@ public class Statistics {
             return average;
         }
     */
-
-
 
         public double average (Vector<Long> getData){
 
@@ -52,12 +48,12 @@ public class Statistics {
         double sum = 0;
         int numberOfSamples = 0;
         for (long termInDataSet : getData) {
-            sum = Math.pow((termInDataSet - average(getData)), 2);
+            sum += Math.pow((termInDataSet - average(getData)), 2);
             numberOfSamples++;
         }
 
         // sum = Math.pow(sum, 2);
-        double variance = sum / (numberOfSamples - 1);
+        double variance = sum / numberOfSamples;
 
 
         //this.variance = variance;
