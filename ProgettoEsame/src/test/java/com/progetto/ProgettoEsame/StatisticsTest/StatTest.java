@@ -45,7 +45,7 @@ public class StatTest {
 
 
         @Test
-    void shouldFindMaxValue(){
+    void shouldFindMaxMinValue(){
             Vector<Long> longVector = new Vector<>();
             VisibilityFilterImpl vis = new VisibilityFilterImpl();
             Statistics stat = new Statistics();
@@ -53,7 +53,7 @@ public class StatTest {
             long l = 50000;
             for (int i = 0; i < 10; i++)
                 longVector.add(i, l++);
-
-            Assertions.assertEquals(50004.5, stat.maxValue(longVector));
+            Assertions.assertEquals(50000, stat.minValue(longVector));
+            Assertions.assertEquals(50009, stat.maxValue(longVector));
         }
 }

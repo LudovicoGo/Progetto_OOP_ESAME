@@ -12,7 +12,7 @@ public class ServiceTest {
     WeatherService service = new WeatherService();
 
     @Test
-    @DisplayName("shouldFindThatCity")
+    @DisplayName("should find that city")
     void shouldFindThatCity(){
         JSONObject jsonObject = service.getJSONWeather("Milan");
 
@@ -22,6 +22,18 @@ public class ServiceTest {
         Assertions.assertEquals("Milan", cityName);
         Assertions.assertEquals(3173435, cityId);
     }
-    
+
+    @Test
+    @DisplayName("should convert date")
+    void shouldConvertDate(){
+        long toEpochDate = service.dataConverter("25122021154526");
+        Assertions.assertEquals(1640443526, toEpochDate);
+
+        toEpochDate = service.dataConverter("31122021232425");
+        Assertions.assertEquals(1640989465, toEpochDate);
+
+
+    }
+
 
 }
