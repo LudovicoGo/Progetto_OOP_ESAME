@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 public class ServiceTest {
 
 
-    WeatherService service = new WeatherService();
+    private WeatherService service = new WeatherService();
 
     @Test
     @DisplayName("should find that city")
