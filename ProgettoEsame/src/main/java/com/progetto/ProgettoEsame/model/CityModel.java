@@ -1,9 +1,25 @@
 package com.progetto.ProgettoEsame.model;
 
+/** Classe che descrive le città ereditando latitudine e longitudine da GeolocationModel.
+ * @author Gorgoglione Ludovico
+ * @author Curzi Christian
+ */
+
 public class CityModel extends GeolocationModel {
 
+    /**
+     * Variabile che rappresenta il nome della città.
+     */
     private String cityName;
+
+    /**
+     * Variabile che rappresenta l'ID della città.
+     */
     private long cityId;
+
+    /**
+     * Variabile che rappresenta la nazione in cui si trova la città.
+     */
     private String country;
 
     /** Costruttore di default dell'oggetto.

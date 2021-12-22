@@ -1,16 +1,60 @@
 package com.progetto.ProgettoEsame.model;
 
+/** Classe che descrive il meteo di una città ereditando da CityModel.
+ * @author Gorgoglione Ludovico
+ * @author Curzi Christian
+ */
+
 public class WeatherModel extends CityModel{
 
+    /**
+     * Variabile che rappresenta la data a cui si riferisce la previsione.
+     */
     private long date;
+
+    /**
+     * Variabile che rappresenta le informazioni principali del meteo.
+     */
     private String mainWeather;
+
+    /**
+     * Variabile che rappresenta la descrizione del meteo.
+     */
     private String description;
+
+    /**
+     * Variabile che rappresenta la temperatura.
+     */
     private double temp;
+
+    /**
+     * Variabile che rappresenta la temperatura percepita.
+     */
     private double feelsLike;
+
+    /**
+     * Variabile che rappresenta la temperatura minima.
+     */
     private double tempMin;
+
+    /**
+     * Variabile che rappresenta la temperatura massima.
+     */
     private double tempMax;
+
+    /**
+     * Variabile che rappresenta la pressione.
+     */
     private long pressure;
+
+    /**
+     * Variabile che rappresenta l'umidità.
+     */
     private long humidity;
+
+    /**
+     * Variabile che rappresenta la visibilità.
+     */
     private long visibility;
 
     /** Costruttore di default dell'oggetto.
@@ -22,20 +66,20 @@ public class WeatherModel extends CityModel{
     }
 
     /** Costruttore dell'oggetto.
-     * @param name         Nome della città.
-     * @param cityId       ID della città.
-     * @param country      Nazione in cui si trova la città.
-     * @param latitude     Latitudine della città.
-     * @param longitude    Longitudine della città.
-     * @param description  Descrizione del meteo.
-     * @param temp         Temperatura.
-     * @param feelsLike    Temperatura percepita.
-     * @param tempMax      Temperatura massima registrata.
-     * @param tempMin      Temperatura minima registrata.
-     * @param pressure     Pressione.
-     * @param humidity     Umidità.
-     * @param visibility   Visibilità.
-     * @param date         Giorno a cui si riferiscono le previsioni meteo.
+     * @param name           Nome della città.
+     * @param cityId         ID della città.
+     * @param country        Nazione in cui si trova la città.
+     * @param latitude       Latitudine della città.
+     * @param longitude      Longitudine della città.
+     * @param description    Descrizione del meteo.
+     * @param temp           Temperatura.
+     * @param feelsLike      Temperatura percepita.
+     * @param tempMax        Temperatura massima registrata.
+     * @param tempMin        Temperatura minima registrata.
+     * @param pressure       Pressione.
+     * @param humidity       Umidità.
+     * @param visibility     Visibilità.
+     * @param date           Giorno a cui si riferiscono le previsioni meteo.
      */
 
     public WeatherModel(String name, long cityId, String country, double latitude, double longitude, String mainWeather, String description, double temp, double feelsLike, double tempMax, double tempMin, long pressure, long humidity, long visibility, long date) {
@@ -72,7 +116,7 @@ public class WeatherModel extends CityModel{
 
     /**
      * Metodo che restituisce la descrizione del meteo.
-     * @return mainWeather
+     * @return description
      */
 
     public String getDescription() {
@@ -233,7 +277,7 @@ public class WeatherModel extends CityModel{
     }
 
     /**
-     * Override del metodo toString
+     * Metodo toString che restituisce il contenuto dell'oggetto sotto forma di stringa.
      * @return WeatherModel
      */
 
@@ -252,4 +296,5 @@ public class WeatherModel extends CityModel{
                 ", date=" + date +
                 '}';
     }
+
 }
