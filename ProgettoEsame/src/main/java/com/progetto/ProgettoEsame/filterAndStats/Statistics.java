@@ -15,7 +15,7 @@ public class Statistics {
         //  private double variance; // variance = sum/(numberOfSamples - 1);
         //  private double average; // media dei campioni
         //  private int numberOfSamples; // numero di campioni
-        //  private double sum; // sum = sommatoria di (termInDataSet - meanVis)^2
+        //  private double sum; // sum = sommatoria di (termInDataSet - average)^2
         //  private long maxValue; // valore massimo registrato
         //  private long minValue; // valore minimo registrato
 
@@ -52,11 +52,11 @@ public class Statistics {
         double sum = 0;
         int numberOfSamples = 0;
         for (long termInDataSet : getData) {
-            sum = termInDataSet - average(getData);
+            sum = Math.pow((termInDataSet - average(getData)), 2);
             numberOfSamples++;
         }
 
-        sum = Math.pow(sum, 2);
+        // sum = Math.pow(sum, 2);
         double variance = sum / (numberOfSamples - 1);
 
 
