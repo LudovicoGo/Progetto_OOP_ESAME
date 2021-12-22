@@ -1,5 +1,4 @@
 package com.progetto.ProgettoEsame.StatsCalculatorTest;
-
 import com.progetto.ProgettoEsame.filterAndStats.Statistics;
 import com.progetto.ProgettoEsame.filterAndStats.VisibilityFilterImpl;
 import org.junit.Before;
@@ -8,8 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Vector;
 
-public class statsTest {
-
+public class StatsTest {
 
     @Test
     void shouldCalculateAverage() {
@@ -27,7 +25,7 @@ public class statsTest {
         Assertions.assertEquals(50004.5, stat.average(longVector));
     }
 
-    
+
 
     @Test
     void shouldCalculateVariance(){
