@@ -18,38 +18,32 @@ import java.util.*;
 /**
  * Questa classe implementa l'interfaccia WeatherService e contiene i metodi usati dal controller
  * per ottenere e salvare le previsioni del tempo a partire dalle api di OpenWeather.
- *
  * @author Ludovico Gorgoglione
  * @author Christian Curzi
  *
  */
 
-
 public class WeatherService {
 
     /**
-     * api key utilizzata per ottenere accesso alle informazioni che
+     * Api key utilizzata per ottenere accesso alle informazioni che
      * si richiedono tramite la chiamata ai servizi di OpenWeather.
      *
      */
     private final String APIKey = "7a89f821172959c6731c4bafaa3f1b20";
 
-
-
     /**
-     * url al quale ci si riferisce per fare le chiamate alle api di OpenWeather.
+     * URL al quale ci si riferisce per fare le chiamate alle api di OpenWeather.
      *
      */
     private final String apiCallUrl = "https://api.openweathermap.org/data/2.5/weather?q=";
 
-
-
     /**
-     * metodo che fa una chiamata alle api di OpenWeather, estrapola le previsioni meteo per la città richiesta.
-     *
-     * @param cityName nome della città di cui si vogliono richiedere le previsioni meteo.
-     * @return restituisce un JSONObject con all'interno le previsioni meteo complete per la città richiesta.
+     * Metodo che fa una chiamata alle api di OpenWeather, estrapola le previsioni meteo per la città richiesta.
+     * @param cityName           Nome della città di cui si vogliono richiedere le previsioni meteo.
+     * @return                   Restituisce un JSONObject con all'interno le previsioni meteo complete per la città richiesta.
      */
+
     public JSONObject getJSONWeather(String cityName){ //ritorna al controller un jsonobject che corrisponde a quello che si tottiene dalla chiamata delle api su postman
         JSONObject jsonWeather = new JSONObject();
 
@@ -73,14 +67,12 @@ public class WeatherService {
 
     }
 
-
-
     /**
-     * metodo che trasforma un JSONObject contenente previsioni meteo in un oggetto WeatherModel.
-     *
-     * @param ob JSONObject contenente le previsioni meteo.
-     * @return restituisce le previsioni meteo in forma WeatherModel.
+     * Metodo che trasforma un JSONObject contenente previsioni meteo in un oggetto WeatherModel.
+     * @param ob                 JSONObject contenente le previsioni meteo.
+     * @return                   Restituisce le previsioni meteo in forma WeatherModel.
      */
+
     public WeatherModel JSONToWeatherModel(JSONObject ob) {
 
         WeatherModel saveWeather = new WeatherModel();
@@ -153,12 +145,12 @@ public class WeatherService {
 */
 
     /**
-     * metodo che stampa un JSONArray su un file.
-     *
-     * @param array JSONArray da stampare sul file.
-     * @param cityName nome della città a cui si riferiscono le previsioni contenute nel JSONObject passato prima.
-     * @param append se si vuole scrivere in append sul file o sovrascriverlo direttamente.
+     * Metodo che stampa un JSONArray su un file.
+     * @param array              JSONArray da stampare sul file.
+     * @param cityName           Nome della città a cui si riferiscono le previsioni contenute nel JSONObject passato prima.
+     * @param append             Se si vuole scrivere in append sul file o sovrascriverlo direttamente.
      */
+
     public void JSONArrayToFile (JSONArray array, String cityName, boolean append){
 
         try{         //TODO modificare percorso salvataggio files
@@ -172,16 +164,15 @@ public class WeatherService {
         }
     }
 
-
     /**
-     * metodo che salva su file, ogni ora, le previsioni meteo in relazione al periodo scelto
+     * Metodo che salva su file, ogni ora, le previsioni meteo in relazione al periodo scelto
      * (Giorno stesso, un giorno a scelta, intera settimana, una certa fascia oraria).
-     *
-     * @param cityName nome della città di cui si vogliono salvare
-     * @param period periodo relativo al quale si vogliono salvare le previsioni (Daily, ChosenDay, Week, TimeSlot)
-     * @param initialParam ora/data d'inizio del periodo scelto
-     * @param finalParam ora/data finale del periodo scelto
+     * @param cityName           Nome della città di cui si vogliono salvare
+     * @param period             Periodo relativo al quale si vogliono salvare le previsioni (Daily, ChosenDay, Week, TimeSlot)
+     * @param initialParam       Ora/data d'inizio del periodo scelto
+     * @param finalParam         Ora/data finale del periodo scelto
      */
+
     public void getScheduledWeather (String cityName, String period, long initialParam, long finalParam) {
 
         Timer timer = new Timer();
@@ -269,15 +260,13 @@ public class WeatherService {
         timer.schedule(task, getDelay(period, initialParam), 1000);          //TODO rimpiazzare 1000 con 3600000, 1000 = 1 secondo, 60000 = 1 minuto, 3600000 = 1 ora
     }
 
-
-
     /**
-     * metodo che calcola il delay di partenza per il timer del metodo getScheduledWeather
-     *
-     * @param period periodo relativo al quale si vogliono salvare le previsioni (Daily, ChosenDay, Week, TimeSlot)
-     * @param initialParam ora/data d'inizio del periodo scelto
-     * @return il delay di partenza per il timer del metodo getScheduledWeather
+     * Metodo che calcola il delay di partenza per il timer del metodo getScheduledWeather
+     * @param period             Periodo relativo al quale si vogliono salvare le previsioni (Daily, ChosenDay, Week, TimeSlot)
+     * @param initialParam       Ora/data d'inizio del periodo scelto
+     * @return                   Delay di partenza per il timer del metodo getScheduledWeather
      */
+
     public long getDelay(String period, long initialParam){           //per ottenere il delay di partenza del timer
 
         long delay = 0;
@@ -315,14 +304,12 @@ public class WeatherService {
         return delay;
     }
 
-
-
     /**
-     * metodo che converte una data in formato ddMMyyyHHmmss nel suo equivalente in epoch seconds
-     *
-     * @param stringDateTime data da convertire
-     * @return ritorna un long contenente il tempo trascorso dalla data inserita all'epoch time
+     * Metodo che converte una data in formato ddMMyyyHHmmss nel suo equivalente in epoch seconds
+     * @param stringDateTime     Data da convertire
+     * @return                   long contenente il tempo trascorso dalla data inserita all'epoch time
      */
+
     public long dataConverter(String stringDateTime){
 
         //per la data usare il formato ddmmyy
@@ -337,10 +324,10 @@ public class WeatherService {
 
     /**
      * metodo che converte un WeatherModel in un JSONObject
-     *
-     * @param model WeatherModel da convertire
-     * @return un JSONObject contente le informazioni del WeatherModel
+     * @param  model             WeatherModel da convertire
+     * @return                   JSONObject contente le informazioni del WeatherModel
      */
+
     public JSONObject WeatherModelToJSON(WeatherModel model){
         JSONObject JSONWeather = new JSONObject();
         JSONObject JSONCoord = new JSONObject();

@@ -23,7 +23,7 @@ public class StatTest {
             for (int i = 0; i < 10; i++)
                 longVector.add(i, l++);
 
-            Assertions.assertEquals(8.25, stat.average(longVector));
+            Assertions.assertEquals(50004.5, stat.average(longVector));
         }
 
 
@@ -38,7 +38,7 @@ public class StatTest {
             for (int i = 0; i < 10; i++)
                 longVector.add(i, l++);
 
-            Assertions.assertEquals(50004.5, stat.variance(longVector));
+            Assertions.assertEquals(8.25, stat.variance(longVector));
 
         }
 
