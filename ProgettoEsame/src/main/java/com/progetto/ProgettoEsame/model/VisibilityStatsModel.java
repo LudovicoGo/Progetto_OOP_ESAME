@@ -18,12 +18,12 @@ public class VisibilityStatsModel extends CityForStatsModel{
     double visibilityVariance;
 
     /**
-     * Variabile che rappresenta il valore massimo registrato
+     * Variabile che rappresenta il valore massimo della visibilità registrato
      */
     long maxValue;
 
     /**
-     * Variabile che rappresenta il valore minimo registrato
+     * Variabile che rappresenta il valore minimo della visibilità registrato
      */
     long minValue;
 
