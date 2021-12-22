@@ -54,6 +54,6 @@ public class StatTest {
             for (int i = 0; i < 10; i++)
                 longVector.add(i, l++);
 
-            Assertions.assertEquals(50009, stat.maxValue(longVector));
+            Assertions.assertEquals(50004.5, stat.maxValue(longVector));
         }
 }
