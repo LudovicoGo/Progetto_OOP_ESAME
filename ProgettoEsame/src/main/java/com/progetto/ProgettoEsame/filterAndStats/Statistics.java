@@ -55,7 +55,6 @@ public class Statistics {
         // sum = Math.pow(sum, 2);
         double variance = sum / numberOfSamples;
 
-
         //this.variance = variance;
         return variance;
     }
