@@ -16,10 +16,23 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Vector;
 
+/** Classe che contiene l'implementazione di VisibilityFilter.
+ * @author Gorgoglione Ludovico
+ * @author Curzi Christian
+ */
+
 public class VisibilityFilterImpl implements VisibilityFilter {
 
+    /**
+     * Creazione dell'oggetto stats di tipo Statistics.
+     */
     private Statistics stats = new Statistics();
 
+    /** Metodo che restituisce i dati della visibilità di un periodo specifico.
+     * @param cityName           Nome della città.
+     * @param period             Periodo a cui si riferiscono i dati.
+     * @return dataVisibility
+     */
 
     public Vector<Long> getVisibilityData(String cityName, String period){
         Vector<Long> dataVisibility = new Vector<Long>();
@@ -41,6 +54,13 @@ public class VisibilityFilterImpl implements VisibilityFilter {
         return dataVisibility;
     }
 
+    /**
+     * Metodo che calcola le statistiche della visibilità e le istanzia in un oggetto di tipo VisibilityStatsModel.
+     * @param cityName           Nome della città.
+     * @param period             Periodo a cui si riferiscono i dati.
+     * @return                   Restituisce un oggetto di tipo VisibilityStatsModel che contiene tutte le statistiche della visibilità.
+     */
+
     public VisibilityStatsModel calculator (String cityName, String period){
         VisibilityStatsModel model = new VisibilityStatsModel(cityName);
         model.setAverageVisibility(stats.average(getVisibilityData(cityName, period)));
@@ -51,6 +71,11 @@ public class VisibilityFilterImpl implements VisibilityFilter {
         return model;
     }
 
+    /**
+     * Metodo che prende l'oggetto di tipo VisibilityStatsModel e restituisce i dati sotto forma di JSON.
+     * @param model              Oggetto di tipo VisibilityStatsModel che contiene tutte le statistiche della visibilità.
+     * @return                   Restituisce un oggetto di tipo JSONObject che contiene tutte le statistiche della visibilità.
+     */
 
     public JSONObject modelToJSONObject (VisibilityStatsModel model){
         JSONObject jsonObject = new JSONObject();
@@ -66,6 +91,5 @@ public class VisibilityFilterImpl implements VisibilityFilter {
 
         return jsonObject;
     }
-
 
 }
