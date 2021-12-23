@@ -178,7 +178,6 @@ public class WeatherService {
         Timer timer = new Timer();
         JSONArray completeWeather = new JSONArray();
         long delay = 0;
-
         TimerTask task = new TimerTask() {
             int  counter = 0;
 
@@ -186,12 +185,13 @@ public class WeatherService {
             @Override
             public void run() {
                 JSONObject weather = getJSONWeather(cityName);
-
+                long times = 0;                                                                   //todo rimettere 0
                 switch (period){
                     case "TimeSlot": {
 
-                        long times = (finalParam - initialParam)/3600000; // /3600000
+                        times = (finalParam - initialParam)/3600000;                             //todo RIMETTERE 3600000 PER SALVARE OGNI ORA
                         // JSONObject weather = getJSONWeather(cityName);
+                        /*
                         completeWeather.add(counter, weather);
                         counter++;
                         JSONArrayToFile(completeWeather, cityName, false);
@@ -200,6 +200,7 @@ public class WeatherService {
                             JSONArrayToFile(completeWeather, cityName, false);
                             timer.cancel();
                         }
+                        */
                         break;
                     }
 
@@ -209,9 +210,10 @@ public class WeatherService {
                         LocalDateTime midnight = now.toLocalDate().atStartOfDay();
                         LocalDateTime endOfTheWeek = midnight.plusDays(7);                  //vado alla mezzanotte di quando finisce la settimana
                         long dateDifference = (endOfTheWeek.atZone(zoneId).toEpochSecond()*1000) - (now.atZone(zoneId).toEpochSecond()*1000);   //questa è la differenza in millisecondi tra la mezzanotte del secondo giorno e l'ora attuale
-                        long times = dateDifference / 3600000;                    //numero di ore per cui devo eseguire il ciclo (604800000 è il numero di ore presenti in una settimana), alla fine ho il giorno corrente +
+                        times = dateDifference / 3600000;                    //numero di ore per cui devo eseguire il ciclo (604800000 è il numero di ore presenti in una settimana), alla fine ho il giorno corrente +
 
                         // JSONObject weather = getJSONWeather(cityName);                          //TODO forse si può ridurre questo ammasso di roba con un metodo a parte
+                        /*
                         completeWeather.add(counter, weather);
                         counter++;
 
@@ -219,12 +221,14 @@ public class WeatherService {
                             JSONArrayToFile(completeWeather, cityName, false);
                             timer.cancel();
                         }
+
+                         */
                         break;
                     }
 
                     case "ChosenDay": {
-                        long times = 24;
-                        // JSONObject weather = getJSONWeather(cityName);                          //TODO forse si può ridurre questo ammasso di roba con un metodo a parte
+                        times = 24;
+                        /*
                         completeWeather.add(counter, weather);
                         counter++;
 
@@ -232,6 +236,7 @@ public class WeatherService {
                             JSONArrayToFile(completeWeather, cityName, false);
                             timer.cancel();
                         }
+                        */
                         break;
                     }
 
@@ -241,9 +246,9 @@ public class WeatherService {
                         long nowToEpoch = now.atZone(zoneId).toEpochSecond()*1000;
                         LocalDateTime tomorrow = now.toLocalDate().atStartOfDay();
                         long tomorrowToEpoch = tomorrow.atZone(zoneId).toEpochSecond()*1000;
-                        long times = (tomorrowToEpoch - nowToEpoch)/3600000;
+                        times = (tomorrowToEpoch - nowToEpoch)/3600000;
 
-                        // JSONObject weather = getJSONWeather(cityName);                          //TODO qui andrebbe un metodo per ridurre questo codice che in questo medoto è ripetuto 4 volte
+                        /*
                         completeWeather.add(counter, weather);
                         counter++;
 
@@ -251,14 +256,26 @@ public class WeatherService {
                             JSONArrayToFile(completeWeather, cityName, false);
                             timer.cancel();
                         }
+
+                         */
                         break;
 
                     }
                 }
+
+                completeWeather.add(counter, weather);
+                counter++;
+
+                if (counter >= times) {
+                    JSONArrayToFile(completeWeather, cityName, false);
+                    timer.cancel();
+                }
             }
         };                      //getDelay(freq, initialParam, finalHour)
-        timer.schedule(task, getDelay(period, initialParam), 1000);          //TODO rimpiazzare 1000 con 3600000, 1000 = 1 secondo, 60000 = 1 minuto, 3600000 = 1 ora
+        //timer.schedule(task, 0, 3600000);
+        timer.schedule(task, getDelay(period, initialParam), 3600000);             //TODO rimpiazzare 1000 con 3600000, 1000 = 1 secondo, 60000 = 1 minuto, 3600000 = 1 ora
     }
+
 
     /**
      * Metodo che calcola il delay di partenza per il timer del metodo getScheduledWeather
