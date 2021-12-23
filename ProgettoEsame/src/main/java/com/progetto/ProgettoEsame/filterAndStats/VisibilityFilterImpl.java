@@ -38,7 +38,8 @@ public class VisibilityFilterImpl implements VisibilityFilter {
         Vector<Long> dataVisibility = new Vector<Long>();
         JSONParser parser = new JSONParser();
         try{
-            JSONArray array = (JSONArray) parser.parse(new FileReader(cityName + period + "WeatherArray.json"));
+            String fileName = (cityName + period + "WeatherArray.json");
+            JSONArray array = (JSONArray) parser.parse(new FileReader("src/main/resources/dataExamples/" + fileName));
             for(Object o : array){
                 JSONObject weather = (JSONObject) o;
                 long vis =(Long) weather.get("visibility");

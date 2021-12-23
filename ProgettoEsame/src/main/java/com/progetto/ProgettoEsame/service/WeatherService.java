@@ -134,7 +134,7 @@ public class WeatherService {
 
         try{        //TODO modificare percorso salvataggio files
             File f = new File("saved/" + cityName + "WeatherArray.json");
-            FileWriter file = new FileWriter(cityName + "WeatherArray.json", false);
+            FileWriter file = new FileWriter("src/main/resources/saved/" + cityName + "WeatherArray.json", false);
             file.write(obj.toJSONString());
             file.flush();
             file.close();
@@ -153,9 +153,9 @@ public class WeatherService {
 
     public void JSONArrayToFile (JSONArray array, String cityName, boolean append){
 
-        try{         //TODO modificare percorso salvataggio files
-            // File f = new File("ProgettoEsame/src/main/esources/data");
-            FileWriter file = new FileWriter(cityName + "WeatherArray.json", false);
+        try{
+
+            FileWriter file = new FileWriter("src/main/resources/saved/" + cityName + "WeatherArray.json", false);
             file.write(array.toJSONString());
             file.flush();
             file.close();
@@ -163,7 +163,19 @@ public class WeatherService {
             e.printStackTrace();
         }
     }
+/*
+    public void testscrittura (String cityName){
+       try {
 
+           FileWriter file = new FileWriter(" + cityName + "WeatherArray.json", false);
+           file.write(cityName);
+           file.flush();
+           file.close();
+       } catch (IOException e){
+           e.printStackTrace();
+       }
+    }
+*/
     /**
      * Metodo che salva su file, ogni ora, le previsioni meteo in relazione al periodo scelto
      * (Giorno stesso, un giorno a scelta, intera settimana, una certa fascia oraria).
@@ -185,7 +197,7 @@ public class WeatherService {
             @Override
             public void run() {
                 JSONObject weather = getJSONWeather(cityName);
-                long times = 0;                                                                   //todo rimettere 0
+                long times = 0;
                 switch (period){
                     case "TimeSlot": {
 
@@ -196,7 +208,7 @@ public class WeatherService {
                         counter++;
                         JSONArrayToFile(completeWeather, cityName, false);
 
-                        if (counter >= times) {                                                 //TODO qui andrebbe il metodo da implementare nel TODO successivo
+                        if (counter >= times) {
                             JSONArrayToFile(completeWeather, cityName, false);
                             timer.cancel();
                         }
@@ -212,7 +224,7 @@ public class WeatherService {
                         long dateDifference = (endOfTheWeek.atZone(zoneId).toEpochSecond()*1000) - (now.atZone(zoneId).toEpochSecond()*1000);   //questa è la differenza in millisecondi tra la mezzanotte del secondo giorno e l'ora attuale
                         times = dateDifference / 3600000;                    //numero di ore per cui devo eseguire il ciclo (604800000 è il numero di ore presenti in una settimana), alla fine ho il giorno corrente +
 
-                        // JSONObject weather = getJSONWeather(cityName);                          //TODO forse si può ridurre questo ammasso di roba con un metodo a parte
+                        // JSONObject weather = getJSONWeather(cityName);                         
                         /*
                         completeWeather.add(counter, weather);
                         counter++;

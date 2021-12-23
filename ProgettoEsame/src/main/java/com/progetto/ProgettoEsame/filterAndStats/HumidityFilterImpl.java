@@ -35,7 +35,8 @@ public class HumidityFilterImpl implements HumidityFilter {
         Vector<Long> dataHumidity = new Vector<Long>();
         JSONParser parser = new JSONParser();
         try{
-            JSONArray humArray = (JSONArray) parser.parse(new FileReader(cityName + period + "WeatherArray.json"));
+            String fileName = (cityName + period + "WeatherArray.json");
+            JSONArray humArray = (JSONArray) parser.parse(new FileReader("src/main/resources/dataExamples/" + fileName));
             for(Object o : humArray){
                 JSONObject weather = (JSONObject) o;
                 JSONObject main = (JSONObject) weather.get("main");
