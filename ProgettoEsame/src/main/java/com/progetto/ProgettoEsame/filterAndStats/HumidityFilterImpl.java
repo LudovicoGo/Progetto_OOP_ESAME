@@ -13,12 +13,23 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Vector;
 
+/** Classe che contiene l'implementazione di HumidityFilter.
+ * @author Gorgoglione Ludovico
+ * @author Curzi Christian
+ */
+
 public class HumidityFilterImpl implements HumidityFilter {
 
+    /**
+     * Creazione dell'oggetto stats di tipo Statistics.
+     */
     private Statistics stats = new Statistics();
 
-
-
+    /** Metodo che restituisce i dati dell'umidità di un periodo specifico.
+     * @param cityName           Nome della città.
+     * @param period             Periodo a cui si riferiscono i dati.
+     * @return dataHumidity
+     */
 
     public Vector<Long> getHumidityData(String cityName, String period){
         Vector<Long> dataHumidity = new Vector<Long>();
@@ -43,6 +54,13 @@ public class HumidityFilterImpl implements HumidityFilter {
 
     }
 
+    /**
+     * Metodo che calcola le statistiche dell'umidità e le istanzia in un oggetto di tipo HumidityStatsModel.
+     * @param cityName           Nome della città.
+     * @param period             Periodo a cui si riferiscono i dati.
+     * @return                   Restituisce un oggetto di tipo HumidityStatsModel che contiene tutte le statistiche dell'umidità.
+     */
+
     public HumidityStatsModel calculator (String cityName, String period){
         HumidityStatsModel model = new HumidityStatsModel(cityName);
         model.setAverageHumidity(stats.average(getHumidityData(cityName, period)));
@@ -53,6 +71,11 @@ public class HumidityFilterImpl implements HumidityFilter {
         return model;
     }
 
+    /**
+     * Metodo che prende l'oggetto di tipo HumidityStatsModel e restituisce i dati sotto forma di JSON.
+     * @param model              Oggetto di tipo HumidityStatsModel che contiene tutte le statistiche dell'umidità.
+     * @return                   Restituisce un oggetto di tipo JSONObject che contiene tutte le statistiche dell'umidità.
+     */
 
     public JSONObject modelToJSONObject (HumidityStatsModel model){
         JSONObject jsonObject = new JSONObject();
@@ -68,6 +91,5 @@ public class HumidityFilterImpl implements HumidityFilter {
 
         return jsonObject;
     }
-
 
 }
