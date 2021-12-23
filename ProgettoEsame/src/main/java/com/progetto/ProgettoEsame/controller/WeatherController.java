@@ -1,4 +1,5 @@
 package com.progetto.ProgettoEsame.controller;
+
 import com.progetto.ProgettoEsame.Exception.CityException;
 import com.progetto.ProgettoEsame.Exception.TimeSlotException;
 import com.progetto.ProgettoEsame.filterAndStats.HumidityFilterImpl;
@@ -13,15 +14,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-
 /**
  * Classe per gestire le chiamate che il programma può fare verso le api di OpenWeather
  * e per calcolarci sopra le statistiche richieste
- *
  * @author Ludovico Gorgoglione
  * @author Christian Curzi
- *
  */
+
 @RestController
 public class WeatherController {
 
@@ -34,10 +33,10 @@ public class WeatherController {
 
     /**
      * Questa rotta restituisce le previsioni del meteo all'istante della chiamata.
-     *
-     * @param cityName è il nome della città di cui si richiedono le previsioni meteo.
-     * @return un JSONObject con all'interno le previsioni complete della città richiesta
+     * @param cityName         Nome della città di cui si richiedono le previsioni meteo.
+     * @return                 JSONObject con all'interno le previsioni complete della città richiesta
      */
+
     @GetMapping("/weather")
     public ResponseEntity<Object> getWeather(@RequestParam (name = "cityName", defaultValue = "empty") String cityName) {  //restituisce il JSON completo delle previsioni della chiamata api per la città cityName
         try {
@@ -52,17 +51,16 @@ public class WeatherController {
         }
     }
 
-
     /**
      * Questa rotta salva ogni ora le previsioni del tempo complete su un file, l'utente
      * può scegliere il periodo di tempo di raccolta dei dati.
-     *  @param cityName nome della città di cui si vogliono salvare le previsioni
-     * @param period periodo di tempo nel quale si vogliono salvare le previsioni (Daily, ChosenDay, Week, TimeSlot).
-     * @param initialDate ora/data d'inizio del periodo durante il quale si vogliono salvare le previsioni.
-     * @param finalDate ora/data della fine del periodo durante il quale si vogliono salvare le previsioni.
-     *
+     * @param cityName         Nome della città di cui si vogliono salvare le previsioni
+     * @param period           Periodo di tempo nel quale si vogliono salvare le previsioni (Daily, ChosenDay, Week, TimeSlot).
+     * @param initialDate      Ora/data d'inizio del periodo durante il quale si vogliono salvare le previsioni.
+     * @param finalDate        Ora/data della fine del periodo durante il quale si vogliono salvare le previsioni.
      */
-    @GetMapping("/scheduledWeather")//(@RequestParam String cityName, String freq, int initialParam, int finalHour)
+
+    @GetMapping("/scheduledWeather") //(@RequestParam String cityName, String freq, int initialParam, int finalHour)
     public ResponseEntity<Object> saveScheduledWeather(@RequestParam (name = "cityName", defaultValue = "empty") String cityName, @RequestParam (name = "period", defaultValue = "Daily") String period,
                                                        @RequestParam (name = "initialParam", defaultValue = "-1") String initialDate, @RequestParam (name = "finalParam", defaultValue = "-1") String finalDate){
 
@@ -121,36 +119,30 @@ public class WeatherController {
     //TODO ROTTA DI TEST ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-
     /**
-     * metodo che prende da un file le statistiche sulla visibilità e ne restituisce media, varianza e valore massimo e minimo
-     *
-     * @param cityName nome della città di cui si vogliono calcolare le statistiche
-     * @param period periodo di tempo di cui si vogliono calcolare le statistiche
-     * @return un JSONObject contenente le statistiche
+     * Metodo che prende da un file le statistiche sulla visibilità e ne restituisce media, varianza e valore massimo e minimo
+     * @param cityName         Nome della città di cui si vogliono calcolare le statistiche
+     * @param period           Periodo di tempo di cui si vogliono calcolare le statistiche
+     * @return                 JSONObject contenente le statistiche
      */
+
     @GetMapping("/visibility")
     public ResponseEntity<Object> getVisibilityStats(@RequestParam String cityName, @RequestParam String period){
         VisibilityFilterImpl vis = new VisibilityFilterImpl();
         return new ResponseEntity<> (vis.modelToJSONObject(vis.calculator(cityName, period)), HttpStatus.OK);
     }
 
-
     /**
-     * metodo che prende da un file le statistiche sull'umidità e ne restituisce media, varianza e valore massimo e minimo
-     *
-     * @param cityName nome della città di cui si vogliono calcolare le statistiche
-     * @param period periodo di tempo di cui si vogliono calcolare le statistiche
-     * @return un JSONObject contenente le statistiche
+     * Metodo che prende da un file le statistiche sull'umidità e ne restituisce media, varianza e valore massimo e minimo
+     * @param cityName         Nome della città di cui si vogliono calcolare le statistiche
+     * @param period           Periodo di tempo di cui si vogliono calcolare le statistiche
+     * @return                 JSONObject contenente le statistiche
      */
+
     @GetMapping("/humidity")
     public ResponseEntity<Object> getHumidityStats(@RequestParam String cityName, @RequestParam String period){
         HumidityFilterImpl vis = new HumidityFilterImpl();
         return new ResponseEntity<> (vis.modelToJSONObject(vis.calculator(cityName, period)), HttpStatus.OK);
     }
 
-
-
-
 }
-
