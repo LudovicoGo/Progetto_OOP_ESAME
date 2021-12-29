@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class WeatherController {
 
-  // @Autowired
+    @Autowired
 
     private WeatherService service = new WeatherService();
     private Statistics statistics = new Statistics();
@@ -36,7 +36,6 @@ public class WeatherController {
      * @param cityName         Nome della città di cui si richiedono le previsioni meteo.
      * @return                 JSONObject con all'interno le previsioni complete della città richiesta
      */
-
     @GetMapping("/weather")
     public ResponseEntity<Object> getWeather(@RequestParam (name = "cityName", defaultValue = "empty") String cityName) {  //restituisce il JSON completo delle previsioni della chiamata api per la città cityName
         try {
@@ -59,7 +58,6 @@ public class WeatherController {
      * @param initialDate      Ora/data d'inizio del periodo durante il quale si vogliono salvare le previsioni.
      * @param finalDate        Ora/data della fine del periodo durante il quale si vogliono salvare le previsioni.
      */
-
     @GetMapping("/scheduledWeather") //(@RequestParam String cityName, String freq, int initialParam, int finalHour)
     public ResponseEntity<Object> saveScheduledWeather(@RequestParam (name = "cityName", defaultValue = "empty") String cityName, @RequestParam (name = "period", defaultValue = "Daily") String period,
                                                        @RequestParam (name = "initialParam", defaultValue = "-1") String initialDate, @RequestParam (name = "finalParam", defaultValue = "-1") String finalDate){
@@ -113,7 +111,7 @@ public class WeatherController {
     //TODO ROTTA DI TEST ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     @GetMapping("/test")
     public void test(){
-       // service.testscrittura("ASDASDASDASDADS");
+        // service.testscrittura("ASDASDASDASDADS");
     }
     //TODO ROTTA DI TEST ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -124,12 +122,22 @@ public class WeatherController {
      * @param period           Periodo di tempo di cui si vogliono calcolare le statistiche
      * @return                 JSONObject contenente le statistiche
      */
-
     @GetMapping("/visibility")
-    public ResponseEntity<Object> getVisibilityStats(@RequestParam String cityName, @RequestParam String period){
+    public ResponseEntity<Object> getVisibilityStats(@RequestParam String cityName, @RequestParam String period) {
         VisibilityFilterImpl vis = new VisibilityFilterImpl();
-        return new ResponseEntity<> (vis.modelToJSONObject(vis.calculator(cityName, period)), HttpStatus.OK);
+        try{
+
+            if(!statistics.HaveWeGotThatCity(cityName))
+                throw new CityException("ERRORE!    Attualmente conosco la visibilità solo delle seguenti città: Milan, Valencia, London");
+            vis.getVisibilityData(cityName, period);
+
+    }catch (CityException e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(e.getExceptionMessage(), HttpStatus.BAD_REQUEST);
+
     }
+        return new ResponseEntity<>(vis.modelToJSONObject(vis.calculator(cityName, period)), HttpStatus.OK);
+}
 
     /**
      * Metodo che prende da un file le statistiche sull'umidità e ne restituisce media, varianza e valore massimo e minimo
@@ -137,11 +145,21 @@ public class WeatherController {
      * @param period           Periodo di tempo di cui si vogliono calcolare le statistiche
      * @return                 JSONObject contenente le statistiche
      */
-
     @GetMapping("/humidity")
     public ResponseEntity<Object> getHumidityStats(@RequestParam String cityName, @RequestParam String period){
-        HumidityFilterImpl vis = new HumidityFilterImpl();
-        return new ResponseEntity<> (vis.modelToJSONObject(vis.calculator(cityName, period)), HttpStatus.OK);
+        HumidityFilterImpl hum = new HumidityFilterImpl();
+        try{
+
+            if(!statistics.HaveWeGotThatCity(cityName))
+                throw new CityException("ERRORE!    Attualmente conosco l'umidità solo delle seguenti città: Milan, Valencia, London");
+            hum.getHumidityData(cityName, period);
+
+        }catch (CityException e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(e.getExceptionMessage(), HttpStatus.BAD_REQUEST);
+
+        }
+        return new ResponseEntity<> (hum.modelToJSONObject(hum.calculator(cityName, period)), HttpStatus.OK);
     }
 
 }

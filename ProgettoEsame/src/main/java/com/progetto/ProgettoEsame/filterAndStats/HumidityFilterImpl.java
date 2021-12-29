@@ -28,9 +28,8 @@ public class HumidityFilterImpl implements HumidityFilter {
     /** Metodo che restituisce i dati dell'umidità di un periodo specifico.
      * @param cityName           Nome della città.
      * @param period             Periodo a cui si riferiscono i dati.
-     * @return dataHumidity
+     * @return                   Vector di long contenente tutti i valori dell'umidità
      */
-
     public Vector<Long> getHumidityData(String cityName, String period){
         Vector<Long> dataHumidity = new Vector<Long>();
         JSONParser parser = new JSONParser();
@@ -61,7 +60,6 @@ public class HumidityFilterImpl implements HumidityFilter {
      * @param period             Periodo a cui si riferiscono i dati.
      * @return                   Restituisce un oggetto di tipo HumidityStatsModel che contiene tutte le statistiche dell'umidità.
      */
-
     public HumidityStatsModel calculator (String cityName, String period){
         HumidityStatsModel model = new HumidityStatsModel(cityName);
         model.setAverageHumidity(stats.average(getHumidityData(cityName, period)));
@@ -77,7 +75,6 @@ public class HumidityFilterImpl implements HumidityFilter {
      * @param model              Oggetto di tipo HumidityStatsModel che contiene tutte le statistiche dell'umidità.
      * @return                   Restituisce un oggetto di tipo JSONObject che contiene tutte le statistiche dell'umidità.
      */
-
     public JSONObject modelToJSONObject (HumidityStatsModel model){
         JSONObject jsonObject = new JSONObject();
         JSONObject name = new JSONObject();

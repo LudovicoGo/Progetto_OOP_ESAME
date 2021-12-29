@@ -1,5 +1,6 @@
 package com.progetto.ProgettoEsame.filterAndStats;
 
+import com.progetto.ProgettoEsame.Exception.CityException;
 import com.progetto.ProgettoEsame.model.VisibilityStatsModel;
 import com.progetto.ProgettoEsame.model.WeatherModel;
 import com.progetto.ProgettoEsame.filterAndStats.Statistics;
@@ -21,6 +22,7 @@ import java.util.Vector;
  * @author Curzi Christian
  */
 
+
 public class VisibilityFilterImpl implements VisibilityFilter {
 
     /**
@@ -28,21 +30,24 @@ public class VisibilityFilterImpl implements VisibilityFilter {
      */
     private Statistics stats = new Statistics();
 
+
     /** Metodo che restituisce i dati della visibilità di un periodo specifico.
      * @param cityName           Nome della città.
      * @param period             Periodo a cui si riferiscono i dati.
-     * @return dataVisibility
+     * @return                   Vector di long contenente i valori della visibilità.
      */
-
     public Vector<Long> getVisibilityData(String cityName, String period){
         Vector<Long> dataVisibility = new Vector<Long>();
         JSONParser parser = new JSONParser();
         try{
+
+            //stats.HaveWeGotThatCity(cityName);
+
             String fileName = (cityName + period + "WeatherArray.json");
             JSONArray array = (JSONArray) parser.parse(new FileReader("src/main/resources/dataExamples/" + fileName));
             for(Object o : array){
                 JSONObject weather = (JSONObject) o;
-                long vis =(Long) weather.get("visibility");
+                long vis = (Long) weather.get("visibility");
                 dataVisibility.add(vis);
             }
 
@@ -61,7 +66,6 @@ public class VisibilityFilterImpl implements VisibilityFilter {
      * @param period             Periodo a cui si riferiscono i dati.
      * @return                   Restituisce un oggetto di tipo VisibilityStatsModel che contiene tutte le statistiche della visibilità.
      */
-
     public VisibilityStatsModel calculator (String cityName, String period){
         VisibilityStatsModel model = new VisibilityStatsModel(cityName);
         model.setAverageVisibility(stats.average(getVisibilityData(cityName, period)));
@@ -77,7 +81,6 @@ public class VisibilityFilterImpl implements VisibilityFilter {
      * @param model              Oggetto di tipo VisibilityStatsModel che contiene tutte le statistiche della visibilità.
      * @return                   Restituisce un oggetto di tipo JSONObject che contiene tutte le statistiche della visibilità.
      */
-
     public JSONObject modelToJSONObject (VisibilityStatsModel model){
         JSONObject jsonObject = new JSONObject();
         JSONObject name = new JSONObject();

@@ -8,6 +8,7 @@ import org.json.simple.JSONArray;
 
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
+import org.springframework.stereotype.Service;
 
 import java.io.*;
 import java.net.URL;
@@ -22,7 +23,7 @@ import java.util.*;
  * @author Christian Curzi
  *
  */
-
+@Service
 public class WeatherService {
 
     /**
@@ -224,7 +225,7 @@ public class WeatherService {
                         long dateDifference = (endOfTheWeek.atZone(zoneId).toEpochSecond()*1000) - (now.atZone(zoneId).toEpochSecond()*1000);   //questa è la differenza in millisecondi tra la mezzanotte del secondo giorno e l'ora attuale
                         times = dateDifference / 3600000;                    //numero di ore per cui devo eseguire il ciclo (604800000 è il numero di ore presenti in una settimana), alla fine ho il giorno corrente +
 
-                        // JSONObject weather = getJSONWeather(cityName);                         
+                        // JSONObject weather = getJSONWeather(cityName);
                         /*
                         completeWeather.add(counter, weather);
                         counter++;
