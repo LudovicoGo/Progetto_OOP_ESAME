@@ -17,4 +17,4 @@ public interface HumidityFilter {
     public abstract JSONObject modelToJSONObject (HumidityStatsModel model);
 
 
-    }
+}

@@ -35,9 +35,6 @@ public class VisibilityFilterImpl implements VisibilityFilter {
         Vector<Long> dataVisibility = new Vector<Long>();
         JSONParser parser = new JSONParser();
         try{
-
-            //stats.HaveWeGotThatCity(cityName);
-
             String fileName = (cityName + period + "WeatherArray.json");
             JSONArray array = (JSONArray) parser.parse(new FileReader("src/main/resources/dataExamples/" + fileName));
             for(Object o : array){
