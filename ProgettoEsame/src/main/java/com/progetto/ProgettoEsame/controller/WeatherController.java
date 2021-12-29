@@ -1,5 +1,6 @@
 package com.progetto.ProgettoEsame.controller;
 
+import com.progetto.ProgettoEsame.Exception.CantFindDataException;
 import com.progetto.ProgettoEsame.Exception.CityException;
 import com.progetto.ProgettoEsame.Exception.TimeSlotException;
 import com.progetto.ProgettoEsame.filterAndStats.HumidityFilterImpl;
@@ -128,10 +129,10 @@ public class WeatherController {
         try{
 
             if(!statistics.HaveWeGotThatCity(cityName))
-                throw new CityException("ERRORE!    Attualmente conosco la visibilità solo delle seguenti città: Milan, Valencia, London");
+                throw new CantFindDataException("ERRORE!    Attualmente conosco la visibilità solo delle seguenti città: Milan, Valencia, London");
             vis.getVisibilityData(cityName, period);
 
-    }catch (CityException e) {
+    }catch (CantFindDataException e) {
             e.printStackTrace();
             return new ResponseEntity<>(e.getExceptionMessage(), HttpStatus.BAD_REQUEST);
 
@@ -151,10 +152,10 @@ public class WeatherController {
         try{
 
             if(!statistics.HaveWeGotThatCity(cityName))
-                throw new CityException("ERRORE!    Attualmente conosco l'umidità solo delle seguenti città: Milan, Valencia, London");
+                throw new CantFindDataException("ERRORE!    Attualmente conosco l'umidità solo delle seguenti città: Milan, Valencia, London");
             hum.getHumidityData(cityName, period);
 
-        }catch (CityException e) {
+        }catch (CantFindDataException e) {
             e.printStackTrace();
             return new ResponseEntity<>(e.getExceptionMessage(), HttpStatus.BAD_REQUEST);
 
