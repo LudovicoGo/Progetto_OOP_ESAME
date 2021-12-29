@@ -1,12 +1,7 @@
 package com.progetto.ProgettoEsame.filterAndStats;
 
-import com.progetto.ProgettoEsame.Exception.CityException;
 import com.progetto.ProgettoEsame.model.VisibilityStatsModel;
-import com.progetto.ProgettoEsame.model.WeatherModel;
-import com.progetto.ProgettoEsame.filterAndStats.Statistics;
-import com.progetto.ProgettoEsame.service.WeatherService;
 
-import com.progetto.ProgettoEsame.model.CityForStatsModel;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;

@@ -7,7 +7,7 @@ import com.progetto.ProgettoEsame.filterAndStats.HumidityFilterImpl;
 import com.progetto.ProgettoEsame.filterAndStats.Statistics;
 
 import com.progetto.ProgettoEsame.filterAndStats.VisibilityFilterImpl;
-import com.progetto.ProgettoEsame.service.WeatherService;
+import com.progetto.ProgettoEsame.service.WeatherServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +27,7 @@ public class WeatherController {
 
     @Autowired
 
-    private WeatherService service = new WeatherService();
+    private WeatherServiceImpl service = new WeatherServiceImpl();
     private Statistics statistics = new Statistics();
 
     //private VisibilityFilterImpl visFilter = new VisibilityFilterImpl();
@@ -68,8 +68,8 @@ public class WeatherController {
             if (cityName.equals("empty"))
                 throw new CityException("ERRORE! Non hai inserito il nome della città, riprova!");
 
-            long initialParam = service.dataConverter(initialDate);
-            long finalParam = service.dataConverter(finalDate);
+            long initialParam = service.DataConverter(initialDate);
+            long finalParam = service.DataConverter(finalDate);
 
             switch (period) {
                 case "Daily": {
