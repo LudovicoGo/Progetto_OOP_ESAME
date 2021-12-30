@@ -1,13 +1,9 @@
 package com.progetto.ProgettoEsame.filterAndStats;
-
-import ch.qos.logback.core.subst.Parser;
 import com.progetto.ProgettoEsame.model.HumidityStatsModel;
-import com.progetto.ProgettoEsame.model.VisibilityStatsModel;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -18,12 +14,7 @@ import java.util.Vector;
  * @author Curzi Christian
  */
 
-public class HumidityFilterImpl implements HumidityFilter {
-
-    /**
-     * Creazione dell'oggetto stats di tipo Statistics.
-     */
-    private Statistics stats = new Statistics();
+public class HumidityFilterImpl extends Statistics implements HumidityFilter {
 
     /** Metodo che restituisce i dati dell'umidità di un periodo specifico.
      * @param cityName           Nome della città.
@@ -55,17 +46,17 @@ public class HumidityFilterImpl implements HumidityFilter {
     }
 
     /**
-     * Metodo che calcola le statistiche dell'umidità e le istanzia in un oggetto di tipo HumidityStatsModel.
+     * Metodo che calcola le statistiche dell'umidità e le inserisce in un oggetto di tipo HumidityStatsModel.
      * @param cityName           Nome della città.
      * @param period             Periodo a cui si riferiscono i dati.
      * @return                   Restituisce un oggetto di tipo HumidityStatsModel che contiene tutte le statistiche dell'umidità.
      */
     public HumidityStatsModel calculator (String cityName, String period){
         HumidityStatsModel model = new HumidityStatsModel(cityName);
-        model.setAverageHumidity(stats.average(getHumidityData(cityName, period)));
-        model.setHumidityVariance(stats.variance(getHumidityData(cityName, period)));
-        model.setHumidityMax(stats.maxValue(getHumidityData(cityName, period)));
-        model.setHumidityMin(stats.minValue(getHumidityData(cityName, period)));
+        model.setAverageHumidity(average(getHumidityData(cityName, period)));
+        model.setHumidityVariance(variance(getHumidityData(cityName, period)));
+        model.setHumidityMax(maxValue(getHumidityData(cityName, period)));
+        model.setHumidityMin(minValue(getHumidityData(cityName, period)));
 
         return model;
     }

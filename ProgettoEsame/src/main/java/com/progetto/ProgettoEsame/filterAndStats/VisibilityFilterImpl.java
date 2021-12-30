@@ -1,12 +1,9 @@
 package com.progetto.ProgettoEsame.filterAndStats;
-
 import com.progetto.ProgettoEsame.model.VisibilityStatsModel;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -18,13 +15,7 @@ import java.util.Vector;
  */
 
 
-public class VisibilityFilterImpl implements VisibilityFilter {
-
-    /**
-     * Creazione dell'oggetto stats di tipo Statistics.
-     */
-    private Statistics stats = new Statistics();
-
+public class VisibilityFilterImpl extends Statistics implements VisibilityFilter {
 
     /** Metodo che restituisce i dati della visibilità di un periodo specifico.
      * @param cityName           Nome della città.
@@ -53,17 +44,17 @@ public class VisibilityFilterImpl implements VisibilityFilter {
     }
 
     /**
-     * Metodo che calcola le statistiche della visibilità e le istanzia in un oggetto di tipo VisibilityStatsModel.
+     * Metodo che calcola le statistiche della visibilità e le inserisce in un oggetto di tipo VisibilityStatsModel.
      * @param cityName           Nome della città.
      * @param period             Periodo a cui si riferiscono i dati.
      * @return                   Restituisce un oggetto di tipo VisibilityStatsModel che contiene tutte le statistiche della visibilità.
      */
     public VisibilityStatsModel calculator (String cityName, String period){
         VisibilityStatsModel model = new VisibilityStatsModel(cityName);
-        model.setAverageVisibility(stats.average(getVisibilityData(cityName, period)));
-        model.setVisibilityVariance(stats.variance(getVisibilityData(cityName, period)));
-        model.setMaxValue(stats.maxValue(getVisibilityData(cityName, period)));
-        model.setMinValue(stats.minValue(getVisibilityData(cityName, period)));
+        model.setAverageVisibility(average(getVisibilityData(cityName, period)));
+        model.setVisibilityVariance(variance(getVisibilityData(cityName, period)));
+        model.setMaxValue(maxValue(getVisibilityData(cityName, period)));
+        model.setMinValue(minValue(getVisibilityData(cityName, period)));
 
         return model;
     }

@@ -30,8 +30,6 @@ public class WeatherController {
     private WeatherServiceImpl service = new WeatherServiceImpl();
     private Statistics statistics = new Statistics();
 
-    //private VisibilityFilterImpl visFilter = new VisibilityFilterImpl();
-
     /**
      * Questa rotta restituisce le previsioni del meteo all'istante della chiamata.
      * @param cityName         Nome della città di cui si richiedono le previsioni meteo.
