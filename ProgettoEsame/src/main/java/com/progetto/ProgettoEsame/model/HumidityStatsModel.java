@@ -8,27 +8,27 @@ package com.progetto.ProgettoEsame.model;
 public class HumidityStatsModel extends CityForStatsModel{
 
     /**
-     * Variabile che rappresenta la media dell'umidità
+     * Variabile che contiene la media dell'umidità.
      */
     double averageHumidity;
 
     /**
-     * Variabile che rappresenta la varianza dell'umidità
+     * Variabile che contiene la varianza dell'umidità.
      */
     double humidityVariance;
 
     /**
-     * Variabile che rappresenta il valore massimo dell'umidità registrato
+     * Variabile che contiene il valore massimo dell'umidità registrato.
      */
     long humidityMax;
 
     /**
-     * Variabile che rappresenta il valore minimo dell'umidità registrato
+     * Variabile che contiene il valore minimo dell'umidità registrato.
      */
     long humidityMin;
 
-    /** Costruttore dell'oggetto.
-     * @param cityName             Nome della città.
+    /** Costruttore della classe.
+     * @param cityName Nome della città.
      */
 
     public HumidityStatsModel(String cityName) {
@@ -36,13 +36,12 @@ public class HumidityStatsModel extends CityForStatsModel{
     }
 
     /** Costruttore dell'oggetto.
-     * @param cityName             Nome della città.
-     * @param averageHumidity      Media della visibilità.
-     * @param humidityVariance     Varianza della visibilità.
-     * @param humidityMax          Valore massimo registrato della visibilità.
-     * @param humidityMin          Valore minimo registrato della visibilità.
+     * @param cityName Nome della città.
+     * @param averageHumidity Media dell'umiditò.
+     * @param humidityVariance Varianza dell'umiditò.
+     * @param humidityMax Valore massimo registrato dell'umiditò.
+     * @param humidityMin Valore minimo registrato dell'umiditò.
      */
-
     public HumidityStatsModel(String cityName, double averageHumidity, double humidityVariance, long humidityMax, long humidityMin) {
         super(cityName);
         this.averageHumidity = averageHumidity;
@@ -55,16 +54,14 @@ public class HumidityStatsModel extends CityForStatsModel{
      * Metodo che restituisce la media dell'umidità.
      * @return averageHumidity
      */
-
     public double getAverageHumidity() {
         return averageHumidity;
     }
 
     /**
-     * Metodo che setta la media dell'umidità.
+     * Metodo che imposta la media dell'umidità.
      * @param averageHumidity
      */
-
     public void setAverageHumidity(double averageHumidity) {
         this.averageHumidity = averageHumidity;
     }
@@ -73,52 +70,46 @@ public class HumidityStatsModel extends CityForStatsModel{
      * Metodo che restituisce la varianza dell'umidità.
      * @return humidityVariance
      */
-
     public double getHumidityVariance() {
         return humidityVariance;
     }
 
     /**
-     * Metodo che setta la varianza della umidità.
+     * Metodo che imposta la varianza dell'umidità.
      * @param humidityVariance
      */
-
     public void setHumidityVariance(double humidityVariance) {
         this.humidityVariance = humidityVariance;
     }
 
     /**
-     * Metodo che restituisce il valore massimo registrato.
+     * Metodo che restituisce il valore massimo registrato dell'umidità.
      * @return humidityMax
      */
-
     public long getHumidityMax() {
         return humidityMax;
     }
 
     /**
-     * Metodo che setta il valore massimo registrato.
+     * Metodo che imposta il valore massimo registrato dell'umidità.
      * @param humidityMax
      */
-
     public void setHumidityMax(long humidityMax) {
         this.humidityMax = humidityMax;
     }
 
     /**
-     * Metodo che restituisce il valore minimo registrato.
+     * Metodo che restituisce il valore minimo registrato dell'umidità.
      * @return humidityMin
      */
-
     public long getHumidityMin() {
         return humidityMin;
     }
 
     /**
-     * Metodo che setta il valore minimo registrato.
+     * Metodo che imposta il valore minimo registrato dell'umidità.
      * @param humidityMin
      */
-
     public void setHumidityMin(long humidityMin) {
         this.humidityMin = humidityMin;
     }

@@ -20,16 +20,14 @@ public class GeolocationModel {
     /** Costruttore di default dell'oggetto.
      *
      */
-
     public GeolocationModel() {
 
     }
 
     /** Costruttore dell'oggetto.
-     * @param latitude       Latitudine della città.
-     * @param longitude      Longitudine della città.
+     * @param latitude Latitudine della città.
+     * @param longitude Longitudine della città.
      */
-
     public GeolocationModel (double latitude, double longitude) {
         this.latitude = latitude;
         this.longitude = longitude;
@@ -37,45 +35,40 @@ public class GeolocationModel {
 
     /**
      * Metodo che restituisce le informazioni principali del meteo.
-     * @return latitude
+     * @return La latitudine della città.
      */
-
     public double getLatitude() {
         return latitude;
     }
 
     /**
-     * Metodo che setta la descrizione del meteo.
-     * @param latitude
+     * Metodo che imposta la descrizione del meteo.
+     * @param latitude Latitudine della città.
      */
-
     public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
     /**
      * Metodo che restituisce le informazioni principali del meteo.
-     * @return longitude
+     * @return La longitudine della città.
      */
-
     public double getLongitude() {
         return longitude;
     }
 
     /**
-     * Metodo che setta la descrizione del meteo.
-     * @param longitude
+     * Metodo che imposta la descrizione del meteo.
+     * @param longitude La longitudine della città.
      */
-
     public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 
     /**
      * Metodo che restituisce il contenuto dell'oggetto sotto forma di stringa
-     * @return
+     * @return Stringa contenente valori di longitudine e latitudine della città;
      */
-
     @Override
     public String toString (){
         return "Latitude: " + latitude + "; Longitude: " + longitude;

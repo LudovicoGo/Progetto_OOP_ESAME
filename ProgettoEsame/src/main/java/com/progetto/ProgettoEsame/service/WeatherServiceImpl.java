@@ -12,7 +12,7 @@ import java.util.*;
 
 /**
  * Questa classe implementa l'interfaccia WeatherServiceImpl e contiene i metodi usati dal controller
- * per ottenere e salvare le previsioni del tempo a partire dalle api di OpenWeather.
+ * per ottenere e salvare le previsioni del tempo.
  * @author Ludovico Gorgoglione
  * @author Christian Curzi
  *

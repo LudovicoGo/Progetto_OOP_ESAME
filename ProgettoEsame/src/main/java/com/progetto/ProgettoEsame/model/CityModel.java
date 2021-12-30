@@ -22,10 +22,10 @@ public class CityModel extends GeolocationModel {
      */
     private String country;
 
-    /** Costruttore di default dell'oggetto.
+
+    /** Costruttore di default.
      *
      */
-
     public CityModel() {
         super();
     }
@@ -34,16 +34,14 @@ public class CityModel extends GeolocationModel {
      * Metodo che restituisce il nome della città.
      * @return cityName
      */
-
     public String getCityName() {
         return cityName;
     }
 
     /**
-     * Metodo che setta il nome della città.
+     * Metodo che imposta il nome della città.
      * @param name
      */
-
     public void setCityName(String name) {
         this.cityName = name;
     }
@@ -52,16 +50,14 @@ public class CityModel extends GeolocationModel {
      * Metodo che restituisce l'ID della città.
      * @return cityId
      */
-
     public long getCityId() {
         return cityId;
     }
 
     /**
-     * Metodo che setta l'ID della città.
+     * Metodo che imposta l'ID della città.
      * @param id
      */
-
     public void setCityId(long id) {
         this.cityId = id;
     }
@@ -70,28 +66,25 @@ public class CityModel extends GeolocationModel {
      * Metodo che restituisce la nazione in cui si trova la città.
      * @return country
      */
-
     public String getCountry() {
         return country;
     }
 
     /**
-     * Metodo che setta la nazione in cui si trova la città.
+     * Metodo che imposta la nazione in cui si trova la città.
      * @param country
      */
-
     public void setCountry(String country) {
         this.country = country;
     }
 
-    /** Costruttore dell'oggetto.
-     * @param name         Nome della città.
-     * @param cityId       ID della città.
-     * @param country      Nazione in cui si trova la città.
-     * @param latitude     Latitudine della città.
-     * @param longitude    Longitudine della città.
+    /** Costruttore della classe.
+     * @param name Nome della città.
+     * @param cityId ID della città.
+     * @param country Nazione in cui si trova la città.
+     * @param latitude Latitudine della città.
+     * @param longitude Longitudine della città.
      */
-
     public CityModel(String name, long cityId, String country, double latitude, double longitude) {
         super(latitude, longitude);
         this.cityName = name;

@@ -12,10 +12,9 @@ public class CityForStatsModel {
      */
     String cityName;
 
-    /** Costruttore dell'oggetto.
-     * @param cityName             Nome della città.
+    /** Costruttore della classe.
+     * @param cityName Nome della città.
      */
-
     public CityForStatsModel(String cityName) {
         this.cityName = cityName;
     }
@@ -24,16 +23,14 @@ public class CityForStatsModel {
      * Metodo che restituisce il nome della città.
      * @return cityName
      */
-
     public String getCityName() {
         return cityName;
     }
 
     /**
-     * Metodo che setta il nome della città.
+     * Metodo che imposta il nome della città.
      * @param cityName
      */
-
     public void setCityName(String cityName) {
         this.cityName = cityName;
     }

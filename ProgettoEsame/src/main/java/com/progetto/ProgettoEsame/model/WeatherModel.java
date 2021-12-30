@@ -57,15 +57,14 @@ public class WeatherModel extends CityModel{
      */
     private long visibility;
 
-    /** Costruttore di default dell'oggetto.
+    /** Costruttore di default della classe.
      *
      */
-
     public WeatherModel(){
         super();
     }
 
-    /** Costruttore dell'oggetto.
+    /** Costruttore della classe.
      * @param name           Nome della città.
      * @param cityId         ID della città.
      * @param country        Nazione in cui si trova la città.
@@ -81,7 +80,6 @@ public class WeatherModel extends CityModel{
      * @param visibility     Visibilità.
      * @param date           Giorno a cui si riferiscono le previsioni meteo.
      */
-
     public WeatherModel(String name, long cityId, String country, double latitude, double longitude, String mainWeather, String description, double temp, double feelsLike, double tempMax, double tempMin, long pressure, long humidity, long visibility, long date) {
         super(name, cityId, country, latitude, longitude);
         this.mainWeather = mainWeather;
@@ -106,7 +104,7 @@ public class WeatherModel extends CityModel{
     }
 
     /**
-     * Metodo che setta le informazioni principali del meteo.
+     * Metodo che imposta le informazioni principali del meteo.
      * @param mainWeather
      */
 
@@ -124,7 +122,7 @@ public class WeatherModel extends CityModel{
     }
 
     /**
-     * Metodo che setta la descrizione del meteo.
+     * Metodo che imposta la descrizione del meteo.
      * @param description
      */
 
@@ -142,7 +140,7 @@ public class WeatherModel extends CityModel{
     }
 
     /**
-     * Metodo che setta la temperatura.
+     * Metodo che imposta la temperatura.
      * @param temp
      */
 
@@ -160,7 +158,7 @@ public class WeatherModel extends CityModel{
     }
 
     /**
-     * Metodo che setta la temperatura percepita.
+     * Metodo che imposta la temperatura percepita.
      * @param feelsLike
      */
 
@@ -178,7 +176,7 @@ public class WeatherModel extends CityModel{
     }
 
     /**
-     * Metodo che setta la temperatura massima.
+     * Metodo che imposta la temperatura massima.
      * @param tempMax
      */
 
@@ -196,7 +194,7 @@ public class WeatherModel extends CityModel{
     }
 
     /**
-     * Metodo che setta la temperatura minima.
+     * Metodo che imposta la temperatura minima.
      * @param tempMin
      */
 
@@ -214,7 +212,7 @@ public class WeatherModel extends CityModel{
     }
 
     /**
-     * Metodo che setta la pressione.
+     * Metodo che imposta la pressione.
      * @param pressure
      */
 
@@ -232,7 +230,7 @@ public class WeatherModel extends CityModel{
     }
 
     /**
-     * Metodo che setta l'umidità.
+     * Metodo che imposta l'umidità.
      * @param humidity
      */
 
@@ -250,7 +248,7 @@ public class WeatherModel extends CityModel{
     }
 
     /**
-     * Metodo che setta la visibilità.
+     * Metodo che imposta la.0 visibilità.
      * @param visibility
      */
 
@@ -268,7 +266,7 @@ public class WeatherModel extends CityModel{
     }
 
     /**
-     * Metodo che setta la data a cui si rierisce la previsione.
+     * Metodo che imposta la data a cui si riferisce la previsione.
      * @param date
      */
 
@@ -278,9 +276,8 @@ public class WeatherModel extends CityModel{
 
     /**
      * Metodo toString che restituisce il contenuto dell'oggetto sotto forma di stringa.
-     * @return WeatherModel
+     * @return stringa contenente tutti i dati dell'oggetto.
      */
-
     @Override
     public String toString() {
         return "WeatherModel{" +
