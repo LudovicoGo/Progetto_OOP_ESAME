@@ -27,8 +27,8 @@ public class VisibilityStatsModel extends CityForStatsModel{
      */
     long minValue;
 
-    /** Costruttore dell'oggetto.
-     * @param cityName             Nome della città.
+    /** Costruttore della classe.
+     * @param cityName Nome della città.
      */
     public VisibilityStatsModel(String cityName) {
         super(cityName);

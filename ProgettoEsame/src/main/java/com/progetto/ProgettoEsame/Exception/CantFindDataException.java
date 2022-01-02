@@ -9,7 +9,7 @@ public class CantFindDataException extends Exception {
     private String message;
 
     /** Costruttore della classe.
-     * @param message        Messaggio che verrà restituito.
+     * @param message Messaggio che verrà restituito.
      */
     public CantFindDataException (String message){
         super();

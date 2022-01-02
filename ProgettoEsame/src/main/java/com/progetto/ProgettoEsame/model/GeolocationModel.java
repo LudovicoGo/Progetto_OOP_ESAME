@@ -34,7 +34,7 @@ public class GeolocationModel {
     }
 
     /**
-     * Metodo che restituisce le informazioni principali del meteo.
+     * Metodo che restituisce il valore della latitudine.
      * @return La latitudine della città.
      */
     public double getLatitude() {
@@ -42,7 +42,7 @@ public class GeolocationModel {
     }
 
     /**
-     * Metodo che imposta la descrizione del meteo.
+     * Metodo che imposta il valore della latitudine.
      * @param latitude Latitudine della città.
      */
     public void setLatitude(double latitude) {
@@ -50,7 +50,7 @@ public class GeolocationModel {
     }
 
     /**
-     * Metodo che restituisce le informazioni principali del meteo.
+     * Metodo che restituisceil valore della longitudine.
      * @return La longitudine della città.
      */
     public double getLongitude() {
@@ -58,7 +58,7 @@ public class GeolocationModel {
     }
 
     /**
-     * Metodo che imposta la descrizione del meteo.
+     * Metodo che imposta il valore della longitudine.
      * @param longitude La longitudine della città.
      */
     public void setLongitude(double longitude) {

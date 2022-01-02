@@ -28,8 +28,8 @@ public class Statistics{
     /**
      * Metodo per vedere se la città inserita è presente tra quelle di cui si hanno salvati i dati
      *
-     * @param cityToFind          Nome della città da trovare.
-     * @return                    Un booleano che è true se la città viene trovata e false se non viene trovata.
+     * @param cityToFind Nome della città da trovare.
+     * @return Un booleano che è true se la città viene trovata e false se non viene trovata.
      */
     public boolean HaveWeGotThatCity(String cityToFind) {
         boolean find = false;
@@ -43,8 +43,8 @@ public class Statistics{
 
     /**
     * Metodo che prende un Vector contenente i dati di visibilità/umidità, di cui ne dovrà calcolare la media.
-    * @param getData            Vector che contiene i dati di visibilità/umidità, di cui ne dovrà calcolare la media.
-    * @return average           Double che rappresenta la media.
+    * @param getData Vector di long che contiene i dati di visibilità/umidità, di cui ne dovrà calcolare la media.
+    * @return Ritorna un double che rappresenta la media.
     */
     public double average (Vector<Long> getData){
 
@@ -63,8 +63,8 @@ public class Statistics{
 
     /**
      * Metodo che prende un Vector contenente i dati di visibilità/umidità, di cui ne dovrà calcolare la varianza.
-     * @param getData            Vector che contiene i dati di visibilità/umidità, di cui ne dovrà calcolare la varianza.
-     * @return variance          Double che rappresenta la varianza.
+     * @param getData Vector che contiene i dati di visibilità/umidità, di cui ne dovrà calcolare la varianza.
+     * @return ritorna un double che rappresenta la varianza.
      */
     public double variance(Vector<Long> getData){
 
@@ -82,8 +82,8 @@ public class Statistics{
 
     /**
      * Metodo che prende un Vector contenente i dati di visibilità/umidità, di cui dovrà trovare il valore massimo.
-     * @param getData            Vector che contiene i dati di visibilità/umidità, di cui dovrà trovare il valore massimo.
-     * @return maxValue          Long che rappresenta il valore massimo che è stato registrato.
+     * @param getData Vector che contiene i dati di visibilità/umidità, di cui dovrà trovare il valore massimo.
+     * @return ritorna un long che rappresenta il valore massimo che è stato registrato.
      */
     public long maxValue (Vector<Long> getData){
 
@@ -100,8 +100,8 @@ public class Statistics{
 
     /**
      * Metodo che prende un Vector contenente i dati di visibilità/umidità, di cui dovrà trovare il valore minimo.
-     * @param getData            Vector che contiene i dati di visibilità/umidità, di cui dovrà trovare il valore minimo.
-     * @return minValue          Long che rappresenta il valore minimo che è stato registrato.
+     * @param getData Vector che contiene i dati di visibilità/umidità, di cui dovrà trovare il valore minimo.
+     * @return Ritorna un long che rappresenta il valore minimo che è stato registrato.
      */
     public long minValue (Vector<Long> getData){
 

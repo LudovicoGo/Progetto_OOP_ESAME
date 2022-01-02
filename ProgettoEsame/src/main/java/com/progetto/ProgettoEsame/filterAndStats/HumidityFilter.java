@@ -6,7 +6,7 @@ import org.json.simple.JSONObject;
 import java.util.Vector;
 
 
-/** Interfaccia che descrive HumidityFilterImpl.
+/** Interfaccia della classe HumidityFilterImpl.
  * @author Gorgoglione Ludovico
  * @author Curzi Christian
  */

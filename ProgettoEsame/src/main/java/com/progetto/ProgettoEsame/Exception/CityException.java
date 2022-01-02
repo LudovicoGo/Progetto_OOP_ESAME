@@ -13,20 +13,18 @@ public class CityException extends Exception{
      */
     private String exceptionMessage;
 
-    /** Costruttore dell'oggetto.
+    /** Costruttore della classe.
      * @param message        Messaggio che verrà restituito.
      */
-
     public CityException (String message){
         super();
         this.exceptionMessage = message;
     }
 
     /**
-     * Metodo che restituisce il messaggio di eccezione.
+     * Metodo che restituisce il messaggio dell'eccezione.
      * @return exceptionMessage
      */
-
     public String getExceptionMessage() {
         return exceptionMessage;
     }

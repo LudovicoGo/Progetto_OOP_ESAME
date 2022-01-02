@@ -5,7 +5,7 @@ import org.json.simple.JSONObject;
 
 import java.util.Vector;
 
-/** Interfaccia che descrive VisibilityFilterImpl.
+/** Interfaccia della classe VisibilityFilterImpl.
  * @author Gorgoglione Ludovico
  * @author Curzi Christian
  */

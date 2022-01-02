@@ -233,7 +233,7 @@ public class WeatherServiceImpl implements WeatherService{
 
 
     /**
-     * Metodo che converte una data in formato ddMMyyyyHHmmss nel suo equivalente in seconds to epoch
+     * Metodo che converte una data in formato ddMMyyyyHHmmss nel suo equivalente in milliseconds to epoch
      * @param stringDateTime Data da convertire
      * @return long contenente il tempo trascorso dalla data inserita all'epoch time
      */

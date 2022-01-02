@@ -13,20 +13,18 @@ public class TimeSlotException extends Exception{
      */
     private String exceptionMessage;
 
-    /** Costruttore dell'oggetto.
-     * @param message        Messaggio che verrà restituito.
+    /** Costruttore della classe.
+     * @param message Messaggio che verrà restituito.
      */
-
     public TimeSlotException (String message){
         super();
         this.exceptionMessage = message;
     }
 
     /**
-     * Metodo che restituisce il messaggio di eccezione.
+     * Metodo che restituisce il messaggio dell'eccezione.
      * @return exceptionMessage
      */
-
     public String getExceptionMessage() {
         return exceptionMessage;
     }

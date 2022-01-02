@@ -98,7 +98,6 @@ public class WeatherModel extends CityModel{
      * Metodo che restituisce le informazioni principali del meteo.
      * @return mainWeather
      */
-
     public String getMainWeather() {
         return mainWeather;
     }
@@ -107,7 +106,6 @@ public class WeatherModel extends CityModel{
      * Metodo che imposta le informazioni principali del meteo.
      * @param mainWeather
      */
-
     public void setMainWeather(String mainWeather) {
         this.mainWeather = mainWeather;
     }
@@ -116,7 +114,6 @@ public class WeatherModel extends CityModel{
      * Metodo che restituisce la descrizione del meteo.
      * @return description
      */
-
     public String getDescription() {
         return description;
     }
@@ -125,7 +122,6 @@ public class WeatherModel extends CityModel{
      * Metodo che imposta la descrizione del meteo.
      * @param description
      */
-
     public void setDescription(String description) {
         this.description = description;
     }
@@ -134,7 +130,6 @@ public class WeatherModel extends CityModel{
      * Metodo che restituisce la temperatura.
      * @return temp
      */
-
     public double getTemp() {
         return temp;
     }
@@ -143,7 +138,6 @@ public class WeatherModel extends CityModel{
      * Metodo che imposta la temperatura.
      * @param temp
      */
-
     public void setTemp(double temp) {
         this.temp = temp;
     }
@@ -152,7 +146,6 @@ public class WeatherModel extends CityModel{
      * Metodo che restituisce la temperatura percepita.
      * @return feelsLike
      */
-
     public double getFeelsLike() {
         return feelsLike;
     }
@@ -161,7 +154,6 @@ public class WeatherModel extends CityModel{
      * Metodo che imposta la temperatura percepita.
      * @param feelsLike
      */
-
     public void setFeelsLike(double feelsLike) {
         this.feelsLike = feelsLike;
     }
@@ -170,7 +162,6 @@ public class WeatherModel extends CityModel{
      * Metodo che restituisce la temperatura massima.
      * @return tempMax
      */
-
     public double getTempMax() {
         return tempMax;
     }
@@ -179,7 +170,6 @@ public class WeatherModel extends CityModel{
      * Metodo che imposta la temperatura massima.
      * @param tempMax
      */
-
     public void setTempMax(double tempMax) {
         this.tempMax = tempMax;
     }
@@ -188,7 +178,6 @@ public class WeatherModel extends CityModel{
      * Metodo che restituisce la temperatura minima.
      * @return tempMin
      */
-
     public double getTempMin() {
         return tempMin;
     }
@@ -197,7 +186,6 @@ public class WeatherModel extends CityModel{
      * Metodo che imposta la temperatura minima.
      * @param tempMin
      */
-
     public void setTempMin(double tempMin) {
         this.tempMin = tempMin;
     }
@@ -206,7 +194,6 @@ public class WeatherModel extends CityModel{
      * Metodo che restituisce la pressione.
      * @return pressure
      */
-
     public long getPressure() {
         return pressure;
     }
@@ -215,7 +202,6 @@ public class WeatherModel extends CityModel{
      * Metodo che imposta la pressione.
      * @param pressure
      */
-
     public void setPressure(long pressure) {
         this.pressure = pressure;
     }
@@ -224,7 +210,6 @@ public class WeatherModel extends CityModel{
      * Metodo che restituisce l'umidità.
      * @return humidity
      */
-
     public long getHumidity() {
         return humidity;
     }
@@ -233,7 +218,6 @@ public class WeatherModel extends CityModel{
      * Metodo che imposta l'umidità.
      * @param humidity
      */
-
     public void setHumidity(long humidity) {
         this.humidity = humidity;
     }
@@ -242,7 +226,6 @@ public class WeatherModel extends CityModel{
      * Metodo che restituisce la visibilità.
      * @return visibility
      */
-
     public long getVisibility() {
         return visibility;
     }
@@ -251,7 +234,6 @@ public class WeatherModel extends CityModel{
      * Metodo che imposta la.0 visibilità.
      * @param visibility
      */
-
     public void setVisibility(long visibility) {
         this.visibility = visibility;
     }
@@ -260,7 +242,6 @@ public class WeatherModel extends CityModel{
      * Metodo che restituisce la data a cui si riferisce la previsione.
      * @return date
      */
-
     public long getDate() {
         return date;
     }
@@ -269,7 +250,6 @@ public class WeatherModel extends CityModel{
      * Metodo che imposta la data a cui si riferisce la previsione.
      * @param date
      */
-
     public void setDate(long date) {
         this.date = date;
     }

@@ -35,7 +35,7 @@ public class HumidityStatsModel extends CityForStatsModel{
         super(cityName);
     }
 
-    /** Costruttore dell'oggetto.
+    /** Costruttore della classe.
      * @param cityName Nome della città.
      * @param averageHumidity Media dell'umiditò.
      * @param humidityVariance Varianza dell'umiditò.

@@ -13,13 +13,12 @@ import java.util.Vector;
  * @author Gorgoglione Ludovico
  * @author Curzi Christian
  */
-
 public class HumidityFilterImpl extends Statistics implements HumidityFilter {
 
-    /** Metodo che restituisce i dati dell'umidità di un periodo specifico.
-     * @param cityName           Nome della città.
-     * @param period             Periodo a cui si riferiscono i dati.
-     * @return                   Vector di long contenente tutti i valori dell'umidità
+    /** Metodo che legge da file i valori dell'umidità di uno specifico periodo di tempo.
+     * @param cityName Nome della città.
+     * @param period Periodo a cui si riferiscono i dati.
+     * @return Vector di long contenente tutti i valori dell'umidità
      */
     public Vector<Long> getHumidityData(String cityName, String period){
         Vector<Long> dataHumidity = new Vector<Long>();
@@ -47,9 +46,9 @@ public class HumidityFilterImpl extends Statistics implements HumidityFilter {
 
     /**
      * Metodo che calcola le statistiche dell'umidità e le inserisce in un oggetto di tipo HumidityStatsModel.
-     * @param cityName           Nome della città.
-     * @param period             Periodo a cui si riferiscono i dati.
-     * @return                   Restituisce un oggetto di tipo HumidityStatsModel che contiene tutte le statistiche dell'umidità.
+     * @param cityName Nome della città.
+     * @param period Periodo a cui si riferiscono i dati.
+     * @return Restituisce un oggetto di tipo HumidityStatsModel che contiene tutte le statistiche dell'umidità.
      */
     public HumidityStatsModel calculator (String cityName, String period){
         HumidityStatsModel model = new HumidityStatsModel(cityName);
@@ -63,8 +62,8 @@ public class HumidityFilterImpl extends Statistics implements HumidityFilter {
 
     /**
      * Metodo che prende l'oggetto di tipo HumidityStatsModel e restituisce i dati sotto forma di JSON.
-     * @param model              Oggetto di tipo HumidityStatsModel che contiene tutte le statistiche dell'umidità.
-     * @return                   Restituisce un oggetto di tipo JSONObject che contiene tutte le statistiche dell'umidità.
+     * @param model Oggetto di tipo HumidityStatsModel che contiene tutte le statistiche dell'umidità.
+     * @return Restituisce un oggetto di tipo JSONObject che contiene tutte le statistiche dell'umidità.
      */
     public JSONObject modelToJSONObject (HumidityStatsModel model){
         JSONObject jsonObject = new JSONObject();

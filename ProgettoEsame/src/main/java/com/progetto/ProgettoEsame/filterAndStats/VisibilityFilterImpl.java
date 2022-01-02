@@ -17,10 +17,10 @@ import java.util.Vector;
 
 public class VisibilityFilterImpl extends Statistics implements VisibilityFilter {
 
-    /** Metodo che restituisce i dati della visibilità di un periodo specifico.
-     * @param cityName           Nome della città.
-     * @param period             Periodo a cui si riferiscono i dati.
-     * @return                   Vector di long contenente i valori della visibilità.
+    /** Metodo che legge da file i valori della visibilità di uno specifico periodo di tempo.
+     * @param cityName Nome della città.
+     * @param period Periodo a cui si riferiscono i dati.
+     * @return Vector di long contenente i valori della visibilità.
      */
     public Vector<Long> getVisibilityData(String cityName, String period){
         Vector<Long> dataVisibility = new Vector<Long>();
@@ -45,9 +45,9 @@ public class VisibilityFilterImpl extends Statistics implements VisibilityFilter
 
     /**
      * Metodo che calcola le statistiche della visibilità e le inserisce in un oggetto di tipo VisibilityStatsModel.
-     * @param cityName           Nome della città.
-     * @param period             Periodo a cui si riferiscono i dati.
-     * @return                   Restituisce un oggetto di tipo VisibilityStatsModel che contiene tutte le statistiche della visibilità.
+     * @param cityName Nome della città.
+     * @param period Periodo a cui si riferiscono i dati.
+     * @return Restituisce un oggetto di tipo VisibilityStatsModel che contiene tutte le statistiche della visibilità.
      */
     public VisibilityStatsModel calculator (String cityName, String period){
         VisibilityStatsModel model = new VisibilityStatsModel(cityName);
@@ -61,8 +61,8 @@ public class VisibilityFilterImpl extends Statistics implements VisibilityFilter
 
     /**
      * Metodo che prende l'oggetto di tipo VisibilityStatsModel e restituisce i dati sotto forma di JSON.
-     * @param model              Oggetto di tipo VisibilityStatsModel che contiene tutte le statistiche della visibilità.
-     * @return                   Restituisce un oggetto di tipo JSONObject che contiene tutte le statistiche della visibilità.
+     * @param model Oggetto di tipo VisibilityStatsModel che contiene tutte le statistiche della visibilità.
+     * @return Restituisce un oggetto di tipo JSONObject che contiene tutte le statistiche della visibilità.
      */
     public JSONObject modelToJSONObject (VisibilityStatsModel model){
         JSONObject jsonObject = new JSONObject();
