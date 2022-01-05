@@ -16,11 +16,14 @@ La presente applicazione permette di ottenere previsioni di visibilità, umidit�
 
 <a name="installazione"></a>
 ## Installazione
-
+WeatherApp è installabile dal Prompt dei Comandi digitando:
+```
+git clone https://github.com/LudovicoGo/Progetto_OOP_ESAME 
+```
 
 <a name="configurazione"></a>
 ## Configurazione
-
+Per accedere al nostro servizio è necessario modificare la variabile api_key in ServiceImpl.java. Si può ottenere una API key gratuitamente accedendo alla pagina di OpenWeather. Infine basterà avviare il web-server eseguendo WeatherAppApplication.java.
 
 <a name="rotte"></a>
 ## Rotte
