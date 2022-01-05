@@ -6,17 +6,25 @@
 
 ## INDICE:
 * [Introduzione](#introduzione)
-* [Installazione](#introduzione)
-* [Configurazione](#introduzione)
-* [Rotte](#introduzione)
+* [Installazione](#installazione)
+* [Configurazione](#configurazione)
+* [Rotte](#rotte)
 
-  ## INTRODUZIONE
-  
-  ## INSTALLAZIONE
-  
-  ## CONFIGURAZIONE
-  
-  ## ROTTE
+<a name="introduzione"></a>
+## Introduzione
+La presente applicazione permette di ottenere previsioni di visibilità, umidità, temperatura massima e minima di una città ed esclusivamente per visibilità e umidità WeatherApp ne restituisce le relative statistiche. Quando l'applicazione verrà lanciata, inizierà a raccogliere i dati sulla visibilità di 2 città (Milano, Londra) e li salverà su un file ogni ora.
+
+<a name="installazione"></a>
+## Installazione
+
+
+<a name="configurazione"></a>
+## Configurazione
+
+
+<a name="rotte"></a>
+## Rotte
+
   
 
 
