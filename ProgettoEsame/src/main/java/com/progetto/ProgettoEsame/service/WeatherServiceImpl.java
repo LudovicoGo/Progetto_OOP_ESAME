@@ -113,10 +113,10 @@ public class WeatherServiceImpl implements WeatherService{
      * @param cityName Nome della città a cui si riferiscono le previsioni contenute nel JSONObject passato prima.
      * @param append Se si vuole scrivere in append sul file o sovrascriverlo direttamente.
      */
-    public void JSONArrayToFile (JSONArray array, String cityName, boolean append){
+    public void JSONArrayToFile (JSONArray array, String cityName, String period, boolean append){
         try{
 
-            FileWriter file = new FileWriter("src/main/resources/saved/" + cityName + "WeatherArray.json", false);
+            FileWriter file = new FileWriter("src/main/resources/saved/" + cityName + period + "WeatherArray.json", false);
             file.write(array.toJSONString());
             file.flush();
             file.close();
@@ -147,16 +147,17 @@ public class WeatherServiceImpl implements WeatherService{
                 long times = 0;
                 switch (period){
                     case "TimeSlot": {
-                        times = (finalParam - initialParam)/3600000;                             //METTERE 3600000 PER TOVARE NUMERO DI RIPETIZIONI SE SI VOGLIONO FARE OGNI ORA
+                        times = (finalParam - initialParam)/3600000;                             //PER TOVARE NUMERO DI RIPETIZIONI SE SI VOGLIONO FARE OGNI ORA
+                        //times = 2;
                         break;
                     }
 
                     case "Week": {
-                        ZoneId zoneId = ZoneId.systemDefault();
+                        ZoneId zoneId = ZoneId.systemDefault();                                 //imposto il fuso orario
                         LocalDateTime now = LocalDateTime.now();
-                        LocalDateTime midnight = now.toLocalDate().atStartOfDay();
-                        LocalDateTime endOfTheWeek = midnight.plusDays(7);
-                        long dateDifference = (endOfTheWeek.atZone(zoneId).toEpochSecond()*1000) - (now.atZone(zoneId).toEpochSecond()*1000);
+                        LocalDateTime midnight = now.toLocalDate().atStartOfDay();              //imposto un giorno alla mezzanotte del giorno corrente
+                        LocalDateTime endOfTheWeek = midnight.plusDays(7);                      //gli sommo 7 giorni
+                        long dateDifference = (endOfTheWeek.atZone(zoneId).toEpochSecond()*1000) - (now.atZone(zoneId).toEpochSecond()*1000);   //differenza tra la mezzanotte di oggi tra una settimana e l'ora attuale
                         times = dateDifference / 3600000;
                         break;
                     }
@@ -182,12 +183,12 @@ public class WeatherServiceImpl implements WeatherService{
                 counter++;
 
                 if (counter >= times) {
-                    JSONArrayToFile(completeWeather, cityName, false);
+                    JSONArrayToFile(completeWeather, cityName, period, false);
                     timer.cancel();
                 }
             }
         };
-        //timer.schedule(task, 0, 3600000);
+        //timer.schedule(task, 0, 1000);
         timer.schedule(task, getDelay(period, initialParam), 3600000);             //   period:   1 = 1 millisecondo, 1000 = 1 secondo, 60000 = 1 minuto, 3600000 = 1 ora
     }
 
@@ -217,10 +218,10 @@ public class WeatherServiceImpl implements WeatherService{
             }
 
             case "ChosenDay":{
-                ZoneId zoneId = ZoneId.systemDefault();
+                ZoneId zoneId = ZoneId.systemDefault();                              //imposta il fuso orario
                 LocalDateTime now = LocalDateTime.now();
-                LocalDateTime day = LocalDateTime.ofEpochSecond(initialParam/1000, 0, ZoneOffset.UTC);
-                LocalDateTime dayAtMidnight = day.withHour(0).withMinute(0).withSecond(0).withNano(0);
+                LocalDateTime day = LocalDateTime.ofEpochSecond(initialParam/1000, 0, ZoneOffset.UTC);   //prende il giorno scelto
+                LocalDateTime dayAtMidnight = day.withHour(0).withMinute(0).withSecond(0).withNano(0);                            //porta quel giorno alla sua mezzanotte
                 long dayToEpoch = dayAtMidnight.atZone(zoneId).toEpochSecond()*1000;
                 long nowUnix = (now.atZone(zoneId).toEpochSecond()*1000);
                 delay = dayToEpoch - nowUnix;

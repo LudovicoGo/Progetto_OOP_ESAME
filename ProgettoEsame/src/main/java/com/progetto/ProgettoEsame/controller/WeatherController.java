@@ -6,6 +6,7 @@ import com.progetto.ProgettoEsame.Exception.TimeSlotException;
 import com.progetto.ProgettoEsame.filterAndStats.HumidityFilterImpl;
 import com.progetto.ProgettoEsame.filterAndStats.Statistics;
 
+
 import com.progetto.ProgettoEsame.filterAndStats.VisibilityFilterImpl;
 import com.progetto.ProgettoEsame.service.WeatherServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,11 +59,12 @@ public class WeatherController {
      * @param finalDate        Ora/data della fine del periodo durante il quale si vogliono salvare le previsioni.
      */
     @GetMapping("/scheduledWeather") //(@RequestParam String cityName, String freq, int initialParam, int finalHour)
-    public ResponseEntity<Object> saveScheduledWeather(@RequestParam (name = "cityName", defaultValue = "empty") String cityName, @RequestParam (name = "period", defaultValue = "Daily") String period,
+    public ResponseEntity<Object> saveScheduledWeather(@RequestParam (name = "cityName", defaultValue = "empty") String cityName, @RequestParam (name = "period", defaultValue = "empty") String period,
                                                        @RequestParam (name = "initialParam", defaultValue = "-1") String initialDate, @RequestParam (name = "finalParam", defaultValue = "-1") String finalDate){
 
         try {
-
+            if (!statistics.HaveWeGotThatPeriod(period))
+                throw new TimeSlotException("ERRORE! hai inserito un periodo di tempo non corretto, puoi scegliere tra: TimeSlot, Daily, ChosenDay, Weekly");
             if (cityName.equals("empty"))
                 throw new CityException("ERRORE! Non hai inserito il nome della città, riprova!");
 
@@ -73,13 +75,13 @@ public class WeatherController {
                 case "Daily": {
 
                 }
-                case "Week": {
+                case "Weekly": {
                     service.getScheduledWeather(cityName, period, initialParam, finalParam);
                     break;
                 }
                 case "TimeSlot": {
-                    if (initialParam == -1 || finalParam == -1) {
-                        throw new TimeSlotException("hai commesso un ERRORE nell'inserimento delle date/ore");
+                    if (initialParam == -1 || finalParam == -1 || (finalParam-initialParam <= 360000)) {
+                        throw new TimeSlotException("hai commesso un ERRORE nell'inserimento delle date/ore"); //lanciata eccezione quando non si inserisce almeno uno dei due tempi (inizio o fine) o quando si mette una fascia oraria <= di 1 ora
                     }
                     service.getScheduledWeather(cityName, period, initialParam, finalParam);
                     break;
@@ -88,11 +90,6 @@ public class WeatherController {
                     if (initialParam == -1)
                         throw new TimeSlotException("hai commesso un ERRORE nell'inserimento della data");
                     service.getScheduledWeather(cityName, period, initialParam, finalParam);
-                    break;
-                }
-                case "test": {
-                    if (initialParam == -1)
-                        throw new TimeSlotException("hai commesso un ERRORE nell'inserimento della data");
                     break;
                 }
             }
@@ -110,9 +107,12 @@ public class WeatherController {
     //TODO ROTTA DI TEST ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     @GetMapping("/test")
     public void test(){
-        // service.testscrittura("ASDASDASDASDADS");
+       // return new ResponseEntity<>(statistics.HaveWeGotThatCity("Valencia"), HttpStatus.OK);
+        service.getScheduledWeather("Milan", "TimeSlot", 234567, 4567890);
+
     }
     //TODO ROTTA DI TEST ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
 
     /**
@@ -150,7 +150,7 @@ public class WeatherController {
         try{
 
             if(!statistics.HaveWeGotThatCity(cityName))
-                throw new CantFindDataException("ERRORE!    Attualmente conosco l'umidità solo delle seguenti città: Milan, Valencia, London");
+                throw new CantFindDataException("ERRORE!    Attualmente conosco l'umidità solo delle seguenti città: Milan, Valencia, London, Paris");
             hum.getHumidityData(cityName, period);
 
         }catch (CantFindDataException e) {

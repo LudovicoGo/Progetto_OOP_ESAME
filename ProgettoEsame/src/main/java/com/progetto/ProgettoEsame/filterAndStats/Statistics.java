@@ -1,10 +1,5 @@
 package com.progetto.ProgettoEsame.filterAndStats;
 
-import com.progetto.ProgettoEsame.Exception.CityException;
-import com.progetto.ProgettoEsame.filterAndStats.HumidityFilterImpl;
-import com.progetto.ProgettoEsame.filterAndStats.VisibilityFilterImpl;
-import com.progetto.ProgettoEsame.model.VisibilityStatsModel;
-import com.progetto.ProgettoEsame.model.HumidityStatsModel;
 
 import java.util.Vector;
 
@@ -16,12 +11,18 @@ import java.util.Vector;
 public class Statistics{
 
     private Vector<String> cities = new Vector<>();
-
+    private Vector<String> periods = new Vector<>();
 
     public Statistics(){
         cities.add("Milan");
         cities.add("Valencia");
         cities.add("London");
+        cities.add("Paris");
+
+        periods.add("TimeSlot");
+        periods.add("Daily");
+        periods.add("ChosenDay");
+        periods.add("Weekly");
     }
 
 
@@ -32,13 +33,17 @@ public class Statistics{
      * @return Un booleano che è true se la città viene trovata e false se non viene trovata.
      */
     public boolean HaveWeGotThatCity(String cityToFind) {
-        boolean find = false;
-        for(int i = 0; i < cities.size(); i++){
-            if (cities.elementAt(i).equals(cityToFind))
-                find = true;
-        }
+       return cities.contains(cityToFind);
+    }
 
-        return find;
+    /**
+     * Metodo per vedere se il periodo di tempo scelto è uno tra quelli con cui vengono salvati i dati
+     *
+     * @param period Nome del periodo di tempo scelto.
+     * @return Un booleano che è true se il periodo di tempo scelto è uno di quelli con cui vengono salvati i dati e false altrimenti.
+     */
+    public boolean HaveWeGotThatPeriod(String period){
+        return periods.contains(period);
     }
 
     /**

@@ -1,6 +1,6 @@
 [
    {
-      "visibility":10000,
+      "visibility":9500,
       "timezone":3600,
       "main":{
          "temp":286.66,
@@ -46,13 +46,13 @@
       }
    },
    {
-      "visibility":10000,
+   "visibility":9400,
       "timezone":3600,
       "main":{
          "temp":286.66,
          "temp_min":285.43,
          "grnd_level":975,
-         "humidity":72,
+         "humidity":74,
          "pressure":1018,
          "sea_level":1018,
          "feels_like":286,
@@ -92,7 +92,7 @@
       }
    },
    {
-      "visibility":9200,
+      "visibility":9600,
       "timezone":3600,
       "main":{
          "temp":286.56,
@@ -138,13 +138,13 @@
       }
    },
    {
-      "visibility":9000,
+      "visibility":9700,
       "timezone":3600,
       "main":{
          "temp":286.56,
          "temp_min":285.36,
          "grnd_level":975,
-         "humidity":76,
+         "humidity":75,
          "pressure":1018,
          "sea_level":1018,
          "feels_like":285.89,
@@ -184,13 +184,13 @@
       }
    },
    {
-      "visibility":10000,
+      "visibility":9800,
       "timezone":3600,
       "main":{
          "temp":286.48,
          "temp_min":285.36,
          "grnd_level":975,
-         "humidity":73,
+         "humidity":76,
          "pressure":1018,
          "sea_level":1018,
          "feels_like":285.8,
@@ -230,13 +230,197 @@
       }
    },
    {
-      "visibility":9600,
+      "visibility":10000,
       "timezone":3600,
       "main":{
          "temp":286.48,
          "temp_min":285.36,
          "grnd_level":975,
-         "humidity":75,
+         "humidity":74,
+         "pressure":1018,
+         "sea_level":1018,
+         "feels_like":285.8,
+         "temp_max":288.02
+      },
+      "clouds":{
+         "all":69
+      },
+      "sys":{
+         "country":"ES",
+         "sunrise":1641712983,
+         "sunset":1641747438,
+         "id":2008731,
+         "type":2
+      },
+      "dt":1641762270,
+      "coord":{
+         "lon":-0.8333,
+         "lat":39.3333
+      },
+      "weather":[
+         {
+            "icon":"04n",
+            "description":"broken clouds",
+            "main":"Clouds",
+            "id":803
+         }
+      ],
+      "name":"Valencia",
+      "cod":200,
+      "id":2509951,
+      "base":"stations",
+      "wind":{
+         "deg":276,
+         "speed":10.56,
+         "gust":18.91
+      }
+   },
+   {
+      "visibility":10000,
+      "timezone":3600,
+      "main":{
+         "temp":286.48,
+         "temp_min":285.36,
+         "grnd_level":975,
+         "humidity":74,
+         "pressure":1018,
+         "sea_level":1018,
+         "feels_like":285.8,
+         "temp_max":288.02
+      },
+      "clouds":{
+         "all":69
+      },
+      "sys":{
+         "country":"ES",
+         "sunrise":1641712983,
+         "sunset":1641747438,
+         "id":2008731,
+         "type":2
+      },
+      "dt":1641762270,
+      "coord":{
+         "lon":-0.8333,
+         "lat":39.3333
+      },
+      "weather":[
+         {
+            "icon":"04n",
+            "description":"broken clouds",
+            "main":"Clouds",
+            "id":803
+         }
+      ],
+      "name":"Valencia",
+      "cod":200,
+      "id":2509951,
+      "base":"stations",
+      "wind":{
+         "deg":276,
+         "speed":10.56,
+         "gust":18.91
+      }
+   },
+   {
+      "visibility":10000,
+      "timezone":3600,
+      "main":{
+         "temp":286.48,
+         "temp_min":285.36,
+         "grnd_level":975,
+         "humidity":74,
+         "pressure":1018,
+         "sea_level":1018,
+         "feels_like":285.8,
+         "temp_max":288.02
+      },
+      "clouds":{
+         "all":69
+      },
+      "sys":{
+         "country":"ES",
+         "sunrise":1641712983,
+         "sunset":1641747438,
+         "id":2008731,
+         "type":2
+      },
+      "dt":1641762270,
+      "coord":{
+         "lon":-0.8333,
+         "lat":39.3333
+      },
+      "weather":[
+         {
+            "icon":"04n",
+            "description":"broken clouds",
+            "main":"Clouds",
+            "id":803
+         }
+      ],
+      "name":"Valencia",
+      "cod":200,
+      "id":2509951,
+      "base":"stations",
+      "wind":{
+         "deg":276,
+         "speed":10.56,
+         "gust":18.91
+      }
+   },
+   {
+      "visibility":9100,
+      "timezone":3600,
+      "main":{
+         "temp":286.48,
+         "temp_min":285.36,
+         "grnd_level":975,
+         "humidity":72,
+         "pressure":1018,
+         "sea_level":1018,
+         "feels_like":285.8,
+         "temp_max":288.02
+      },
+      "clouds":{
+         "all":69
+      },
+      "sys":{
+         "country":"ES",
+         "sunrise":1641712983,
+         "sunset":1641747438,
+         "id":2008731,
+         "type":2
+      },
+      "dt":1641762270,
+      "coord":{
+         "lon":-0.8333,
+         "lat":39.3333
+      },
+      "weather":[
+         {
+            "icon":"04n",
+            "description":"broken clouds",
+            "main":"Clouds",
+            "id":803
+         }
+      ],
+      "name":"Valencia",
+      "cod":200,
+      "id":2509951,
+      "base":"stations",
+      "wind":{
+         "deg":276,
+         "speed":10.56,
+         "gust":18.91
+      }
+   },
+   {
+      "visibility":9800,
+      "timezone":3600,
+      "main":{
+         "temp":286.48,
+         "temp_min":285.36,
+         "grnd_level":975,
+         "humidity":76,
          "pressure":1018,
          "sea_level":1018,
          "feels_like":285.8,

@@ -1,36 +1,36 @@
 [
    {
-      "visibility":6500,
+      "visibility":6900,
       "timezone":3600,
       "main":{
-         "temp":278.19,
-         "temp_min":272.96,
-         "humidity":87,
-         "pressure":1030,
-         "feels_like":278.19,
-         "temp_max":283.74
+         "temp":273.98,
+         "temp_min":271.73,
+         "humidity":85,
+         "pressure":1005,
+         "feels_like":273.98,
+         "temp_max":276.41
       },
       "clouds":{
-         "all":71
+         "all":1
       },
       "sys":{
          "country":"IT",
-         "sunrise":1639551389,
-         "sunset":1639582829,
-         "id":20368,
+         "sunrise":1641711723,
+         "sunset":1641743885,
+         "id":2020320,
          "type":2
       },
-      "dt":1639560180,
+      "dt":1641760800,
       "coord":{
          "lon":9.1895,
          "lat":45.4643
       },
       "weather":[
          {
-            "icon":"50d",
-            "description":"fog",
-            "main":"Fog",
-            "id":741
+            "icon":"01n",
+            "description":"clear sky",
+            "main":"Clear",
+            "id":800
          }
       ],
       "name":"Milan",
@@ -38,42 +38,43 @@
       "id":3173435,
       "base":"stations",
       "wind":{
-         "deg":0,
-         "speed":0.51
+         "deg":121,
+         "speed":0.45,
+         "gust":3.13
       }
    },
    {
-      "visibility":6090,
+      "visibility":7000,
       "timezone":3600,
       "main":{
-         "temp":278.19,
-         "temp_min":272.96,
-         "humidity":87,
-         "pressure":1030,
-         "feels_like":278.19,
-         "temp_max":283.74
+         "temp":273.98,
+         "temp_min":271.73,
+         "humidity":86,
+         "pressure":1005,
+         "feels_like":273.98,
+         "temp_max":276.41
       },
       "clouds":{
-         "all":71
+         "all":1
       },
       "sys":{
          "country":"IT",
-         "sunrise":1639551389,
-         "sunset":1639582829,
-         "id":20368,
+         "sunrise":1641711723,
+         "sunset":1641743885,
+         "id":2020320,
          "type":2
       },
-      "dt":1639560180,
+      "dt":1641760800,
       "coord":{
          "lon":9.1895,
          "lat":45.4643
       },
       "weather":[
          {
-            "icon":"50d",
-            "description":"fog",
-            "main":"Fog",
-            "id":741
+            "icon":"01n",
+            "description":"clear sky",
+            "main":"Clear",
+            "id":800
          }
       ],
       "name":"Milan",
@@ -81,42 +82,43 @@
       "id":3173435,
       "base":"stations",
       "wind":{
-         "deg":0,
-         "speed":0.51
+         "deg":121,
+         "speed":0.45,
+         "gust":3.13
       }
    },
    {
-      "visibility":5550,
+      "visibility":7100,
       "timezone":3600,
       "main":{
-         "temp":278.19,
-         "temp_min":272.96,
-         "humidity":87,
-         "pressure":1030,
-         "feels_like":278.19,
-         "temp_max":283.74
+         "temp":273.93,
+         "temp_min":271.73,
+         "humidity":83,
+         "pressure":1005,
+         "feels_like":273.93,
+         "temp_max":277.09
       },
       "clouds":{
-         "all":71
+         "all":1
       },
       "sys":{
          "country":"IT",
-         "sunrise":1639551389,
-         "sunset":1639582829,
-         "id":20368,
+         "sunrise":1641711723,
+         "sunset":1641743885,
+         "id":2020320,
          "type":2
       },
-      "dt":1639560180,
+      "dt":1641761405,
       "coord":{
          "lon":9.1895,
          "lat":45.4643
       },
       "weather":[
          {
-            "icon":"50d",
-            "description":"fog",
-            "main":"Fog",
-            "id":741
+            "icon":"01n",
+            "description":"clear sky",
+            "main":"Clear",
+            "id":800
          }
       ],
       "name":"Milan",
@@ -124,42 +126,43 @@
       "id":3173435,
       "base":"stations",
       "wind":{
-         "deg":0,
-         "speed":0.51
+         "deg":121,
+         "speed":0.45,
+         "gust":3.13
       }
    },
    {
-      "visibility":9800,
+      "visibility":7000,
       "timezone":3600,
       "main":{
-         "temp":278.19,
-         "temp_min":272.96,
-         "humidity":87,
-         "pressure":1030,
-         "feels_like":278.19,
-         "temp_max":283.74
+         "temp":273.93,
+         "temp_min":271.73,
+         "humidity":84,
+         "pressure":1005,
+         "feels_like":273.93,
+         "temp_max":277.09
       },
       "clouds":{
-         "all":71
+         "all":1
       },
       "sys":{
          "country":"IT",
-         "sunrise":1639551389,
-         "sunset":1639582829,
-         "id":20368,
+         "sunrise":1641711723,
+         "sunset":1641743885,
+         "id":2020320,
          "type":2
       },
-      "dt":1639560180,
+      "dt":1641761405,
       "coord":{
          "lon":9.1895,
          "lat":45.4643
       },
       "weather":[
          {
-            "icon":"50d",
-            "description":"fog",
-            "main":"Fog",
-            "id":741
+            "icon":"01n",
+            "description":"clear sky",
+            "main":"Clear",
+            "id":800
          }
       ],
       "name":"Milan",
@@ -167,8 +170,97 @@
       "id":3173435,
       "base":"stations",
       "wind":{
-         "deg":0,
-         "speed":0.51
+         "deg":121,
+         "speed":0.45,
+         "gust":3.13
+      }
+   },
+   {
+      "visibility":5000,
+      "timezone":3600,
+      "main":{
+         "temp":273.69,
+         "temp_min":271.18,
+         "humidity":87,
+         "pressure":1005,
+         "feels_like":273.69,
+         "temp_max":276.8
+      },
+      "clouds":{
+         "all":1
+      },
+      "sys":{
+         "country":"IT",
+         "sunrise":1641711723,
+         "sunset":1641743885,
+         "id":2012644,
+         "type":2
+      },
+      "dt":1641762228,
+      "coord":{
+         "lon":9.1895,
+         "lat":45.4643
+      },
+      "weather":[
+         {
+            "icon":"50n",
+            "description":"mist",
+            "main":"Mist",
+            "id":701
+         }
+      ],
+      "name":"Milan",
+      "cod":200,
+      "id":3173435,
+      "base":"stations",
+      "wind":{
+         "deg":202,
+         "speed":0.89,
+         "gust":1.79
+      }
+   },
+   {
+      "visibility":5500,
+      "timezone":3600,
+      "main":{
+         "temp":273.69,
+         "temp_min":271.18,
+         "humidity":88,
+         "pressure":1005,
+         "feels_like":273.69,
+         "temp_max":276.8
+      },
+      "clouds":{
+         "all":1
+      },
+      "sys":{
+         "country":"IT",
+         "sunrise":1641711723,
+         "sunset":1641743885,
+         "id":2012644,
+         "type":2
+      },
+      "dt":1641762228,
+      "coord":{
+         "lon":9.1895,
+         "lat":45.4643
+      },
+      "weather":[
+         {
+            "icon":"50n",
+            "description":"mist",
+            "main":"Mist",
+            "id":701
+         }
+      ],
+      "name":"Milan",
+      "cod":200,
+      "id":3173435,
+      "base":"stations",
+      "wind":{
+         "deg":202,
+         "speed":0.89,
+         "gust":1.79
       }
    }
 ]
