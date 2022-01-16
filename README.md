@@ -157,11 +157,29 @@ Significato dei campi della risposta ottenuta da OpenWeather:
 
 <a name="eccezioni"></a>
 ## Eccezioni
-- CantFindDataException,    
-- CityException,   
-- TimeSlotException,
 
-Si vada su intellij, si faccia click destro sul file dell'eccezione che serve e si faccia "find usage" che  mostra dove e quando sono lanciate e i messaggi che lanciano 
+ - **<b>CantFindDataException</b>**:
+
+   Viene lanciata quando non si trova il file relativo alle previsioni richieste, per esempio richiedere le statistiche della visibilità di una città non presente nel database porta a questo errore.
+   Questa eccezione viene lanciata nel [controller](https://github.com/LudovicoGo/Progetto_OOP_ESAME/blob/master/ProgettoEsame/src/main/java/com/progetto/ProgettoEsame/controller/WeatherController.java) dai metodi getHumidityStats e getVisibilityStats, restituisce il seguente messaggio di errore:
+   
+   ```ERRORE! Attualmente conosco la visibilità / l'umidità solo delle seguenti città: Milan, Valencia, London, Paris```
+    
+- **<b>CityException</b>**:
+
+  Viene lanciata quando si dimentica di inserire il nome della città di cui si vogliono ottenere / salvare su file le previsioni.
+  Viene lanciata dal [controller](https://github.com/LudovicoGo/Progetto_OOP_ESAME/blob/master/ProgettoEsame/src/main/java/com/progetto/ProgettoEsame/controller/WeatherController.java) nei metodi getWeather e saveScheduledWeather, restituisce il seguente messaggio di errore:
+  
+   ```ERRORE! Non hai inserito il nome della città, riprova!```
+  
+- **<b>TimeSlotException</b>**:
+
+  Viene lanciata quando si provano a salvare su file delle previsioni usando un periodo di tempo non ammesso dal programma.
+  Viene lanciata nel [controller](https://github.com/LudovicoGo/Progetto_OOP_ESAME/blob/master/ProgettoEsame/src/main/java/com/progetto/ProgettoEsame/controller/WeatherController.java) dal metodo saveScheduledWeather, restituisce il seguente messaggio di errore:
+  
+   ```hai commesso un ERRORE nell'inserimento delle date/ore```
+   
+   
 
 <a name="autori"></a>
 ## Autori
