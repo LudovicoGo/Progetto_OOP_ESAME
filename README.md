@@ -10,6 +10,7 @@ Questo programma ha come scopo quello di offrire all'utente (tramite chiamate al
 * [Rotte](#rotte)
 * [Eccezioni](#eccezioni)
 * [Test effettuati](#test)
+* [Lettura API OpenWeather](#API)
 * [Programmi e risorse utilizzate](#programmi)
 * [Autori](#autori)
 
@@ -142,7 +143,7 @@ L'utente ha a disposizione le seguenti rotte:
   Viene lanciata quando si provano a salvare su file delle previsioni usando un periodo di tempo non ammesso dal programma.
   Viene lanciata nel [controller](https://github.com/LudovicoGo/Progetto_OOP_ESAME/blob/master/ProgettoEsame/src/main/java/com/progetto/ProgettoEsame/controller/WeatherController.java) dal metodo saveScheduledWeather, restituisce il seguente messaggio di errore:
   
-   ```hai commesso un ERRORE nell'inserimento delle date/ore```
+   ```Hai commesso un ERRORE nell'inserimento delle date/ore```
  
 <a name="test"></a>
 ## Test effettuati   
@@ -158,6 +159,36 @@ L'utente ha a disposizione le seguenti rotte:
  
     - <b>shouldFindMaxMinValue</b>:  
        Test che va a verificare il corretto funzionamento dei metodi <b>MaxValue</b> e <b>MinValue</b>, cioè vede se riescono ad estrarre il valore minimo e massimo contenuti in un <b>Vector di Long</b> in modo corretto.
+ 
+<a name="API"></a>
+## Aiuto per la lettura delle API di OpenWeather  
+### Ecco una legenda a cui fare riferimento per la lettura delle previsioni meteo ottenute:
+* ```coord``` <br /> 
+     - ```coord.lon``` City geo location, longitude;
+     - ```coord.lat``` City geo location, latitude;
+        
+* ```weather``` (more info Weather condition codes)
+     - ```weather.id``` Weather condition id;
+     - ```weather.main``` Group of weather parameters (Rain, Snow, Extreme etc.);
+     - ```weather.description``` Weather condition within the group. You can get the output in your language.
+* ```main```
+     - ```main.temp``` Temperature. Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit.
+     - ```main.feels_like``` Temperature. This temperature parameter accounts for the human perception of weather. Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit. 
+     - ```main.pressure``` Atmospheric pressure (on the sea level, if there is no sea_level or grnd_level data), hPa
+     - ```main.humidity``` Humidity, %
+     - ```main.temp_min``` Minimum temperature at the moment. This is minimal currently observed temperature (within large megalopolises and urban areas). Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit.
+     - ```main.temp_max``` Maximum temperature at the moment. This is maximal currently observed temperature (within large megalopolises and urban areas). Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit.
+ * ``` dt ``` Time of data calculation, unix, UTC.
+ 
+ * ```sys```
+      - ```sys.id``` Internal parameter;
+      - ```sys.message``` Internal parameter;
+      - ```sys.country``` Country code (GB, JP etc.);
+      - ```sys.sunrise``` Sunrise time, unix, UTC;
+      - ```sys.sunset``` Sunset time, unix, UTC.
+ * ```id``` City ID.
+ * ```name``` City name.
+       
        
 <a name="programmi"></a>
 ## Programmi e risorse utilizzate
