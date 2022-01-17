@@ -4,19 +4,19 @@
   La presente applicazione offre la possibilità di avere previsioni e statistiche riguardo visibilità e umidità di una data città ma anche previsioni su temperatura massima, minima e percepita. Le statistiche sarà possibile filtrarle in base ai giorni di predizione.
 </p>
 
+<a name="introduzione"></a>
+## Introduzione
+Questo programma ha come scopo quello di offrire all'utente (tramite chiamate alle API Current di [OpenWeather](https://openweathermap.org/)) la possibilità di ottenere previsioni meteo istantanee complete relative a una città e di poter calcolare delle statistiche relative a visibilità e umidità di una città, potendo anche scegliere il periodo di tempo su cui calcolarle. Le statistiche su umidità e visibilità vengono calcolate prendendo i valori necessari da dei file presenti nella cartella [dataExamples](https://github.com/LudovicoGo/Progetto_OOP_ESAME/tree/master/ProgettoEsame/src/main/resources/dataExamples) (attualmente sono presenti dei file di esempio, ma tali file possono anche essere generati usando questo programma).
+
 ## INDICE:
 * [Introduzione](#introduzione)
-* [Installazione](#installazione)
+* [Installazione e Configurazione](#installEConf)
 * [Configurazione](#configurazione)
 * [Rotte](#rotte)
 * [Eccezioni](#eccezioni)
 * [Autori](#autori)
 
-<a name="introduzione"></a>
-## Introduzione
-La nostra applicazione permette di ottenere previsioni di visibilità, umidità, temperatura massima e minima di una città ed esclusivamente per visibilità e umidità WeatherApp ne restituisce le relative statistiche. Quando l'applicazione verrà lanciata inizierà a raccogliere i dati sulla visibilità di 4 città (Milano, Valencia, Parigi e Londra) e li salverà su un file ogni ora.
-
-<a name="installazione"></a>
+<a name="installEConf"></a>
 ## Installazione
 La presente applicazione è installabile dal Prompt dei Comandi con:
 ```
@@ -40,13 +40,13 @@ L'utente ha a disposizione le seguenti rotte:
  
 | Rotta             | Tipo rotta |        Descrizione                                           
 |-------------------|------------|--------------------------------------------------------------
-| [/weather](#1)          |     GET    | Restituisce un JSONObject contenente le previsioni meteo istantanee (ancheumidità e visibilità) della città richiesta.
-| [/scheduledWeather](#2) |     GET    | Salva su file JSON le previsioni del meteo complete di una città in modo ciclico, una volta all'ora, in un certo periodo di tempo indicato.
-| [/visibility](#3)       |     GET    | Calcola media e varianza della visibilità, relative ad un dato periodi di tempo, di una città prendendone i valori da un file JSON.
-| [/humidity](#4)         |     GET    | Calcola media e varianza della umidità, relative ad un dato periodi di tempo, di una città prendendone i valori da un file JSON.
+| [/weather](#_1)          |     GET    | Restituisce un JSONObject contenente le previsioni meteo istantanee (ancheumidità e visibilità) della città richiesta.
+| [/scheduledWeather](#_2) |     GET    | Salva su file JSON le previsioni del meteo complete di una città in modo ciclico, una volta all'ora, in un certo periodo di tempo indicato.
+| [/visibility](#_3)       |     GET    | Calcola media e varianza della visibilità, relative ad un dato periodi di tempo, di una città prendendone i valori da un file JSON.
+| [/humidity](#_4)         |     GET    | Calcola media e varianza della umidità, relative ad un dato periodi di tempo, di una città prendendone i valori da un file JSON.
 
 ### Spiegazione rotte
-   <a name="1"></a>
+   <a name="_1"></a>
   - **<b>Utilizzo rotta /weather</b>**:
 
     Questa rotta prende in input il nome di una città e restituisce un JSONObject con dentro le previsioni meteo istantanee complete (comprese visibilità e umidità), si può inserire una città qualsiasi e nel caso la città inserita non esista o si sbagli a scriverne il nome verrà restituito un errore. Si utilizza cosi:
@@ -56,7 +56,7 @@ L'utente ha a disposizione le seguenti rotte:
       ```
       (mettere il nome della città richiesta al posto di "NomeCittà" e rimuovere le parentesi graffe)
       
-  <a name="2"></a>  
+  <a name="_2"></a>  
  - **<b>Utilizzo rotta /scheduledWeather</b>**:
  
     Questa rotta prende in input il nome di una città, un periodo di tempo, l'inizio e la fine di quel periodo del periodo di riferimento e salva su un file JSON le previsioni meteo istantanee complete (comprese visibilità e umidità), si può inserire una città qualsiasi. I periodi di tempo disponibili sono TimeSlot, Daily, ChosenDay, Weekly. Le date vanno inserite seguendo il formato ddMMyyyyHHmmss.
@@ -103,7 +103,7 @@ L'utente ha a disposizione le seguenti rotte:
          ```
          (inserire i parametri e rimuovere le parentesi graffe)
          
-  <a name="3"></a>          
+  <a name="_3"></a>          
  - **<b>Utilizzo rotta /visibility</b>**:
  
     Questa rotta prende in input il nome di una città e il nome di un periodo di tempo (TimeSlot, Weekly, ChosenDay, Daily), si può inserire una città tra quelle presenti nel database di esempi (ovvero: Milan, Valencia, London, Paris).
@@ -115,7 +115,7 @@ L'utente ha a disposizione le seguenti rotte:
       ```
 
 
-  <a name="4"></a>           
+  <a name="_4"></a>           
  - **<b>Utilizzo rotta /humidity</b>**:
  
     Questa rotta prende in input il nome di una città e il nome di un periodo di tempo (TimeSlot, Weekly, ChosenDay, Daily), si può inserire una città tra quelle presenti nel database di esempi (ovvero: Milan, Valencia, London, Paris).
