@@ -11,21 +11,17 @@ Questo programma ha come scopo quello di offrire all'utente (tramite chiamate al
 ## INDICE:
 * [Introduzione](#introduzione)
 * [Installazione e Configurazione](#installEConf)
-* [Configurazione](#configurazione)
 * [Rotte](#rotte)
 * [Eccezioni](#eccezioni)
 * [Autori](#autori)
 
 <a name="installEConf"></a>
-## Installazione
-La presente applicazione è installabile dal Prompt dei Comandi con:
-```
-git clone https://github.com/LudovicoGo/Progetto_OOP_ESAME 
-```
+## Installazione e Configurazione
+Il programma può essere installato clonandolo da questa directory tramite prompt dei comandi, usando [GitHub Desktop](https://desktop.github.com/) o direttamente da IDE per esempio da [Intellij](https://blog.jetbrains.com/idea/2020/10/clone-a-project-from-github/).
 
-<a name="configurazione"></a>
-## Configurazione
-Per accedere al nostro servizio è necessario modificare l' ``` api_key ``` in [WeatherServiceImpl.java](https://github.com/LudovicoGo/Progetto_OOP_ESAME/blob/master/ProgettoEsame/src/main/java/com/progetto/ProgettoEsame/service/WeatherServiceImpl.java). Si può ottenere una API key gratuitamente accedendo alla pagina di [OpenWeather](https://openweathermap.org). Infine basterà avviare il web-server eseguendo [ProgettoEsameApplication.java](https://github.com/LudovicoGo/Progetto_OOP_ESAME/blob/master/ProgettoEsame/src/main/java/com/progetto/ProgettoEsame/ProgettoEsameApplication.java).
+Nel programma è già presente una  ``` API Key ```  messa a vostra disposizione, è possibile sostituirla con una propria andando a modificare tale voce nella classe [WeatherServiceImpl](https://github.com/LudovicoGo/Progetto_OOP_ESAME/blob/master/ProgettoEsame/src/main/java/com/progetto/ProgettoEsame/service/WeatherServiceImpl).
+
+Per avviare il programma è sufficiente runnare la classe [ProgettoEsameApplication](https://github.com/LudovicoGo/Progetto_OOP_ESAME/blob/master/ProgettoEsame/src/main/java/com/progetto/ProgettoEsame/ProgettoEsameApplication.java).
 
 <a name="rotte"></a>
 ## Rotte
