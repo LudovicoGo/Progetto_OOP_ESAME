@@ -10,6 +10,7 @@ Questo programma ha come scopo quello di offrire all'utente (tramite chiamate al
 * [Rotte](#rotte)
 * [Eccezioni](#eccezioni)
 * [Test effettuati](#test)
+* [Programmi e risorse utilizzate](#programmi)
 * [Autori](#autori)
 
 <a name="installEConf"></a>
@@ -157,6 +158,18 @@ L'utente ha a disposizione le seguenti rotte:
  
     - <b>shouldFindMaxMinValue</b>:  
        Test che va a verificare il corretto funzionamento dei metodi <b>MaxValue</b> e <b>MinValue</b>, cioè vede se riescono ad estrarre il valore minimo e massimo contenuti in un <b>Vector di Long</b> in modo corretto.
+       
+<a name="programmi"></a>
+## Programmi e risorse utilizzate
+ 
+ <b>Per realizzare questo programma abbiamo usato i seguenti programmi:</b>
+ - <b>[Intellij](https://www.jetbrains.com/idea/)</b>: è l'IDE sul quale abbiamo scritto il programma.
+ - <b>[Spring Inizializr](https://start.spring.io/)</b>: con cui abbiamo creato la cartella iniziale del progetto, ci ha permesso di non dover definire e scrivere tutte le dipendenze a mano ma di avere già una base da cui partire.
+ - <b>[JSON-Simple](https://code.google.com/archive/p/json-simple/)</b>: è la libreria che abbiamo usato per leggere e scrivere file e oggetti in formato JSON.
+ - <b>[GitHub](https://github.com/)</b>: piattaforma dove abbiamo caricato il nostro programma.
+ - <b>[GitHub Desktop](https://desktop.github.com/)</b>: che abbiamo usato per gestire tutta la parte relativa a commit / push / clone.
+ - <b>[Postman](https://www.postman.com/)</b>: che abbiamo usato per effettuare le chiamate alle varie rotte del programma.
+ - <b>[Spring Boot](https://spring.io/)</b>: un framework che oltre a configurare in modo "automatico" librerie e dipendenze della nostra applicazione, ci ha permesso di avere un web server Tomcat integrato sul quale poterla eseguire.
 
 <a name="autori"></a>
 ## Autori
