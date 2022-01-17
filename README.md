@@ -1,9 +1,5 @@
 # Progetto_OOP_ESAME
 
-<p align="center">
-  La presente applicazione offre la possibilità di avere previsioni e statistiche riguardo visibilità e umidità di una data città ma anche previsioni su temperatura massima, minima e percepita. Le statistiche sarà possibile filtrarle in base ai giorni di predizione.
-</p>
-
 <a name="introduzione"></a>
 ## Introduzione
 Questo programma ha come scopo quello di offrire all'utente (tramite chiamate alle API Current di [OpenWeather](https://openweathermap.org/)) la possibilità di ottenere previsioni meteo istantanee complete relative a una città e di poter calcolare delle statistiche relative a visibilità e umidità di una città, potendo anche scegliere il periodo di tempo su cui calcolarle. Le statistiche su umidità e visibilità vengono calcolate prendendo i valori necessari da dei file presenti nella cartella [dataExamples](https://github.com/LudovicoGo/Progetto_OOP_ESAME/tree/master/ProgettoEsame/src/main/resources/dataExamples) (attualmente sono presenti dei file di esempio, ma tali file possono anche essere generati usando questo programma).
@@ -13,6 +9,7 @@ Questo programma ha come scopo quello di offrire all'utente (tramite chiamate al
 * [Installazione e Configurazione](#installEConf)
 * [Rotte](#rotte)
 * [Eccezioni](#eccezioni)
+* [Test effettuati](#test)
 * [Autori](#autori)
 
 <a name="installEConf"></a>
@@ -122,35 +119,6 @@ L'utente ha a disposizione le seguenti rotte:
       "src/main/resources/dataExamples/NomeFile.json"
       ```
 
-
-Significato dei campi della risposta ottenuta da OpenWeather:
-* ```coord``` <br /> 
-     - ```coord.lon``` City geo location, longitude;
-     - ```coord.lat``` City geo location, latitude;
-        
-* ```weather``` (more info Weather condition codes)
-     - ```weather.id``` Weather condition id;
-     - ```weather.main``` Group of weather parameters (Rain, Snow, Extreme etc.);
-     - ```weather.description``` Weather condition within the group. You can get the output in your language.
-* ```main```
-     - ```main.temp``` Temperature. Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit.
-     - ```main.feels_like``` Temperature. This temperature parameter accounts for the human perception of weather. Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit. 
-     - ```main.pressure``` Atmospheric pressure (on the sea level, if there is no sea_level or grnd_level data), hPa
-     - ```main.humidity``` Humidity, %
-     - ```main.temp_min``` Minimum temperature at the moment. This is minimal currently observed temperature (within large megalopolises and urban areas). Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit.
-     - ```main.temp_max``` Maximum temperature at the moment. This is maximal currently observed temperature (within large megalopolises and urban areas). Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit.
- * ``` dt ``` Time of data calculation, unix, UTC.
- 
- * ```sys```
-      - ```sys.id``` Internal parameter;
-      - ```sys.message``` Internal parameter;
-      - ```sys.country``` Country code (GB, JP etc.);
-      - ```sys.sunrise``` Sunrise time, unix, UTC;
-      - ```sys.sunset``` Sunset time, unix, UTC.
- * ```id``` City ID.
- * ```name``` City name.
-
-
 <a name="eccezioni"></a>
 ## Eccezioni
 
@@ -174,8 +142,21 @@ Significato dei campi della risposta ottenuta da OpenWeather:
   Viene lanciata nel [controller](https://github.com/LudovicoGo/Progetto_OOP_ESAME/blob/master/ProgettoEsame/src/main/java/com/progetto/ProgettoEsame/controller/WeatherController.java) dal metodo saveScheduledWeather, restituisce il seguente messaggio di errore:
   
    ```hai commesso un ERRORE nell'inserimento delle date/ore```
-   
-   
+ 
+<a name="test"></a>
+## Test effettuati   
+- **<b>ServiceTest</b>**: sono test effettuati per verificare il corretto funzionamento dei metodi della classe <b>[WeatherServiceImpl](https://github.com/LudovicoGo/Progetto_OOP_ESAME/blob/master/ProgettoEsame/src/main/java/com/progetto/ProgettoEsame/service/WeatherServiceImpl.java)</b>, in particolare sono:
+   - <b>shouldFindThatCity</b>:
+        Test che va a verificare che la città di cui si ottengono le previsioni tramite il metodo <b>getJSONWeather</b> sia effettivamente quella richiesta dall'utente.
+   - <b>shouldConvertDate</b>:
+        Test che va a verificare il corretto funzionamento del metodo <b>DataConverter</b>.
+ 
+ - **<b>StatTest</b>**: sono test effettuati per verificare il corretto funzionamento dei metodi della classe <b>[Statistics](https://github.com/LudovicoGo/Progetto_OOP_ESAME/blob/master/ProgettoEsame/src/main/java/com/progetto/ProgettoEsame/filterAndStats/Statistics.java)</b>, in particolare sono:
+    - <b>shouldCalculateAverageAndVariance</b>: 
+       Test che va a verificare il corretto funzionamento dei metodi <b>Average</b> e <b>Variance</b>, cioè se calcolano in modo corretto media e varianza di una serie di valori.
+ 
+    - <b>shouldFindMaxMinValue</b>:  
+       Test che va a verificare il corretto funzionamento dei metodi <b>MaxValue</b> e <b>MinValue</b>, cioè vede se riescono ad estrarre il valore minimo e massimo contenuti in un <b>Vector di Long</b> in modo corretto.
 
 <a name="autori"></a>
 ## Autori
