@@ -81,7 +81,7 @@ public class WeatherController {
                     break;
                 }
                 case "TimeSlot": {
-                    if (initialParam == epoch || finalParam == epoch || (finalParam-initialParam <= 360000)) {
+                    if (initialParam == epoch || finalParam == epoch || (finalParam-initialParam < 360000)) {
                         throw new TimeSlotException("hai commesso un ERRORE nell'inserimento delle date/ore"); //lanciata eccezione quando non si inserisce almeno uno dei due tempi (inizio o fine) o quando si mette una fascia oraria <= di 1 ora
                     }
                     service.getScheduledWeather(cityName, period, initialParam, finalParam);
@@ -101,7 +101,7 @@ public class WeatherController {
             return new ResponseEntity<>(e.getExceptionMessage(), HttpStatus.BAD_REQUEST);
         }
 
-        return new ResponseEntity<>("TUTTO OK! le previsioni meteo sono state salvate su file con successo.", HttpStatus.OK);
+        return new ResponseEntity<>("I parametri inseriti sono corretti! le previsioni meteo saranno state salvate su file con successo.", HttpStatus.OK);
     }
 
 /*
@@ -126,7 +126,7 @@ public class WeatherController {
         VisibilityFilterImpl vis = new VisibilityFilterImpl();
         try{
             if(!statistics.HaveWeGotThatCity(cityName) || !statistics.HaveWeGotThatPeriod(period))
-                throw new CantFindDataException("ERRORE!    Attualmente conosco la visibilità solo delle seguenti città: Milan, Valencia, London, Paris. Assicurati di aver inserito il nome della città / periodo in modo corretto. Attento anche alle maiuscole (vedi suggerimenti e aiuti sul readme).");
+                throw new CantFindDataException("ERRORE!    Attualmente conosco la visibilità solo delle seguenti città: Milan, Valencia, London, Paris. Assicurati di aver inserito il nome della città / periodo in modo corretto, attento anche alle maiuscole del nome della città e del periodo di tempo.");
             vis.getVisibilityData(cityName, period);
     }catch (CantFindDataException e) {
             e.printStackTrace();
@@ -146,7 +146,7 @@ public class WeatherController {
         HumidityFilterImpl hum = new HumidityFilterImpl();
         try{
             if(!statistics.HaveWeGotThatCity(cityName) || !statistics.HaveWeGotThatPeriod(period))
-                throw new CantFindDataException("ERRORE!    Attualmente conosco la umidità solo delle seguenti città: Milan, Valencia, London, Paris. Assicurati di aver inserito il nome della città / periodo in modo corretto. Attento anche alle maiuscole (vedi suggerimenti e aiuti sul readme).");
+                throw new CantFindDataException("ERRORE!    Attualmente conosco la umidità solo delle seguenti città: Milan, Valencia, London, Paris. Assicurati di aver inserito il nome della città / periodo in modo corretto, attento anche alle maiuscole del nome della città e del periodo di tempo.");
             hum.getHumidityData(cityName, period);
 
         }catch (CantFindDataException e) {
