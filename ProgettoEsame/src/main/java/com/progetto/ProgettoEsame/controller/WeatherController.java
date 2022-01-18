@@ -40,7 +40,7 @@ public class WeatherController {
     public ResponseEntity<Object> getWeather(@RequestParam (name = "cityName", defaultValue = "empty") String cityName) {  //restituisce il JSON completo delle previsioni della chiamata api per la città cityName
         try {
             if (cityName.equals("empty"))
-                throw new CityException("Non hai inserito la città!");
+                throw new CityException("ERRORE! Non hai inserito il nome della città, riprova!");
 
             return new ResponseEntity<Object>(service.getJSONWeather(cityName), HttpStatus.OK);
         }
@@ -60,16 +60,17 @@ public class WeatherController {
      */
     @GetMapping("/scheduledWeather") //(@RequestParam String cityName, String freq, int initialParam, int finalHour)
     public ResponseEntity<Object> saveScheduledWeather(@RequestParam (name = "cityName", defaultValue = "empty") String cityName, @RequestParam (name = "period", defaultValue = "empty") String period,
-                                                       @RequestParam (name = "initialParam", defaultValue = "-1") String initialDate, @RequestParam (name = "finalParam", defaultValue = "-1") String finalDate){
+                                                       @RequestParam (name = "initialParam", defaultValue = "01011970000000") String initialDate, @RequestParam (name = "finalParam", defaultValue = "01011970000000") String finalDate){
 
         try {
-            if (!statistics.HaveWeGotThatPeriod(period))
+            if (!statistics.HaveWeGotThatPeriod(period) || period.equals("empty"))
                 throw new TimeSlotException("ERRORE! hai inserito un periodo di tempo non corretto, puoi scegliere tra: TimeSlot, Daily, ChosenDay, Weekly");
             if (cityName.equals("empty"))
                 throw new CityException("ERRORE! Non hai inserito il nome della città, riprova!");
 
             long initialParam = service.DataConverter(initialDate);
             long finalParam = service.DataConverter(finalDate);
+            long epoch = service.DataConverter("01011970000000");
 
             switch (period) {
                 case "Daily": {
@@ -80,14 +81,14 @@ public class WeatherController {
                     break;
                 }
                 case "TimeSlot": {
-                    if (initialParam == -1 || finalParam == -1 || (finalParam-initialParam <= 360000)) {
+                    if (initialParam == epoch || finalParam == epoch || (finalParam-initialParam <= 360000)) {
                         throw new TimeSlotException("hai commesso un ERRORE nell'inserimento delle date/ore"); //lanciata eccezione quando non si inserisce almeno uno dei due tempi (inizio o fine) o quando si mette una fascia oraria <= di 1 ora
                     }
                     service.getScheduledWeather(cityName, period, initialParam, finalParam);
                     break;
                 }
                 case "ChosenDay": {
-                    if (initialParam == -1)
+                    if (initialParam == epoch)
                         throw new TimeSlotException("hai commesso un ERRORE nell'inserimento della data");
                     service.getScheduledWeather(cityName, period, initialParam, finalParam);
                     break;
@@ -103,16 +104,15 @@ public class WeatherController {
         return new ResponseEntity<>("TUTTO OK! le previsioni meteo sono state salvate su file con successo.", HttpStatus.OK);
     }
 
-
-    //TODO ROTTA DI TEST ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*
+    //ROTTA USATA PER FARE PROVE
     @GetMapping("/test")
     public void test(){
        // return new ResponseEntity<>(statistics.HaveWeGotThatCity("Valencia"), HttpStatus.OK);
         service.getScheduledWeather("Milan", "TimeSlot", 234567, 4567890);
 
     }
-    //TODO ROTTA DI TEST ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
+*/
 
 
     /**
@@ -122,20 +122,17 @@ public class WeatherController {
      * @return                 JSONObject contenente le statistiche
      */
     @GetMapping("/visibility")
-    public ResponseEntity<Object> getVisibilityStats(@RequestParam String cityName, @RequestParam String period) {
+    public ResponseEntity<Object> getVisibilityStats(@RequestParam (name = "cityName", defaultValue = "empty") String cityName, @RequestParam (name = "period", defaultValue = "empty") String period) {
         VisibilityFilterImpl vis = new VisibilityFilterImpl();
         try{
-
-            if(!statistics.HaveWeGotThatCity(cityName))
-                throw new CantFindDataException("ERRORE!    Attualmente conosco la visibilità solo delle seguenti città: Milan, Valencia, London");
+            if(!statistics.HaveWeGotThatCity(cityName) || !statistics.HaveWeGotThatPeriod(period))
+                throw new CantFindDataException("ERRORE!    Attualmente conosco la visibilità solo delle seguenti città: Milan, Valencia, London, Paris. Assicurati di aver inserito il nome della città / periodo in modo corretto. Attento anche alle maiuscole (vedi suggerimenti e aiuti sul readme).");
             vis.getVisibilityData(cityName, period);
-
     }catch (CantFindDataException e) {
             e.printStackTrace();
             return new ResponseEntity<>(e.getExceptionMessage(), HttpStatus.BAD_REQUEST);
-
     }
-        return new ResponseEntity<>(vis.modelToJSONObject(vis.calculator(cityName, period)), HttpStatus.OK);
+        return new ResponseEntity<>(vis.ModelToJSONObject(vis.Calculator(cityName, period)), HttpStatus.OK);
 }
 
     /**
@@ -148,17 +145,15 @@ public class WeatherController {
     public ResponseEntity<Object> getHumidityStats(@RequestParam String cityName, @RequestParam String period){
         HumidityFilterImpl hum = new HumidityFilterImpl();
         try{
-
-            if(!statistics.HaveWeGotThatCity(cityName))
-                throw new CantFindDataException("ERRORE!    Attualmente conosco l'umidità solo delle seguenti città: Milan, Valencia, London, Paris");
+            if(!statistics.HaveWeGotThatCity(cityName) || !statistics.HaveWeGotThatPeriod(period))
+                throw new CantFindDataException("ERRORE!    Attualmente conosco la umidità solo delle seguenti città: Milan, Valencia, London, Paris. Assicurati di aver inserito il nome della città / periodo in modo corretto. Attento anche alle maiuscole (vedi suggerimenti e aiuti sul readme).");
             hum.getHumidityData(cityName, period);
 
         }catch (CantFindDataException e) {
             e.printStackTrace();
             return new ResponseEntity<>(e.getExceptionMessage(), HttpStatus.BAD_REQUEST);
-
         }
-        return new ResponseEntity<> (hum.modelToJSONObject(hum.calculator(cityName, period)), HttpStatus.OK);
+        return new ResponseEntity<> (hum.ModelToJSONObject(hum.Calculator(cityName, period)), HttpStatus.OK);
     }
 
 }

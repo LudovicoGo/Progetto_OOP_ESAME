@@ -51,7 +51,7 @@ public class Statistics{
     * @param getData Vector di long che contiene i dati di visibilità/umidità, di cui ne dovrà calcolare la media.
     * @return Ritorna un double che rappresenta la media.
     */
-    public double average (Vector<Long> getData){
+    public double Average (Vector<Long> getData){
 
         int numberOfSamples = 0;
 
@@ -71,13 +71,13 @@ public class Statistics{
      * @param getData Vector che contiene i dati di visibilità/umidità, di cui ne dovrà calcolare la varianza.
      * @return ritorna un double che rappresenta la varianza.
      */
-    public double variance(Vector<Long> getData){
+    public double Variance(Vector<Long> getData){
 
         double sum = 0;
         int numberOfSamples = 0;
 
         for (long termInDataSet : getData) {
-            sum += Math.pow((termInDataSet - average(getData)), 2);
+            sum += Math.pow((termInDataSet - Average(getData)), 2);
             numberOfSamples++;
         }
 
@@ -90,7 +90,7 @@ public class Statistics{
      * @param getData Vector che contiene i dati di visibilità/umidità, di cui dovrà trovare il valore massimo.
      * @return ritorna un long che rappresenta il valore massimo che è stato registrato.
      */
-    public long maxValue (Vector<Long> getData){
+    public long MaxValue (Vector<Long> getData){
 
         long currentData = getData.get(0);
 
@@ -108,7 +108,7 @@ public class Statistics{
      * @param getData Vector che contiene i dati di visibilità/umidità, di cui dovrà trovare il valore minimo.
      * @return Ritorna un long che rappresenta il valore minimo che è stato registrato.
      */
-    public long minValue (Vector<Long> getData){
+    public long MinValue (Vector<Long> getData){
 
         long currentData = getData.get(0);
 

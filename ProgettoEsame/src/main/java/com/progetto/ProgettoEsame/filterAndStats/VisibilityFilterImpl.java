@@ -49,12 +49,12 @@ public class VisibilityFilterImpl extends Statistics implements VisibilityFilter
      * @param period Periodo a cui si riferiscono i dati.
      * @return Restituisce un oggetto di tipo VisibilityStatsModel che contiene tutte le statistiche della visibilità.
      */
-    public VisibilityStatsModel calculator (String cityName, String period){
+    public VisibilityStatsModel Calculator (String cityName, String period){
         VisibilityStatsModel model = new VisibilityStatsModel(cityName);
-        model.setAverageVisibility(average(getVisibilityData(cityName, period)));
-        model.setVisibilityVariance(variance(getVisibilityData(cityName, period)));
-        model.setMaxValue(maxValue(getVisibilityData(cityName, period)));
-        model.setMinValue(minValue(getVisibilityData(cityName, period)));
+        model.setAverageVisibility(Average(getVisibilityData(cityName, period)));
+        model.setVisibilityVariance(Variance(getVisibilityData(cityName, period)));
+        model.setMaxValue(MaxValue(getVisibilityData(cityName, period)));
+        model.setMinValue(MinValue(getVisibilityData(cityName, period)));
 
         return model;
     }
@@ -64,7 +64,7 @@ public class VisibilityFilterImpl extends Statistics implements VisibilityFilter
      * @param model Oggetto di tipo VisibilityStatsModel che contiene tutte le statistiche della visibilità.
      * @return Restituisce un oggetto di tipo JSONObject che contiene tutte le statistiche della visibilità.
      */
-    public JSONObject modelToJSONObject (VisibilityStatsModel model){
+    public JSONObject ModelToJSONObject (VisibilityStatsModel model){
         JSONObject jsonObject = new JSONObject();
         JSONObject name = new JSONObject();
 

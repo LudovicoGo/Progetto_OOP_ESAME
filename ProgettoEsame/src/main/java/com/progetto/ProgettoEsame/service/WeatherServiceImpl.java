@@ -210,7 +210,7 @@ public class WeatherServiceImpl implements WeatherService{
                 break;
             }
 
-            case "Week":
+            case "Weekly":
 
             case "Daily": {
                 delay = 0;

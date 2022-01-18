@@ -12,6 +12,6 @@ import java.util.Vector;
 
 public interface VisibilityFilter {
     public abstract Vector<Long> getVisibilityData(String cityName, String period);
-    public abstract VisibilityStatsModel calculator (String cityName, String period);
-    public abstract JSONObject modelToJSONObject (VisibilityStatsModel model);
+    public abstract VisibilityStatsModel Calculator (String cityName, String period);
+    public abstract JSONObject ModelToJSONObject (VisibilityStatsModel model);
 }

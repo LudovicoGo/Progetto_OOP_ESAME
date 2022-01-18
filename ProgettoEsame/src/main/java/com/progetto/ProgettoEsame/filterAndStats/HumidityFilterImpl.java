@@ -50,12 +50,12 @@ public class HumidityFilterImpl extends Statistics implements HumidityFilter {
      * @param period Periodo a cui si riferiscono i dati.
      * @return Restituisce un oggetto di tipo HumidityStatsModel che contiene tutte le statistiche dell'umidità.
      */
-    public HumidityStatsModel calculator (String cityName, String period){
+    public HumidityStatsModel Calculator (String cityName, String period){
         HumidityStatsModel model = new HumidityStatsModel(cityName);
-        model.setAverageHumidity(average(getHumidityData(cityName, period)));
-        model.setHumidityVariance(variance(getHumidityData(cityName, period)));
-        model.setHumidityMax(maxValue(getHumidityData(cityName, period)));
-        model.setHumidityMin(minValue(getHumidityData(cityName, period)));
+        model.setAverageHumidity(Average(getHumidityData(cityName, period)));
+        model.setHumidityVariance(Variance(getHumidityData(cityName, period)));
+        model.setHumidityMax(MaxValue(getHumidityData(cityName, period)));
+        model.setHumidityMin(MinValue(getHumidityData(cityName, period)));
 
         return model;
     }
@@ -65,7 +65,7 @@ public class HumidityFilterImpl extends Statistics implements HumidityFilter {
      * @param model Oggetto di tipo HumidityStatsModel che contiene tutte le statistiche dell'umidità.
      * @return Restituisce un oggetto di tipo JSONObject che contiene tutte le statistiche dell'umidità.
      */
-    public JSONObject modelToJSONObject (HumidityStatsModel model){
+    public JSONObject ModelToJSONObject (HumidityStatsModel model){
         JSONObject jsonObject = new JSONObject();
         JSONObject name = new JSONObject();
 

@@ -1,0 +1,8 @@
+com.progetto.ProgettoEsame
+com.progetto.ProgettoEsame.controller
+com.progetto.ProgettoEsame.Exception
+com.progetto.ProgettoEsame.filterAndStats
+com.progetto.ProgettoEsame.model
+com.progetto.ProgettoEsame.service
+com.progetto.ProgettoEsame.StatisticsTest
+com.progetto.ProgettoEsame.WeatherServiceTest
