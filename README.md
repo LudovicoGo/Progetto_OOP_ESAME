@@ -171,7 +171,7 @@ L'utente ha a disposizione le seguenti rotte:
   
 - **<b>TimeSlotException</b>**:
 
-  Viene lanciata quando si provano a salvare su file delle previsioni usando un periodo di tempo non ammesso dal programma.
+  Viene lanciata quando si provano a salvare su file delle previsioni usando un periodo di tempo non ammesso dal programma o si dimentica di inserire una data richiesta per l'esecuzione dell'operazione.
   Viene lanciata nel [controller](https://github.com/LudovicoGo/Progetto_OOP_ESAME/blob/master/ProgettoEsame/src/main/java/com/progetto/ProgettoEsame/controller/WeatherController.java) dal metodo saveScheduledWeather, restituisce il seguente messaggio di errore:
   
    ```Hai commesso un ERRORE nell'inserimento delle date/ore```
@@ -235,7 +235,7 @@ L'utente ha a disposizione le seguenti rotte:
        
       
 <a name="programmidocumenti"></a>
-## Programmi utilizzati, risorse utilizzate e documentazione
+## Documenti, pogrammi e risorse utilizzati
 
 **<b>Programmi e risorse utilizzati</b>**:
 
