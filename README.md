@@ -1,4 +1,4 @@
-# Progetto_OOP_ESAME
+# Progetto esame Programmazione a Oggetti, Gennaio2022.
 
 <a name="introduzione"></a>
 ## Introduzione
@@ -6,12 +6,12 @@ Questo programma ha come scopo quello di offrire all'utente (tramite chiamate al
 
 ## INDICE:
 * [Introduzione](#introduzione)
-* [Installazione e Configurazione](#installEConf)
+* [Installazione e configurazione del programma](#installEConf)
 * [Rotte](#rotte)
 * [Eccezioni](#eccezioni)
 * [Test effettuati](#test)
 * [Lettura API OpenWeather](#API)
-* [Programmi e risorse utilizzate](#programmi)
+* [Documenti, pogrammi e risorse utilizzati](#programmidocumenti)
 * [Autori](#autori)
 
 <a name="installEConf"></a>
@@ -51,6 +51,10 @@ L'utente ha a disposizione le seguenti rotte:
       ```
       (mettere il nome della città richiesta al posto di "NomeCittà" e rimuovere le parentesi graffe)
       
+     <b>Esempio risposta:</b>
+      
+      ![MilanWeather](https://user-images.githubusercontent.com/91212120/149629162-299044bb-7ce9-4c3b-a7bf-9d0458426479.png)
+      
   <a name="_2"></a>  
  - **<b>Utilizzo rotta /scheduledWeather</b>**:
  
@@ -59,7 +63,12 @@ L'utente ha a disposizione le seguenti rotte:
       
       ```
       "src/main/resources/saved/NomeFile.json"
-      ```
+      ```   
+     <b>Esempio risposta:</b>
+      
+      ![Immagine 2022-01-18 122049](https://user-images.githubusercontent.com/91212120/149928132-0a755a29-e3a1-40b7-84a4-99dd4b0c3b5c.png)
+
+
       
       Questa rotta si può usare in diversi modi a seconda del periodo di tempo scelto:
       
@@ -102,7 +111,16 @@ L'utente ha a disposizione le seguenti rotte:
  - **<b>Utilizzo rotta /visibility</b>**:
  
     Questa rotta prende in input il nome di una città e il nome di un periodo di tempo (TimeSlot, Weekly, ChosenDay, Daily), si può inserire una città tra quelle presenti nel database di esempi (ovvero: Milan, Valencia, London, Paris).
-    Chiamando questa rotta il programma prende il file su cui sono salvati i dati del meteo della città scelta nel periodo scelto, ne estrapola i valori della visibilità e li usa per calcolare media e varianza di quest'ultima.
+    Chiamando questa rotta il programma prende il file su cui sono salvati i dati del meteo della città scelta nel periodo scelto, ne estrapola i valori della visibilità e li usa per calcolare media e varianza di quest'ultima.    
+     Va usata cosi:
+     
+     ```
+     localhost:8080/visibility?cityName={NomeCittà}&period={PeriodoDiTempo}
+     ```
+     <b>Esempio risposta:</b>
+      
+    ![visibilityMilan](https://user-images.githubusercontent.com/91212120/149629229-1c6ead11-9cb3-4524-a97f-5fd6e0efe0aa.png)
+    
       I file devono avere come nome "nome città + periodo + WeatherArray.json", possono essere generati tramite l'uso della rotta /scheduledWeather (vedi sopra) e sono salvati all'interno della cartella del progetto nel seguente percorso:  
       
       ```
@@ -110,16 +128,29 @@ L'utente ha a disposizione le seguenti rotte:
       ```
 
 
+              
   <a name="_4"></a>           
  - **<b>Utilizzo rotta /humidity</b>**:
  
     Questa rotta prende in input il nome di una città e il nome di un periodo di tempo (TimeSlot, Weekly, ChosenDay, Daily), si può inserire una città tra quelle presenti nel database di esempi (ovvero: Milan, Valencia, London, Paris).
     Chiamando questa rotta il programma prende il file su cui sono salvati i dati del meteo della città scelta nel periodo scelto, ne estrapola i valori dell'umidità e li usa per calcolare media e varianza di quest'ultima.
+     Va usata cosi:
+     
+     ```
+     localhost:8080/humidity?cityName={NomeCittà}&period={PeriodoDiTempo}
+     ```      
+     <b>Esempio risposta:</b>
+      
+   ![humidityMilan](https://user-images.githubusercontent.com/91212120/149629357-20080bf4-1f30-4d56-a338-aa6312036053.png)
+
+    
       I file devono avere come nome "nome città + periodo + WeatherArray.json", possono essere generati tramite l'uso della rotta /scheduledWeather e sono salvati all'interno della cartella del progetto nel seguente percorso:  
       
       ```
       "src/main/resources/dataExamples/NomeFile.json"
       ```
+
+
 
 <a name="eccezioni"></a>
 ## Eccezioni
@@ -159,41 +190,55 @@ L'utente ha a disposizione le seguenti rotte:
  
     - <b>shouldFindMaxMinValue</b>:  
        Test che va a verificare il corretto funzionamento dei metodi <b>MaxValue</b> e <b>MinValue</b>, cioè vede se riescono ad estrarre il valore minimo e massimo contenuti in un <b>Vector di Long</b> in modo corretto.
- 
+
+
 <a name="API"></a>
 ## Aiuto per la lettura delle API di OpenWeather  
-### Ecco una legenda a cui fare riferimento per la lettura delle previsioni meteo ottenute:
-* ```coord``` <br /> 
-     - ```coord.lon``` City geo location, longitude;
-     - ```coord.lat``` City geo location, latitude;
+<b>Ecco una legenda a cui fare riferimento per la comprensione dei parametri  per noi più importanti</b>:
+   * ```coord``` 
+     - ```coord.lon``` Latitudine della città.
+     - ```coord.lat``` Longitudine della città.
         
-* ```weather``` (more info Weather condition codes)
-     - ```weather.id``` Weather condition id;
-     - ```weather.main``` Group of weather parameters (Rain, Snow, Extreme etc.);
-     - ```weather.description``` Weather condition within the group. You can get the output in your language.
+* ```weather``` 
+     - ```weather.id``` id delle condizioni meteo.
+     - ```weather.main``` Condizione meteo.
+     - ```weather.description``` Descrizione più accurata delle condizioni meteo.
+ 
 * ```main```
-     - ```main.temp``` Temperature. Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit.
-     - ```main.feels_like``` Temperature. This temperature parameter accounts for the human perception of weather. Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit. 
-     - ```main.pressure``` Atmospheric pressure (on the sea level, if there is no sea_level or grnd_level data), hPa
-     - ```main.humidity``` Humidity, %
-     - ```main.temp_min``` Minimum temperature at the moment. This is minimal currently observed temperature (within large megalopolises and urban areas). Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit.
-     - ```main.temp_max``` Maximum temperature at the moment. This is maximal currently observed temperature (within large megalopolises and urban areas). Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit.
- * ``` dt ``` Time of data calculation, unix, UTC.
+     - ```main.temp``` Temperatura attuale. .
+     - ```main.feels_like``` Temperatura percepita.
+     - ```main.pressure``` Pressione atmosferica.
+     - ```main.humidity``` Umidità.
+     - ```main.temp_min``` Temperatura minima.
+     - ```main.temp_max``` Temperatura massima.
+     - ```main.sea_level``` Pressione a livello del mare.
+     - ```main.grnd_level``` Pressione a livello del suolo.
+ 
+ * ```wind```
+     - ```wind.speed``` Velocità del vento.
+     - ```wind.deg``` Direzione del vento.
+ 
+ * ```clouds```
+     - ```clouds.all``` Percentuale di nuvole.
+ 
+ * ```timezone``` Fuso orario.
+ 
+ * ``` dt ``` Data e ora in unix di quando sono state fatte le previsioni.
  
  * ```sys```
-      - ```sys.id``` Internal parameter;
-      - ```sys.message``` Internal parameter;
-      - ```sys.country``` Country code (GB, JP etc.);
-      - ```sys.sunrise``` Sunrise time, unix, UTC;
-      - ```sys.sunset``` Sunset time, unix, UTC.
- * ```id``` City ID.
- * ```name``` City name.
+      - ```sys.country``` Nazione.
+      - ```sys.sunrise``` Ora alba in unix.
+      - ```sys.sunset``` Ora tramonto in unix.
+ * ```id``` ID della città.
+ * ```name``` Nome della città.
        
        
-<a name="programmi"></a>
-## Programmi e risorse utilizzate
- 
- <b>Per realizzare questo programma abbiamo usato i seguenti programmi:</b>
+      
+<a name="programmidocumenti"></a>
+## Programmi utilizzati, risorse utilizzate e documentazione
+
+**<b>Programmi e risorse utilizzati</b>**:
+
  - <b>[Intellij](https://www.jetbrains.com/idea/)</b>: è l'IDE sul quale abbiamo scritto il programma.
  - <b>[Spring Inizializr](https://start.spring.io/)</b>: con cui abbiamo creato la cartella iniziale del progetto, ci ha permesso di non dover definire e scrivere tutte le dipendenze a mano ma di avere già una base da cui partire.
  - <b>[JSON-Simple](https://code.google.com/archive/p/json-simple/)</b>: è la libreria che abbiamo usato per leggere e scrivere file e oggetti in formato JSON.
@@ -202,8 +247,11 @@ L'utente ha a disposizione le seguenti rotte:
  - <b>[Postman](https://www.postman.com/)</b>: che abbiamo usato per effettuare le chiamate alle varie rotte del programma.
  - <b>[Spring Boot](https://spring.io/)</b>: un framework che oltre a configurare in modo "automatico" librerie e dipendenze della nostra applicazione, ci ha permesso di avere un web server Tomcat integrato sul quale poterla eseguire.
 
+**<b>Documenti</b>**:
+   - è disponibile per la consultazione il <b>[JavaDoc](https://github.com/LudovicoGo/Progetto_OOP_ESAME/tree/master/ProgettoEsame/javadoc)</b> completo del programma.
+
+
 <a name="autori"></a>
 ## Autori
-- Gorgoglione Ludovico 60%
-- Christian Curzi 40%
-  
+- Gorgoglione Ludovico
+- Christian Curzi
