@@ -148,7 +148,6 @@ public class WeatherServiceImpl implements WeatherService{
                 switch (period){
                     case "TimeSlot": {
                         times = (finalParam - initialParam)/3600000;                             //PER TOVARE NUMERO DI RIPETIZIONI SE SI VOGLIONO FARE OGNI ORA
-                        //times = 2;
                         break;
                     }
 

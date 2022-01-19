@@ -109,7 +109,7 @@ public class WeatherController {
     @GetMapping("/test")
     public void test(){
        // return new ResponseEntity<>(statistics.HaveWeGotThatCity("Valencia"), HttpStatus.OK);
-        service.getScheduledWeather("Milan", "TimeSlot", 234567, 4567890);
+        service.getScheduledWeather("Milan", "TimeSlot", 234564252, 67890);
 
     }
 */
