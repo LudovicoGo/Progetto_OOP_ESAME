@@ -25,13 +25,13 @@ public class WeatherServiceImpl implements WeatherService{
      * si richiedono tramite la chiamata ai servizi di OpenWeather.
      *
      */
-    private String APIKey = "7a89f821172959c6731c4bafaa3f1b20";
+    private final String APIKey = "7a89f821172959c6731c4bafaa3f1b20";
 
     /**
      * URL al quale ci si riferisce per fare le chiamate alle api di OpenWeather.
      *
      */
-    private String apiCallUrl = "https://api.openweathermap.org/data/2.5/weather?q=";
+    private final String apiCallUrl = "https://api.openweathermap.org/data/2.5/weather?q=";
 
     /**
      * Metodo che fa una chiamata alle api di OpenWeather, estrapola le previsioni meteo per la città richiesta.

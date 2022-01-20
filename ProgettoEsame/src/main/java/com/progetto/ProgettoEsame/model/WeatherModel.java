@@ -231,7 +231,7 @@ public class WeatherModel extends CityModel{
     }
 
     /**
-     * Metodo che imposta la.0 visibilità.
+     * Metodo che imposta la visibilità.
      * @param visibility
      */
     public void setVisibility(long visibility) {

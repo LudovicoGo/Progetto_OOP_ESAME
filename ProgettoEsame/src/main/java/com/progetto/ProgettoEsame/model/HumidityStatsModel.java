@@ -37,10 +37,10 @@ public class HumidityStatsModel extends CityForStatsModel{
 
     /** Costruttore della classe.
      * @param cityName Nome della città.
-     * @param averageHumidity Media dell'umiditò.
-     * @param humidityVariance Varianza dell'umiditò.
-     * @param humidityMax Valore massimo registrato dell'umiditò.
-     * @param humidityMin Valore minimo registrato dell'umiditò.
+     * @param averageHumidity Media dell'umidità.
+     * @param humidityVariance Varianza dell'umidità.
+     * @param humidityMax Valore massimo registrato dell'umidità.
+     * @param humidityMin Valore minimo registrato dell'umidità.
      */
     public HumidityStatsModel(String cityName, double averageHumidity, double humidityVariance, long humidityMax, long humidityMin) {
         super(cityName);

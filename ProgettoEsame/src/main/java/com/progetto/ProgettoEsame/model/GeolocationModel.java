@@ -50,7 +50,7 @@ public class GeolocationModel {
     }
 
     /**
-     * Metodo che restituisceil valore della longitudine.
+     * Metodo che restituisce il valore della longitudine.
      * @return La longitudine della città.
      */
     public double getLongitude() {
