@@ -245,6 +245,7 @@ L'utente ha a disposizione le seguenti rotte:
  - <b>[GitHub Desktop](https://desktop.github.com/)</b>: che abbiamo usato per gestire tutta la parte relativa a commit / push / clone.
  - <b>[Postman](https://www.postman.com/)</b>: che abbiamo usato per effettuare le chiamate alle varie rotte del programma.
  - <b>[Spring Boot](https://spring.io/)</b>: un framework che oltre a configurare in modo "automatico" librerie e dipendenze della nostra applicazione, ci ha permesso di avere un web server Tomcat integrato sul quale poterla eseguire.
+ - <b>[API Current di OpenWeather](https://openweathermap.org/current#name)</b>: API che vengono usate dal programma per ottenere le previsioni meteo (istantanee) delle città.
 
 **<b>Documenti</b>**:
    - è disponibile per la consultazione il <b>[JavaDoc](https://github.com/LudovicoGo/Progetto_OOP_ESAME/tree/master/ProgettoEsame/javadoc)</b> completo del programma.
