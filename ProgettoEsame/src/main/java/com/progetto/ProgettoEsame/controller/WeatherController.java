@@ -101,7 +101,7 @@ public class WeatherController {
             return new ResponseEntity<>(e.getExceptionMessage(), HttpStatus.BAD_REQUEST);
         }
 
-        return new ResponseEntity<>("I parametri inseriti sono corretti! le previsioni meteo saranno state salvate su file con successo.", HttpStatus.OK);
+        return new ResponseEntity<>("I parametri inseriti sono corretti! le previsioni meteo saranno salvate su file con successo.", HttpStatus.OK);
     }
 
 /*
@@ -128,12 +128,12 @@ public class WeatherController {
             if(!statistics.HaveWeGotThatCity(cityName) || !statistics.HaveWeGotThatPeriod(period))
                 throw new CantFindDataException("ERRORE!    Attualmente conosco la visibilità solo delle seguenti città: Milan, Valencia, London, Paris. Assicurati di aver inserito il nome della città / periodo in modo corretto, attento anche alle maiuscole del nome della città e del periodo di tempo.");
             vis.getVisibilityData(cityName, period);
-    }catch (CantFindDataException e) {
+        }catch (CantFindDataException e) {
             e.printStackTrace();
             return new ResponseEntity<>(e.getExceptionMessage(), HttpStatus.BAD_REQUEST);
-    }
+        }
         return new ResponseEntity<>(vis.ModelToJSONObject(vis.Calculator(cityName, period)), HttpStatus.OK);
-}
+    }
 
     /**
      * Metodo che prende da un file le statistiche sull'umidità e ne restituisce media, varianza e valore massimo e minimo

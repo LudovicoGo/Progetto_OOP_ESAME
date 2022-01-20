@@ -40,7 +40,7 @@ public class GeolocationModel {
     public double getLatitude() {
         return latitude;
     }
-
+    
     /**
      * Metodo che imposta il valore della latitudine.
      * @param latitude Latitudine della città.
