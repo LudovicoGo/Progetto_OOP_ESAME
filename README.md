@@ -18,7 +18,7 @@ Questo programma ha come scopo quello di offrire all'utente (tramite chiamate al
 ## Installazione e Configurazione
 Il programma può essere installato clonandolo da questa directory tramite prompt dei comandi, usando [GitHub Desktop](https://desktop.github.com/) o direttamente da IDE per esempio da [Intellij](https://blog.jetbrains.com/idea/2020/10/clone-a-project-from-github/).
 
-Nel programma è già presente una  ``` API Key ```  messa a vostra disposizione, è possibile sostituirla con una propria andando a modificare tale voce nella classe [WeatherServiceImpl](https://github.com/LudovicoGo/Progetto_OOP_ESAME/blob/master/ProgettoEsame/src/main/java/com/progetto/ProgettoEsame/service/WeatherServiceImpl).
+Nel programma è già presente una  ``` API Key ```  messa a vostra disposizione, è possibile sostituirla con una propria andando a modificare tale voce nella classe [WeatherServiceImpl](https://github.com/LudovicoGo/Progetto_OOP_ESAME/blob/master/ProgettoEsame/src/main/java/com/progetto/ProgettoEsame/service/WeatherServiceImpl.java).
 
 Per avviare il programma è sufficiente runnare la classe [ProgettoEsameApplication](https://github.com/LudovicoGo/Progetto_OOP_ESAME/blob/master/ProgettoEsame/src/main/java/com/progetto/ProgettoEsame/ProgettoEsameApplication.java).
 
@@ -36,7 +36,7 @@ L'utente ha a disposizione le seguenti rotte:
 | Rotta             | Tipo rotta |        Descrizione                                           
 |-------------------|------------|--------------------------------------------------------------
 | [/weather](#_1)          |     GET    | Restituisce un JSONObject contenente le previsioni meteo istantanee (ancheumidità e visibilità) della città richiesta.
-| [/scheduledWeather](#_2) |     GET    | Salva su file JSON le previsioni del meteo complete di una città in modo ciclico, una volta all'ora, in un certo periodo di tempo indicato.
+| [/scheduledWeather](#_2) |     GET    | Salva su file JSON le previsioni del meteo complete di una città in modo ciclico, una volta all'ora, in un certo periodo di tempo indicato dall'utente (TimeSlot, Daily, Weekly, ChosenDay).
 | [/visibility](#_3)       |     GET    | Calcola media e varianza della visibilità, relative ad un dato periodi di tempo, di una città prendendone i valori da un file JSON.
 | [/humidity](#_4)         |     GET    | Calcola media e varianza della umidità, relative ad un dato periodi di tempo, di una città prendendone i valori da un file JSON.
 
@@ -44,7 +44,7 @@ L'utente ha a disposizione le seguenti rotte:
    <a name="_1"></a>
   - **<b>Utilizzo rotta /weather</b>**:
 
-    Questa rotta prende in input il nome di una città e restituisce un JSONObject con dentro le previsioni meteo istantanee complete (comprese visibilità e umidità), si può inserire una città qualsiasi e nel caso la città inserita non esista o si sbagli a scriverne il nome verrà restituito un errore. Si utilizza cosi:
+    Questa rotta prende in input il nome di una città e restituisce un JSONObject con dentro le previsioni meteo istantanee complete (comprese visibilità e umidità), si può inserire una città qualsiasi, nel caso si dimentichi di specificare il nome della città restituito un errore. Si utilizza cosi:
   
       ```
       localhost:8080/weather?cityName={NomeCittà}
@@ -58,18 +58,17 @@ L'utente ha a disposizione le seguenti rotte:
   <a name="_2"></a>  
  - **<b>Utilizzo rotta /scheduledWeather</b>**:
  
-    Questa rotta prende in input il nome di una città, un periodo di tempo, l'inizio e la fine di quel periodo del periodo di riferimento e salva su un file JSON le previsioni meteo istantanee complete (comprese visibilità e umidità), si può inserire una città qualsiasi. I periodi di tempo disponibili sono TimeSlot, Daily, ChosenDay, Weekly. Le date vanno inserite seguendo il formato ddMMyyyyHHmmss.
-      I file avranno come nome "nome città + WeatherArray.json" e verranno salvati all'interno della cartella del progetto nel seguente percorso:  
+    Questa rotta prende in input il nome di una città, un periodo di tempo, l'inizio e la fine di quel periodo di tempo e salva ciclicamente ogni ora su un file JSON le previsioni meteo istantanee complete (comprese visibilità e umidità), si può inserire una città qualsiasi. I periodi di tempo disponibili sono TimeSlot, Daily, ChosenDay, Weekly. Le date vanno inserite seguendo il formato ddMMyyyyHHmmss.
+      I file avranno come nome "nome città + periodo di tempo + WeatherArray.json" e verranno salvati all'interno della cartella del progetto nel seguente percorso:  
       
       ```
       "src/main/resources/saved/NomeFile.json"
       ```   
      <b>Esempio risposta:</b>
-      
-      ![Immagine 2022-01-18 122049](https://user-images.githubusercontent.com/91212120/149928132-0a755a29-e3a1-40b7-84a4-99dd4b0c3b5c.png)
+     
+      ![rispostascheduled](https://user-images.githubusercontent.com/91212120/150353839-31b60925-7740-4226-bc75-2f0940d62584.png)
 
-
-      
+           
       Questa rotta si può usare in diversi modi a seconda del periodo di tempo scelto:
       
       - **<b>Daily</b>**: 
@@ -82,7 +81,7 @@ L'utente ha a disposizione le seguenti rotte:
          
          
       - **<b>TimeSlot</b>**: 
-         Richiede come input necessari solo il nome della città, va scelto il periodo di tempo "TimeSlot", va fornita la data (e ora) del momento di inizio e della fine del salvataggio delle previsioni. Salva su un file le previsioni del meteo, ogni ora, di una <b>fascia oraria</b> definita inserendo l'ora d'inizio e quella di fine. Va usata cosi:
+         Richiede come input il nome della città, va scelto il periodo di tempo "TimeSlot", va fornita la data (e ora) del momento di inizio e della fine della fascia oraria durante la quale si vuole che avvenga il salvataggio delle previsioni. Salva su un file le previsioni del meteo, ogni ora, della <b>fascia oraria</b> definita inserendo l'ora d'inizio e quella di fine. Va usata cosi:
          
          ```
          localhost:8080/scheduledWeather?cityName={NomeCittà}&period=TimeSlot&initialParam={DataInizio}&finalParam={DataFine}
@@ -182,7 +181,7 @@ L'utente ha a disposizione le seguenti rotte:
    - <b>shouldFindThatCity</b>:
         Test che va a verificare che la città di cui si ottengono le previsioni tramite il metodo <b>getJSONWeather</b> sia effettivamente quella richiesta dall'utente.
    - <b>shouldConvertDate</b>:
-        Test che va a verificare il corretto funzionamento del metodo <b>DataConverter</b>.
+        Test che va a verificare il corretto funzionamento del metodo <b>DataConverter</b> attraverso la comparazione di una data già convertita e una che convertita dal metodo DataConverter stesso.
  
  - **<b>StatTest</b>**: sono test effettuati per verificare il corretto funzionamento dei metodi della classe <b>[Statistics](https://github.com/LudovicoGo/Progetto_OOP_ESAME/blob/master/ProgettoEsame/src/main/java/com/progetto/ProgettoEsame/filterAndStats/Statistics.java)</b>, in particolare sono:
     - <b>shouldCalculateAverageAndVariance</b>: 
@@ -240,7 +239,7 @@ L'utente ha a disposizione le seguenti rotte:
 **<b>Programmi e risorse utilizzati</b>**:
 
  - <b>[Intellij](https://www.jetbrains.com/idea/)</b>: è l'IDE sul quale abbiamo scritto il programma.
- - <b>[Spring Inizializr](https://start.spring.io/)</b>: con cui abbiamo creato la cartella iniziale del progetto, ci ha permesso di non dover definire e scrivere tutte le dipendenze a mano ma di avere già una base da cui partire.
+ - <b>[Spring Initializr](https://start.spring.io/)</b>: con cui abbiamo creato la cartella iniziale del progetto, ci ha permesso di non dover definire e scrivere tutte le dipendenze a mano ma di avere già una base da cui partire.
  - <b>[JSON-Simple](https://code.google.com/archive/p/json-simple/)</b>: è la libreria che abbiamo usato per leggere e scrivere file e oggetti in formato JSON.
  - <b>[GitHub](https://github.com/)</b>: piattaforma dove abbiamo caricato il nostro programma.
  - <b>[GitHub Desktop](https://desktop.github.com/)</b>: che abbiamo usato per gestire tutta la parte relativa a commit / push / clone.
