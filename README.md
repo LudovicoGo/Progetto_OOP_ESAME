@@ -11,7 +11,7 @@ Questo programma ha come scopo quello di offrire all'utente (tramite chiamate al
 * [Eccezioni](#eccezioni)
 * [Test effettuati](#test)
 * [Lettura API OpenWeather](#API)
-* [Documenti, pogrammi e risorse utilizzati](#programmidocumenti)
+* [Documenti, programmi e risorse utilizzati](#programmidocumenti)
 * [Autori](#autori)
 
 <a name="installEConf"></a>
@@ -35,7 +35,7 @@ L'utente ha a disposizione le seguenti rotte:
  
 | Rotta             | Tipo rotta |        Descrizione                                           
 |-------------------|------------|--------------------------------------------------------------
-| [/weather](#_1)          |     GET    | Restituisce un JSONObject contenente le previsioni meteo istantanee (ancheumidità e visibilità) della città richiesta.
+| [/weather](#_1)          |     GET    | Restituisce un JSONObject contenente le previsioni meteo istantanee (anche umidità e visibilità) della città richiesta.
 | [/scheduledWeather](#_2) |     GET    | Salva su file JSON le previsioni del meteo complete di una città in modo ciclico, una volta all'ora, in un certo periodo di tempo indicato dall'utente (TimeSlot, Daily, Weekly, ChosenDay).
 | [/visibility](#_3)       |     GET    | Calcola media e varianza della visibilità, relative ad un dato periodi di tempo, di una città prendendone i valori da un file JSON.
 | [/humidity](#_4)         |     GET    | Calcola media e varianza della umidità, relative ad un dato periodi di tempo, di una città prendendone i valori da un file JSON.
@@ -44,7 +44,7 @@ L'utente ha a disposizione le seguenti rotte:
    <a name="_1"></a>
   - **<b>Utilizzo rotta /weather</b>**:
 
-    Questa rotta prende in input il nome di una città e restituisce un JSONObject con dentro le previsioni meteo istantanee complete (comprese visibilità e umidità), si può inserire una città qualsiasi, nel caso si dimentichi di specificare il nome della città restituito un errore. Si utilizza cosi:
+    Questa rotta prende in input il nome di una città e restituisce un JSONObject con dentro le previsioni meteo istantanee complete (comprese visibilità e umidità), si può inserire una città qualsiasi, nel caso si dimentichi di specificare il nome della città verrà restituito un errore. Si utilizza cosi:
   
       ```
       localhost:8080/weather?cityName={NomeCittà}
